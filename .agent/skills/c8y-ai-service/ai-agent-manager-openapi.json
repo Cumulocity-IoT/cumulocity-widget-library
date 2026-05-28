@@ -1,0 +1,2246 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/mcp/tools": {
+            "get": {
+                "description": "Retrieves all tools available from configured MCP servers. Tools can be used by agents to perform specific actions. Requires admin privileges.",
+                "operationId": "ToolsController_getTools",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of available tools retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "tools": [
+                                        {
+                                            "name": "listAlarms",
+                                            "description": "List alarms in Cumulocity IoT. Returns a list of alarms matching the given filter criteria.",
+                                            "inputSchema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string",
+                                                        "description": "Filter by alarm status",
+                                                        "enum": [
+                                                            "ACTIVE",
+                                                            "ACKNOWLEDGED",
+                                                            "CLEARED"
+                                                        ]
+                                                    },
+                                                    "pageSize": {
+                                                        "type": "number",
+                                                        "description": "Number of results per page"
+                                                    }
+                                                }
+                                            },
+                                            "source": {
+                                                "name": "cumulocity-default",
+                                                "description": "A set of default tools always available in Cumulocity AI Agents.",
+                                                "url": "/sse",
+                                                "isDefault": true,
+                                                "sendAuthentication": true
+                                            }
+                                        },
+                                        {
+                                            "name": "getDevice",
+                                            "description": "Get a managed object representing a device by its ID from Cumulocity IoT.",
+                                            "inputSchema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "deviceId": {
+                                                        "type": "string",
+                                                        "description": "The ID of the device to retrieve"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "deviceId"
+                                                ]
+                                            },
+                                            "source": {
+                                                "name": "cumulocity-default",
+                                                "description": "A set of default tools always available in Cumulocity AI Agents.",
+                                                "url": "/sse",
+                                                "isDefault": true,
+                                                "sendAuthentication": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Get all available tools",
+                "tags": [
+                    "Tools"
+                ]
+            }
+        },
+        "/mcp/servers": {
+            "get": {
+                "description": "Retrieves all configured Model Context Protocol (MCP) servers. MCP servers provide tools that can be used by AI agents. Requires admin privileges.",
+                "operationId": "McpServerController_getTools",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of MCP servers retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "servers": [
+                                        {
+                                            "name": "cumulocity-default",
+                                            "description": "A set of default tools always available in Cumulocity AI Agents.",
+                                            "url": "/sse",
+                                            "isDefault": true,
+                                            "sendAuthentication": true
+                                        },
+                                        {
+                                            "name": "my-mcp-server",
+                                            "description": "Custom MCP server providing domain-specific tools.",
+                                            "url": "https://my-mcp-server.example.com/sse",
+                                            "type": "sse",
+                                            "sendAuthentication": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Get all MCP servers",
+                "tags": [
+                    "MCP Servers"
+                ]
+            },
+            "post": {
+                "description": "Creates a new MCP server configuration. The server can then be used by agents to access its tools. Requires admin privileges.",
+                "operationId": "McpServerController_create",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "MCP server configuration",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "mcp-server": {
+                                    "summary": "New MCP server",
+                                    "value": {
+                                        "name": "my-mcp-server",
+                                        "description": "Custom MCP server providing domain-specific tools.",
+                                        "url": "https://my-mcp-server.example.com/sse",
+                                        "type": "sse",
+                                        "sendAuthentication": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "MCP server created successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Error creating MCP server"
+                    }
+                },
+                "summary": "Create a new MCP server",
+                "tags": [
+                    "MCP Servers"
+                ]
+            }
+        },
+        "/mcp/servers/test": {
+            "post": {
+                "description": "Tests the connection to an MCP server without saving the configuration. Useful for validating server settings before creating. Requires admin privileges.",
+                "operationId": "McpServerController_testServer",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "MCP server configuration to test",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "mcp-server": {
+                                    "summary": "MCP server to test",
+                                    "value": {
+                                        "name": "my-mcp-server",
+                                        "description": "Custom MCP server providing domain-specific tools.",
+                                        "url": "https://my-mcp-server.example.com/sse",
+                                        "type": "sse",
+                                        "sendAuthentication": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Server connection test successful",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "success": {
+                                        "summary": "Successful connection",
+                                        "value": {
+                                            "tools": [
+                                                {
+                                                    "name": "listAlarms",
+                                                    "description": "List alarms in Cumulocity IoT. Returns a list of alarms matching the given filter criteria.",
+                                                    "inputSchema": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "status": {
+                                                                "type": "string",
+                                                                "description": "Filter by alarm status",
+                                                                "enum": [
+                                                                    "ACTIVE",
+                                                                    "ACKNOWLEDGED",
+                                                                    "CLEARED"
+                                                                ]
+                                                            },
+                                                            "pageSize": {
+                                                                "type": "number",
+                                                                "description": "Number of results per page"
+                                                            }
+                                                        }
+                                                    },
+                                                    "source": {
+                                                        "name": "cumulocity-default",
+                                                        "description": "A set of default tools always available in Cumulocity AI Agents.",
+                                                        "url": "/sse",
+                                                        "isDefault": true,
+                                                        "sendAuthentication": true
+                                                    }
+                                                }
+                                            ],
+                                            "success": true
+                                        }
+                                    },
+                                    "failure": {
+                                        "summary": "Failed connection",
+                                        "value": {
+                                            "tools": [],
+                                            "success": false,
+                                            "error": "Failed to connect to MCP server: Connection refused"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Server connection test failed"
+                    }
+                },
+                "summary": "Test MCP server connection",
+                "tags": [
+                    "MCP Servers"
+                ]
+            }
+        },
+        "/mcp/servers/{name}/tools": {
+            "get": {
+                "description": "Retrieves all tools available from a specific MCP server by name. Requires admin privileges.",
+                "operationId": "McpServerController_getToolsOfServer",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the MCP server",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of tools retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "tools": [
+                                        {
+                                            "name": "listAlarms",
+                                            "description": "List alarms in Cumulocity IoT. Returns a list of alarms matching the given filter criteria.",
+                                            "inputSchema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string",
+                                                        "description": "Filter by alarm status",
+                                                        "enum": [
+                                                            "ACTIVE",
+                                                            "ACKNOWLEDGED",
+                                                            "CLEARED"
+                                                        ]
+                                                    },
+                                                    "pageSize": {
+                                                        "type": "number",
+                                                        "description": "Number of results per page"
+                                                    }
+                                                }
+                                            },
+                                            "source": {
+                                                "name": "cumulocity-default",
+                                                "description": "A set of default tools always available in Cumulocity AI Agents.",
+                                                "url": "/sse",
+                                                "isDefault": true,
+                                                "sendAuthentication": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "MCP server not found"
+                    },
+                    "500": {
+                        "description": "Error retrieving tools"
+                    }
+                },
+                "summary": "Get tools from a specific MCP server",
+                "tags": [
+                    "MCP Servers"
+                ]
+            }
+        },
+        "/mcp/servers/{name}": {
+            "put": {
+                "description": "Updates an existing MCP server configuration. Requires admin privileges.",
+                "operationId": "McpServerController_update",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the MCP server to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Updated MCP server configuration",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            },
+                            "examples": {
+                                "mcp-server": {
+                                    "summary": "Updated MCP server",
+                                    "value": {
+                                        "name": "my-mcp-server",
+                                        "description": "Updated description.",
+                                        "url": "https://my-mcp-server.example.com/sse",
+                                        "type": "sse",
+                                        "sendAuthentication": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "MCP server updated successfully",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "name": "my-mcp-server",
+                                    "description": "Updated description.",
+                                    "url": "https://my-mcp-server.example.com/sse",
+                                    "type": "sse",
+                                    "sendAuthentication": true
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "MCP server not found"
+                    },
+                    "500": {
+                        "description": "Error updating MCP server"
+                    }
+                },
+                "summary": "Update an MCP server",
+                "tags": [
+                    "MCP Servers"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes an MCP server configuration. Agents using this server will no longer have access to its tools. Requires admin privileges.",
+                "operationId": "McpServerController_delete",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the MCP server to delete",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "204": {
+                        "description": "MCP server deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "MCP server not found"
+                    },
+                    "500": {
+                        "description": "Error deleting MCP server"
+                    }
+                },
+                "summary": "Delete an MCP server",
+                "tags": [
+                    "MCP Servers"
+                ]
+            }
+        },
+        "/provider": {
+            "post": {
+                "description": "Configures the global AI provider that will be used by all agents that don't have a specific provider set. This is stored securely as a tenant option. Requires admin privileges.",
+                "operationId": "ProviderController_createProvider",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "Provider configuration including name, model, and authentication details",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Provider set successfully"
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Set the global AI provider",
+                "tags": [
+                    "Provider"
+                ]
+            },
+            "get": {
+                "description": "Retrieves the currently configured global AI provider. The API key is masked for security. Returns 404 if no global provider is configured. Requires admin privileges.",
+                "operationId": "ProviderController_getProvider",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Provider retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "No global provider set"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Returns the current provider",
+                "tags": [
+                    "Provider"
+                ]
+            }
+        },
+        "/agent/text": {
+            "post": {
+                "description": "Creates a new text-based AI agent with the specified configuration. Text agents generate conversational responses and can use tools to perform tasks. Requires admin privileges.",
+                "operationId": "AgentController_createTextAgent",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "If the created Agent should get returned, the accept header must be 'application/json'. Otherwise, only the status code 201 is returned.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Text agent definition",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                            },
+                            "examples": {
+                                "text-agent": {
+                                    "summary": "Text agent with prompt",
+                                    "value": {
+                                        "name": "my-text-agent",
+                                        "type": "text",
+                                        "agent": {
+                                            "system": "You are a helpful assistant.",
+                                            "temperature": 0.7,
+                                            "maxOutputTokens": 1024
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Agent created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-text-agent",
+                                    "type": "text",
+                                    "agent": {
+                                        "system": "You are a helpful assistant.",
+                                        "temperature": 0.7,
+                                        "maxOutputTokens": 1024
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Create a new AI text agent",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "get": {
+                "description": "Retrieves a list of all available text agents, including both private agents and shared agents from applications.",
+                "operationId": "AgentController_readTextAgents",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of text agents retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "name": "my-text-agent",
+                                        "type": "text",
+                                        "agent": {
+                                            "system": "You are a helpful assistant.",
+                                            "temperature": 0.7,
+                                            "maxOutputTokens": 1024
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Returns all text agents",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/object": {
+            "post": {
+                "description": "Creates a new object-based AI agent that generates structured JSON objects according to a defined schema. Object agents are useful for extracting structured data from prompts. Requires admin privileges.",
+                "operationId": "AgentController_createObjectAgent",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "If the created Agent should get returned, the accept header must be 'application/json'. Otherwise, only the status code 201 is returned.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Object agent definition",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                            },
+                            "examples": {
+                                "object-agent": {
+                                    "summary": "Object agent with schema",
+                                    "value": {
+                                        "name": "my-object-agent",
+                                        "type": "object",
+                                        "agent": {
+                                            "system": "Extract structured data from the given text.",
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "address"
+                                                ],
+                                                "additionalProperties": false
+                                            },
+                                            "temperature": 0
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Agent created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-object-agent",
+                                    "type": "object",
+                                    "agent": {
+                                        "system": "Extract structured data from the given text.",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "address"
+                                            ],
+                                            "additionalProperties": false
+                                        },
+                                        "temperature": 0
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Create a new AI object agent",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "get": {
+                "description": "Retrieves a list of all available object agents, including both private agents and shared agents from applications.",
+                "operationId": "AgentController_readObjectAgents",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of object agents retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "name": "my-object-agent",
+                                        "type": "object",
+                                        "agent": {
+                                            "system": "Extract structured data from the given text.",
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "address"
+                                                ],
+                                                "additionalProperties": false
+                                            },
+                                            "temperature": 0
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Returns all object agents",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/text/{name}": {
+            "put": {
+                "description": "Updates an existing text agent with new configuration. All properties of the agent can be modified including provider settings, tools, and system prompts. Requires admin privileges.",
+                "operationId": "AgentController_updateTextAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the text agent to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "If the updated Agent should get returned, the accept header must be 'application/json'. Otherwise, only the status code 200 is returned.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Updated text agent definition",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                            },
+                            "examples": {
+                                "text-agent": {
+                                    "summary": "Text agent with prompt",
+                                    "value": {
+                                        "name": "my-text-agent",
+                                        "type": "text",
+                                        "agent": {
+                                            "system": "You are a helpful assistant.",
+                                            "temperature": 0.7,
+                                            "maxOutputTokens": 1024
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Agent updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-text-agent",
+                                    "type": "text",
+                                    "agent": {
+                                        "system": "You are a helpful assistant.",
+                                        "temperature": 0.7,
+                                        "maxOutputTokens": 1024
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Updates the given text agent",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "get": {
+                "description": "Retrieves the complete configuration and details of a specific text agent by name. Can optionally resolve agents from application context using the fromApp parameter.",
+                "operationId": "AgentController_readTextAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the text agent",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fromApp",
+                        "required": false,
+                        "in": "query",
+                        "description": "If used, the agent is resolved from the given application context. This is useful, if agents are delivered as bundle\n    from an plugin or application, as always the correct version of the agent will be used. The value given, needs to be the context path of\n    the application (e.g. 'my-app' for an application available under /apps/my-app or my-app@1.0.1 for a versioned plugin available under /apps/my-app@1.0.1).\n    \n    Still, if a local agent with the same name exists, this one will have precedence over the application based agent.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Agent details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-text-agent",
+                                    "type": "text",
+                                    "agent": {
+                                        "system": "You are a helpful assistant.",
+                                        "temperature": 0.7,
+                                        "maxOutputTokens": 1024
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Returns the text agent details",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes a text agent. Only private agents can be deleted - shared agents from applications cannot be removed. Requires admin privileges.",
+                "operationId": "AgentController_deleteTextAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the text agent to delete",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "204": {
+                        "description": "Agent deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Delete a text agent by name",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "post": {
+                "description": "Sends a message or prompt to a text agent and receives a response. Supports both streaming (SSE/NDJSON) and non-streaming modes. The agent can use configured tools to perform actions and provide contextual responses.",
+                "operationId": "AgentController_talkWithText",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the text agent to talk to",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fullResponse",
+                        "required": false,
+                        "in": "query",
+                        "description": "If set to true, the full response (including details about tool usage etc.) from the AI model is returned. Otherwise, only the text content is returned.\n      In a streaming scenario (when the 'Accept' header is set to 'text/event-stream' or 'application/x-ndjson'), the response is a SSE stream.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "In a streaming scenario (when the 'Accept' header is set to 'text/event-stream' or 'application/x-ndjson'), the response is a SSE stream.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json",
+                                "text/event-stream",
+                                "application/x-ndjson"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fromApp",
+                        "required": false,
+                        "in": "query",
+                        "description": "If used, the agent is resolved from the given application context. This is useful, if agents are delivered as bundle\n    from an plugin or application, as always the correct version of the agent will be used. The value given, needs to be the context path of\n    the application (e.g. 'my-app' for an application available under /apps/my-app or my-app@1.0.1 for a versioned plugin available under /apps/my-app@1.0.1).\n    \n    Still, if a local agent with the same name exists, this one will have precedence over the application based agent.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Text completion request containing messages or prompt",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextCompletionDto"
+                            },
+                            "examples": {
+                                "with-prompt": {
+                                    "summary": "Using a prompt string",
+                                    "value": {
+                                        "prompt": "Hello, how are you?"
+                                    }
+                                },
+                                "with-messages": {
+                                    "summary": "Using messages array",
+                                    "value": {
+                                        "messages": [
+                                            {
+                                                "role": "user",
+                                                "content": "Hello, how are you?"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Response from text agent. Returns plain text when fullResponse=false, or a detailed object when fullResponse=true.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "fullResponse-false": {
+                                        "summary": "Plain text (fullResponse=false)",
+                                        "value": "3 + 1 = 4"
+                                    },
+                                    "fullResponse-true": {
+                                        "summary": "Full response object (fullResponse=true)",
+                                        "value": {
+                                            "steps": [
+                                                {
+                                                    "stepNumber": 0,
+                                                    "model": {
+                                                        "provider": "anthropic",
+                                                        "modelId": "claude-haiku-4-5"
+                                                    },
+                                                    "content": [
+                                                        {
+                                                            "type": "text",
+                                                            "text": "3 + 1 = 4"
+                                                        }
+                                                    ],
+                                                    "finishReason": "stop",
+                                                    "usage": {
+                                                        "inputTokens": 33,
+                                                        "outputTokens": 13,
+                                                        "totalTokens": 46
+                                                    },
+                                                    "warnings": [],
+                                                    "request": {
+                                                        "body": {
+                                                            "model": "claude-haiku-4-5",
+                                                            "max_tokens": 64000,
+                                                            "system": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "<<insert system prompt here>>"
+                                                                }
+                                                            ],
+                                                            "messages": [
+                                                                {
+                                                                    "role": "user",
+                                                                    "content": [
+                                                                        {
+                                                                            "type": "text",
+                                                                            "text": "What is 2+1?"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "role": "assistant",
+                                                                    "content": [
+                                                                        {
+                                                                            "type": "text",
+                                                                            "text": "3"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "role": "user",
+                                                                    "content": [
+                                                                        {
+                                                                            "type": "text",
+                                                                            "text": "and plus 1??"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "response": {
+                                                        "id": "msg_01HR2RurGbrmDSHMfEYGRznZ",
+                                                        "timestamp": "2026-03-10T06:14:35.912Z",
+                                                        "modelId": "claude-haiku-4-5-20251001",
+                                                        "body": {
+                                                            "model": "claude-haiku-4-5-20251001",
+                                                            "id": "msg_01HR2RurGbrmDSHMfEYGRznZ",
+                                                            "type": "message",
+                                                            "role": "assistant",
+                                                            "content": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "3 + 1 = 4"
+                                                                }
+                                                            ],
+                                                            "stop_reason": "end_turn",
+                                                            "stop_sequence": null,
+                                                            "usage": {
+                                                                "input_tokens": 33,
+                                                                "output_tokens": 13
+                                                            }
+                                                        },
+                                                        "messages": [
+                                                            {
+                                                                "role": "assistant",
+                                                                "content": [
+                                                                    {
+                                                                        "type": "text",
+                                                                        "text": "3 + 1 = 4"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ],
+                                            "_output": "3 + 1 = 4",
+                                            "totalUsage": {
+                                                "inputTokens": 33,
+                                                "outputTokens": 13,
+                                                "totalTokens": 46
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Talk to the named text agent",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/object/{name}": {
+            "put": {
+                "description": "Updates an existing object agent with new configuration. You can modify the schema, provider settings, and prompts. Requires admin privileges.",
+                "operationId": "AgentController_updateObjectAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the object agent to update",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "If the updated Agent should get returned, the accept header must be 'application/json'. Otherwise, only the status code 200 is returned.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Updated object agent definition",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                            },
+                            "examples": {
+                                "object-agent": {
+                                    "summary": "Object agent with schema",
+                                    "value": {
+                                        "name": "my-object-agent",
+                                        "type": "object",
+                                        "agent": {
+                                            "system": "Extract structured data from the given text.",
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "address"
+                                                ],
+                                                "additionalProperties": false
+                                            },
+                                            "temperature": 0
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Agent updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-object-agent",
+                                    "type": "object",
+                                    "agent": {
+                                        "system": "Extract structured data from the given text.",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "address"
+                                            ],
+                                            "additionalProperties": false
+                                        },
+                                        "temperature": 0
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Updates the given object agent",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "get": {
+                "description": "Retrieves the complete configuration and details of a specific object agent by name. Can optionally resolve agents from application context using the fromApp parameter.",
+                "operationId": "AgentController_readObjectAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the object agent",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fromApp",
+                        "required": false,
+                        "in": "query",
+                        "description": "If used, the agent is resolved from the given application context. This is useful, if agents are delivered as bundle\n    from an plugin or application, as always the correct version of the agent will be used. The value given, needs to be the context path of\n    the application (e.g. 'my-app' for an application available under /apps/my-app or my-app@1.0.1 for a versioned plugin available under /apps/my-app@1.0.1).\n    \n    Still, if a local agent with the same name exists, this one will have precedence over the application based agent.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Agent details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                                },
+                                "example": {
+                                    "name": "my-object-agent",
+                                    "type": "object",
+                                    "agent": {
+                                        "system": "Extract structured data from the given text.",
+                                        "schema": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "address"
+                                            ],
+                                            "additionalProperties": false
+                                        },
+                                        "temperature": 0
+                                    },
+                                    "availability": "PRIVATE"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Returns the object agent details",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "delete": {
+                "description": "Permanently deletes an object agent. Only private agents can be deleted - shared agents from applications cannot be removed. Requires admin privileges.",
+                "operationId": "AgentController_deleteObjectAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the object agent to delete",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "204": {
+                        "description": "Agent deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Delete an object agent by name",
+                "tags": [
+                    "Agents"
+                ]
+            },
+            "post": {
+                "description": "Sends a prompt to an object agent to generate a structured JSON object according to the agent's defined schema. The response will always conform to the specified schema format.",
+                "operationId": "AgentController_talkWithObject",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the object agent to talk to",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fullResponse",
+                        "required": false,
+                        "in": "query",
+                        "description": "If set to true, the full response (including details about tool usage etc.) from the AI model is returned. Otherwise, only the object content is returned.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "fromApp",
+                        "required": false,
+                        "in": "query",
+                        "description": "If used, the agent is resolved from the given application context. This is useful, if agents are delivered as bundle\n    from an plugin or application, as always the correct version of the agent will be used. The value given, needs to be the context path of\n    the application (e.g. 'my-app' for an application available under /apps/my-app or my-app@1.0.1 for a versioned plugin available under /apps/my-app@1.0.1).\n    \n    Still, if a local agent with the same name exists, this one will have precedence over the application based agent.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Object completion request with schema and prompt/messages",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ObjectCompletionDto"
+                            },
+                            "examples": {
+                                "with-prompt": {
+                                    "summary": "Object extraction with prompt",
+                                    "value": {
+                                        "prompt": "John Doe is 30 years old and lives at 123 Main Street in Springfield."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Generated object from agent. Returns the extracted object when fullResponse=false, or a detailed response when fullResponse=true.",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "fullResponse-false": {
+                                        "summary": "Extracted object (fullResponse=false)",
+                                        "value": {
+                                            "name": "John Doe",
+                                            "address": "123 Main Street in Springfield"
+                                        }
+                                    },
+                                    "fullResponse-true": {
+                                        "summary": "Full response object (fullResponse=true)",
+                                        "value": {
+                                            "steps": [
+                                                {
+                                                    "stepNumber": 0,
+                                                    "model": {
+                                                        "provider": "anthropic",
+                                                        "modelId": "claude-haiku-4-5"
+                                                    },
+                                                    "content": [
+                                                        {
+                                                            "type": "text",
+                                                            "text": "{\"name\":\"John Doe\",\"address\":\"123 Main Street in Springfield\"}"
+                                                        }
+                                                    ],
+                                                    "finishReason": "stop",
+                                                    "usage": {
+                                                        "inputTokens": 198,
+                                                        "outputTokens": 19,
+                                                        "totalTokens": 217
+                                                    },
+                                                    "warnings": [],
+                                                    "request": {
+                                                        "body": {
+                                                            "model": "claude-haiku-4-5",
+                                                            "max_tokens": 64000,
+                                                            "temperature": 0,
+                                                            "output_format": {
+                                                                "type": "json_schema",
+                                                                "schema": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "address": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "address"
+                                                                    ],
+                                                                    "additionalProperties": false
+                                                                }
+                                                            },
+                                                            "system": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "Extract structured data from the given text."
+                                                                }
+                                                            ],
+                                                            "messages": [
+                                                                {
+                                                                    "role": "user",
+                                                                    "content": [
+                                                                        {
+                                                                            "type": "text",
+                                                                            "text": "John Doe is 30 years old and lives at 123 Main Street in Springfield."
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "response": {
+                                                        "id": "msg_01JcoUuVQSbem7HrnngUPxqY",
+                                                        "timestamp": "2026-03-10T12:26:10.744Z",
+                                                        "modelId": "claude-haiku-4-5-20251001",
+                                                        "body": {
+                                                            "model": "claude-haiku-4-5-20251001",
+                                                            "id": "msg_01JcoUuVQSbem7HrnngUPxqY",
+                                                            "type": "message",
+                                                            "role": "assistant",
+                                                            "content": [
+                                                                {
+                                                                    "type": "text",
+                                                                    "text": "{\"name\":\"John Doe\",\"address\":\"123 Main Street in Springfield\"}"
+                                                                }
+                                                            ],
+                                                            "stop_reason": "end_turn",
+                                                            "stop_sequence": null,
+                                                            "usage": {
+                                                                "input_tokens": 198,
+                                                                "output_tokens": 19
+                                                            }
+                                                        },
+                                                        "messages": [
+                                                            {
+                                                                "role": "assistant",
+                                                                "content": [
+                                                                    {
+                                                                        "type": "text",
+                                                                        "text": "{\"name\":\"John Doe\",\"address\":\"123 Main Street in Springfield\"}"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ],
+                                            "_output": {
+                                                "name": "John Doe",
+                                                "address": "123 Main Street in Springfield"
+                                            },
+                                            "totalUsage": {
+                                                "inputTokens": 198,
+                                                "outputTokens": 19,
+                                                "totalTokens": 217
+                                            },
+                                            "object": {
+                                                "name": "John Doe",
+                                                "address": "123 Main Street in Springfield"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Agent not found"
+                    }
+                },
+                "summary": "Talk to the named object agent",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent": {
+            "get": {
+                "description": "Retrieves a list of all available agents (both text and object types), including private agents and shared agents from applications.",
+                "operationId": "AgentController_readAgents",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of all agents retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "name": "my-text-agent",
+                                        "type": "text",
+                                        "agent": {
+                                            "system": "You are a helpful assistant.",
+                                            "temperature": 0.7,
+                                            "maxOutputTokens": 1024
+                                        },
+                                        "availability": "PRIVATE"
+                                    },
+                                    {
+                                        "name": "my-object-agent",
+                                        "type": "object",
+                                        "agent": {
+                                            "system": "Extract structured data from the given text.",
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "address"
+                                                ],
+                                                "additionalProperties": false
+                                            },
+                                            "temperature": 0
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Returns all agents",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/test/{name}": {
+            "get": {
+                "description": "Performs a health check on an agent to verify it exists and is properly configured. Returns information about the agent's availability, provider configuration, and any issues that might prevent its use.",
+                "operationId": "AgentController_checkAgent",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": true,
+                        "in": "path",
+                        "description": "The name of the agent to check",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "fromApp",
+                        "required": false,
+                        "in": "query",
+                        "description": "If used, the agent is resolved from the given application context. This is useful, if agents are delivered as bundle\n    from an plugin or application, as always the correct version of the agent will be used. The value given, needs to be the context path of\n    the application (e.g. 'my-app' for an application available under /apps/my-app or my-app@1.0.1 for a versioned plugin available under /apps/my-app@1.0.1).\n    \n    Still, if a local agent with the same name exists, this one will have precedence over the application based agent.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Agent health check response",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "agent-healthy": {
+                                        "summary": "Agent exists and is ready",
+                                        "value": {
+                                            "exists": true,
+                                            "canCreate": true,
+                                            "isProviderConfigured": true
+                                        }
+                                    },
+                                    "agent-not-found": {
+                                        "summary": "Agent does not exist",
+                                        "value": {
+                                            "exists": false,
+                                            "canCreate": true,
+                                            "isProviderConfigured": true,
+                                            "messages": [
+                                                "Agent 'my-agent' not found."
+                                            ]
+                                        }
+                                    },
+                                    "no-provider": {
+                                        "summary": "No provider configured",
+                                        "value": {
+                                            "exists": false,
+                                            "canCreate": false,
+                                            "isProviderConfigured": false,
+                                            "messages": [
+                                                "Agent 'my-agent' not found.",
+                                                "No global provider is configured."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Allows to verify if an agent can be used",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/test/text": {
+            "post": {
+                "description": "Tests a text agent configuration without persisting it to storage. Useful for validating agent settings and prompts before creating the agent. Supports both streaming and non-streaming modes. Requires admin privileges.",
+                "operationId": "AgentController_testTextAgent",
+                "parameters": [
+                    {
+                        "name": "fullResponse",
+                        "required": false,
+                        "in": "query",
+                        "description": "If set to true, the full response (including details about tool usage etc.) from the AI model is returned. Otherwise, only the text content is returned.\n      In a streaming scenario (when the 'Accept' header is set to 'text/event-stream' or 'application/x-ndjson'), the response is a SSE stream.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "accept",
+                        "required": true,
+                        "in": "header",
+                        "description": "In a streaming scenario (when the 'Accept' header is set to 'text/event-stream' or 'application/x-ndjson'), the response is a SSE stream.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "application/json",
+                                "text/event-stream",
+                                "application/x-ndjson"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Text agent definition to test",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentTextDefinitionDto"
+                            },
+                            "examples": {
+                                "text-agent": {
+                                    "summary": "Text agent with prompt",
+                                    "value": {
+                                        "name": "my-text-agent",
+                                        "type": "text",
+                                        "agent": {
+                                            "system": "You are a helpful assistant.",
+                                            "prompt": "Hello, how are you?",
+                                            "temperature": 0.7,
+                                            "maxOutputTokens": 1024
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Test response from text agent (streaming or non-streaming)"
+                    },
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Allows to test an agent without storing it (only for admins)",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        },
+        "/agent/test/object": {
+            "post": {
+                "description": "Tests an object agent configuration without persisting it to storage. Useful for validating the schema and prompts before creating the agent. Returns a structured object according to the provided schema. Requires admin privileges.",
+                "operationId": "AgentController_testObjectAgent",
+                "parameters": [
+                    {
+                        "name": "fullResponse",
+                        "required": false,
+                        "in": "query",
+                        "description": "If set to true, the full response (including details about tool usage etc.) from the AI model is returned. Otherwise, only the object content is returned.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Object agent definition to test",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AgentObjectDefinitionDto"
+                            },
+                            "examples": {
+                                "object-agent": {
+                                    "summary": "Object agent with schema and prompt",
+                                    "value": {
+                                        "name": "my-object-agent",
+                                        "type": "object",
+                                        "agent": {
+                                            "system": "Extract structured data from the given text.",
+                                            "prompt": "John Doe is 30 years old and lives at 123 Main Street in Springfield.",
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "address"
+                                                ],
+                                                "additionalProperties": false
+                                            },
+                                            "temperature": 0
+                                        },
+                                        "availability": "PRIVATE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Test response with generated object from agent"
+                    },
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - validation failed"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "summary": "Allows to test an object agent without storing it (only for admins)",
+                "tags": [
+                    "Agents"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Cumulocity AI Agents",
+        "description": "The Cumulocity AI Agents API description",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "Agents",
+            "description": "Manage and interact with AI agents (text and object types)"
+        },
+        {
+            "name": "Provider",
+            "description": "Configure the global LLM provider settings. You must set a provider before creating agents. Tested providers are Anthropic, Google and OpenAI."
+        },
+        {
+            "name": "Tools",
+            "description": "Retrieve available tools from configured MCP servers"
+        },
+        {
+            "name": "MCP Servers",
+            "description": "Manage Model Context Protocol (MCP) server configurations"
+        }
+    ],
+    "servers": [
+        {
+            "url": "/service/ai",
+            "description": "API Server"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Object": {
+                "type": "object",
+                "properties": {}
+            },
+            "TextCompletionDto": {
+                "type": "object",
+                "properties": {
+                    "system": {
+                        "type": "string",
+                        "description": "System message to include in the prompt.\nCan be used with `prompt` or `messages`."
+                    },
+                    "prompt": {
+                        "type": "object",
+                        "description": "A simple text prompt or array of messages.\nUse either `prompt` or `messages`, but not both."
+                    },
+                    "messages": {
+                        "description": "A list of messages for conversation history.\nUse either `prompt` or `messages`, but not both.",
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "stopSequences": {
+                        "description": "Stop sequences. If set, the model will stop generating\ntext when one of the stop sequences is generated.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "variables": {
+                        "type": "object",
+                        "description": "Variables to replace in the prompt/messages.\nUse {{ variableName }} syntax in prompts."
+                    },
+                    "tools": {
+                        "type": "object"
+                    },
+                    "stopWhen": {
+                        "type": "object"
+                    },
+                    "providerOptions": {
+                        "type": "object"
+                    },
+                    "maxOutputTokens": {
+                        "type": "number",
+                        "description": "Maximum number of tokens to generate.",
+                        "minimum": 1
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "Temperature setting. Controls randomness in the output.\nHigher values = more creative, lower values = more deterministic.\nCannot be used together with topP.",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "topP": {
+                        "type": "number",
+                        "description": "Nucleus sampling. Only tokens with top P probability mass are considered.\nE.g., 0.1 means only tokens with top 10% probability are considered.\nCannot be used together with temperature.",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "topK": {
+                        "type": "number",
+                        "description": "Only sample from the top K options for each subsequent token.\nUsed to remove \"long tail\" low probability responses.",
+                        "minimum": 1
+                    },
+                    "presencePenalty": {
+                        "type": "number",
+                        "description": "Presence penalty. Affects likelihood of repeating information from the prompt.\nRange: -1 (increase repetition) to 1 (decrease repetition).",
+                        "minimum": -1,
+                        "maximum": 1
+                    },
+                    "frequencyPenalty": {
+                        "type": "number",
+                        "description": "Frequency penalty. Affects likelihood of repeatedly using same words/phrases.\nRange: -1 (increase repetition) to 1 (decrease repetition).",
+                        "minimum": -1,
+                        "maximum": 1
+                    },
+                    "seed": {
+                        "type": "number",
+                        "description": "Seed for random sampling. If set and supported by the model,\ncalls will generate deterministic results.",
+                        "minimum": 0
+                    },
+                    "maxRetries": {
+                        "type": "number",
+                        "description": "Maximum number of retries. Set to 0 to disable retries.\nDefault: 2",
+                        "minimum": 0
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "description": "Timeout in milliseconds. The call will be aborted if it takes longer\nthan the specified timeout. Can be used alongside abortSignal.",
+                        "minimum": 1
+                    }
+                },
+                "required": [
+                    "tools"
+                ]
+            },
+            "McpConfigDto": {
+                "type": "object",
+                "properties": {
+                    "serverName": {
+                        "type": "string"
+                    },
+                    "tools": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "serverName"
+                ]
+            },
+            "AgentTextDefinitionDto": {
+                "type": "object",
+                "properties": {
+                    "agent": {
+                        "$ref": "#/components/schemas/TextCompletionDto"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "provider": {
+                        "type": "object"
+                    },
+                    "mcp": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/McpConfigDto"
+                        }
+                    },
+                    "availability": {
+                        "type": "string",
+                        "default": "PRIVATE",
+                        "enum": [
+                            "SHARED",
+                            "PRIVATE"
+                        ]
+                    },
+                    "source": {
+                        "type": "object"
+                    },
+                    "isOverruled": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "agent",
+                    "type",
+                    "name",
+                    "availability"
+                ]
+            },
+            "ObjectCompletionDto": {
+                "type": "object",
+                "properties": {
+                    "schema": {
+                        "type": "object",
+                        "description": "JSON Schema that defines the structure of the generated object.\nThe model will generate an object conforming to this schema."
+                    },
+                    "system": {
+                        "type": "string",
+                        "description": "System message to include in the prompt.\nCan be used with `prompt` or `messages`."
+                    },
+                    "prompt": {
+                        "type": "object",
+                        "description": "A simple text prompt or array of messages.\nUse either `prompt` or `messages`, but not both."
+                    },
+                    "messages": {
+                        "description": "A list of messages for conversation history.\nUse either `prompt` or `messages`, but not both.",
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "variables": {
+                        "type": "object",
+                        "description": "Variables to replace in the prompt/messages.\nUse {{ variableName }} syntax in prompts."
+                    },
+                    "providerOptions": {
+                        "type": "object"
+                    },
+                    "maxOutputTokens": {
+                        "type": "number",
+                        "description": "Maximum number of tokens to generate.",
+                        "minimum": 1
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "description": "Temperature setting. Controls randomness in the output.\nHigher values = more creative, lower values = more deterministic.\nCannot be used together with topP.",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "topP": {
+                        "type": "number",
+                        "description": "Nucleus sampling. Only tokens with top P probability mass are considered.\nE.g., 0.1 means only tokens with top 10% probability are considered.\nCannot be used together with temperature.",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "topK": {
+                        "type": "number",
+                        "description": "Only sample from the top K options for each subsequent token.\nUsed to remove \"long tail\" low probability responses.",
+                        "minimum": 1
+                    },
+                    "presencePenalty": {
+                        "type": "number",
+                        "description": "Presence penalty. Affects likelihood of repeating information from the prompt.\nRange: -1 (increase repetition) to 1 (decrease repetition).",
+                        "minimum": -1,
+                        "maximum": 1
+                    },
+                    "frequencyPenalty": {
+                        "type": "number",
+                        "description": "Frequency penalty. Affects likelihood of repeatedly using same words/phrases.\nRange: -1 (increase repetition) to 1 (decrease repetition).",
+                        "minimum": -1,
+                        "maximum": 1
+                    },
+                    "seed": {
+                        "type": "number",
+                        "description": "Seed for random sampling. If set and supported by the model,\ncalls will generate deterministic results.",
+                        "minimum": 0
+                    },
+                    "maxRetries": {
+                        "type": "number",
+                        "description": "Maximum number of retries. Set to 0 to disable retries.\nDefault: 2",
+                        "minimum": 0
+                    },
+                    "timeout": {
+                        "type": "number",
+                        "description": "Timeout in milliseconds. The call will be aborted if it takes longer\nthan the specified timeout. Can be used alongside abortSignal.",
+                        "minimum": 1
+                    }
+                },
+                "required": [
+                    "schema"
+                ]
+            },
+            "AgentObjectDefinitionDto": {
+                "type": "object",
+                "properties": {
+                    "agent": {
+                        "$ref": "#/components/schemas/ObjectCompletionDto"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "provider": {
+                        "type": "object"
+                    },
+                    "mcp": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/McpConfigDto"
+                        }
+                    },
+                    "availability": {
+                        "type": "string",
+                        "default": "PRIVATE",
+                        "enum": [
+                            "SHARED",
+                            "PRIVATE"
+                        ]
+                    },
+                    "source": {
+                        "type": "object"
+                    },
+                    "isOverruled": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "agent",
+                    "type",
+                    "name",
+                    "availability"
+                ]
+            }
+        }
+    }
+}
