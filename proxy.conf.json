@@ -1,0 +1,8 @@
+{
+  "/**": {
+    "target": "https://demo.jp.cumulocity.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

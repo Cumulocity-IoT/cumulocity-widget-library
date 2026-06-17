@@ -1,59 +1,82 @@
-# CumulocityWidgetLibrary
+# Cumulocity Widget Library
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.26.
+A collection of custom dashboard widgets for the Cumulocity IoT platform. This library provides advanced visualization capabilities to enhance your IoT dashboards.
 
-## Development server
+## Overview
 
-To start a local development server, run:
+The library contains the following custom widgets:
+
+1. **Alarm Heatmap Widget**: Visualizes alarm frequency over time as a configurable grid heatmap, allowing you to easily spot peak periods of system alarms.
+2. **Stacked Bar Chart Widget**: Displays a stacked bar chart with selected data points, useful for comparing multiple metrics across categories or time intervals.
+3. **Custom Map Widget**: Displays a custom map with dynamic tracking markers using GPS or custom coordinates, allowing you to track assets in real time.
+4. **SPC Chart Widget**: Statistical Process Control line chart with control limits and annotations to help monitor and control process performance.
+5. **Sankey Diagram Widget**: Displays the breakdown flow of alarms/events down the asset/group hierarchy, illustrating flow pathways and volumes.
+
+## Installation
+
+### Prerequisites
+- Cumulocity Web SDK (compatible with v1023.82.4 or later)
+- Node.js (v18 or v20 recommended)
+- Angular CLI
+
+### Installing the Plugin
+To install this widget library as a plugin in your Cumulocity application:
+
+1. Install the package dependencies in your project:
+   ```bash
+   npm install cumulocity-widget-library
+   ```
+
+2. Add the modules of the widgets you want to use to your application's `app.module.ts`:
+   ```typescript
+   import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule } from 'cumulocity-widget-library';
+
+   @NgModule({
+     imports: [
+       // ... other imports
+       AlarmHeatmapWidgetModule,
+       StackedBarChartWidgetModule,
+       CustomMapWidgetModule,
+       SpcChartWidgetModule,
+       SankeyDiagramWidgetModule
+     ]
+   })
+   export class AppModule {}
+   ```
+
+## Quick Start
+
+### Running Locally
+To start a local development server for testing the widgets:
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run start
+   ```
+
+3. Open your browser and navigate to `http://localhost:4200/`.
+
+## Build
+
+To compile the library and build the production-ready plugin package:
 
 ```bash
-ng serve
+npm run build
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The build artifacts will be stored in the `dist/` directory, ready to be uploaded to your Cumulocity administration application under the Ecosystem -> Applications tab.
 
-## Code scaffolding
+## Contributing
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+We welcome contributions to this project! Please read [CONTRIBUTING.md](file:///Users/tobias/repos/cumulocity-widget-library/CONTRIBUTING.md) and sign the [CONTRIBUTOR-LICENSE-AGREEMENT.md](file:///Users/tobias/repos/cumulocity-widget-library/CONTRIBUTOR-LICENSE-AGREEMENT.md) before submitting a Pull Request.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+These tools are provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For more information or help, please visit the [Software AG TECH Community Forums](https://techcommunity.softwareag.com/en_US/forum/iot.html).

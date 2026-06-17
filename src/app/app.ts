@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2026 Cumulocity GmbH.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 

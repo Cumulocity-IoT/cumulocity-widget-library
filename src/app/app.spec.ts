@@ -1,4 +1,9 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+/*
+ * Copyright (c) 2026 Cumulocity GmbH.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 
@@ -6,7 +11,6 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
   });
 
