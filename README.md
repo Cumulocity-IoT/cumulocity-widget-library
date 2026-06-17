@@ -1,6 +1,6 @@
 # Cumulocity Widget Library
 
-A collection of custom dashboard widgets for the Cumulocity IoT platform. This library provides advanced visualization capabilities to enhance your IoT dashboards.
+A collection of custom dashboard widgets for the Cumulocity platform. This library provides advanced visualization capabilities to enhance your dashboards.
 
 ## Overview
 
@@ -33,6 +33,10 @@ The library contains the following custom widgets:
 - Cumulocity Web SDK (compatible with v1023.82.4 or later)
 - Node.js (v18 or v20 recommended)
 - Angular CLI
+
+> [!IMPORTANT]
+> **Compatibility Note**: These widgets require Cumulocity Cockpit / Web SDK version **1023.0.0 or later**. Attempting to load them into older versions (such as v1022) will fail at runtime with loading/dependency errors (e.g., `TypeError: Cannot read properties of undefined (reading 'hasOwnProperty')` or `NG0200` dependency injection errors) due to missing runtime exports in the host platform.
+
 
 ### Installing the Plugin
 To install this widget library as a plugin in your Cumulocity application:
