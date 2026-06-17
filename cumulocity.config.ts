@@ -1,9 +1,10 @@
 import type { ConfigurationOptions } from '@c8y/devkit';
-import { name } from './package.json';
+import { name, version } from './package.json';
 
 export default {
   runTime: {
     name: name,
+    version: version,
     remotes: {
       [name]: [
         'AlarmHeatmapWidgetModule',
