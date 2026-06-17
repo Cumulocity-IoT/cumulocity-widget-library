@@ -7,10 +7,25 @@ A collection of custom dashboard widgets for the Cumulocity IoT platform. This l
 The library contains the following custom widgets:
 
 1. **Alarm Heatmap Widget**: Visualizes alarm frequency over time as a configurable grid heatmap, allowing you to easily spot peak periods of system alarms.
+   
+   ![Alarm Heatmap Preview](public/alarm-heatmap-preview.png)
+
 2. **Stacked Bar Chart Widget**: Displays a stacked bar chart with selected data points, useful for comparing multiple metrics across categories or time intervals.
+
+   ![Stacked Bar Chart Preview](public/stacked-bar-chart-preview.png)
+
 3. **Custom Map Widget**: Displays a custom map with dynamic tracking markers using GPS or custom coordinates, allowing you to track assets in real time.
+
+   ![Custom Map Preview](public/custom-map-preview.png)
+
 4. **SPC Chart Widget**: Statistical Process Control line chart with control limits and annotations to help monitor and control process performance.
+
+   ![SPC Chart Preview](public/spc-chart-preview.png)
+
 5. **Sankey Diagram Widget**: Displays the breakdown flow of alarms/events down the asset/group hierarchy, illustrating flow pathways and volumes.
+
+   ![Sankey Diagram Preview](public/sankey-diagram-preview.png)
+
 
 ## Installation
 
