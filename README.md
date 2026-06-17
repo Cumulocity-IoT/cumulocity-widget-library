@@ -94,8 +94,7 @@ The build artifacts will be stored in the `dist/` directory, ready to be uploade
 
 We welcome contributions to this project! Please read [CONTRIBUTING.md](file:///Users/tobias/repos/cumulocity-widget-library/CONTRIBUTING.md) and sign the [CONTRIBUTOR-LICENSE-AGREEMENT.md](file:///Users/tobias/repos/cumulocity-widget-library/CONTRIBUTOR-LICENSE-AGREEMENT.md) before submitting a Pull Request.
 
----
+These tools are provided as-is and without warranty or support. They do not constitute part of the Cumulocity product suite. Users are free to use, fork and modify them, subject to the license agreement.
 
-These tools are provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement.
+For more information or help, please visit the [Cumulocity TechCommunity](https://community.cumulocity.com/).
 
-For more information or help, please visit the [Software AG TECH Community Forums](https://techcommunity.softwareag.com/en_US/forum/iot.html).
