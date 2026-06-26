@@ -13,6 +13,7 @@ import { StackedBarChartWidgetModule } from './stacked-bar-chart/index';
 import { CustomMapWidgetModule } from './custom-map/index';
 import { SpcChartWidgetModule } from './spc-chart/index';
 import { SankeyDiagramWidgetModule } from './sankey-diagram/index';
+import { ParetoChartWidgetModule } from './pareto-chart/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +25,8 @@ export const appConfig: ApplicationConfig = {
       StackedBarChartWidgetModule,
       CustomMapWidgetModule,
       SpcChartWidgetModule,
-      SankeyDiagramWidgetModule
+      SankeyDiagramWidgetModule,
+      ParetoChartWidgetModule
     )
   ]
 };

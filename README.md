@@ -26,6 +26,10 @@ The library contains the following custom widgets:
 
    ![Sankey Diagram Preview](public/sankey-diagram-preview.png)
 
+6. **Pareto Chart Widget**: Analyses alarms/events by type in a Pareto distribution, highlighting the most frequent occurrences.
+
+   ![Pareto Chart Preview](public/pareto-chart-preview.png)
+
 
 ## Installation
 
@@ -48,7 +52,7 @@ To install this widget library as a plugin in your Cumulocity application:
 
 2. Add the modules of the widgets you want to use to your application's `app.module.ts`:
    ```typescript
-   import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule } from 'cumulocity-widget-library';
+   import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule } from 'cumulocity-widget-library';
 
    @NgModule({
      imports: [
@@ -57,7 +61,8 @@ To install this widget library as a plugin in your Cumulocity application:
        StackedBarChartWidgetModule,
        CustomMapWidgetModule,
        SpcChartWidgetModule,
-       SankeyDiagramWidgetModule
+       SankeyDiagramWidgetModule,
+       ParetoChartWidgetModule
      ]
    })
    export class AppModule {}

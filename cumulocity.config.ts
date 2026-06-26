@@ -11,7 +11,8 @@ export default {
         'StackedBarChartWidgetModule',
         'CustomMapWidgetModule',
         'SpcChartWidgetModule',
-        'SankeyDiagramWidgetModule'
+        'SankeyDiagramWidgetModule',
+        'ParetoChartWidgetModule'
       ]
     },
     package: 'plugin',
@@ -47,6 +48,12 @@ export default {
         module: 'SankeyDiagramWidgetModule',
         path: './src/app/sankey-diagram/index.ts',
         description: 'Displays the breakdown flow of alarms/events down the asset/group hierarchy'
+      },
+      {
+        name: 'Pareto Chart Widget',
+        module: 'ParetoChartWidgetModule',
+        path: './src/app/pareto-chart/index.ts',
+        description: 'Analyses alarms/events by type in a Pareto distribution'
       }
     ]
   },
