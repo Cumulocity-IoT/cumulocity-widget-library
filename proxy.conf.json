@@ -1,8 +1,27 @@
-{
-  "/**": {
+[
+  {
+    "context": [
+      "/tenant",
+      "/user",
+      "/inventory",
+      "/measurement",
+      "/event",
+      "/alarm",
+      "/operation",
+      "/notification",
+      "/notification2",
+      "/cep",
+      "/identity",
+      "/audit",
+      "/application",
+      "/devicecontrol",
+      "/apps",
+      "/plugins"
+    ],
     "target": "https://demo.jp.cumulocity.com",
     "secure": true,
     "changeOrigin": true,
+    "ws": true,
     "logLevel": "debug"
   }
-}
+]

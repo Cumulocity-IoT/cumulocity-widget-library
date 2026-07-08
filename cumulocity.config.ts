@@ -12,7 +12,8 @@ export default {
         'CustomMapWidgetModule',
         'SpcChartWidgetModule',
         'SankeyDiagramWidgetModule',
-        'ParetoChartWidgetModule'
+        'ParetoChartWidgetModule',
+        'RadarChartWidgetModule'
       ]
     },
     package: 'plugin',
@@ -54,6 +55,12 @@ export default {
         module: 'ParetoChartWidgetModule',
         path: './src/app/pareto-chart/index.ts',
         description: 'Analyses alarms/events by type in a Pareto distribution'
+      },
+      {
+        name: 'Radar Chart Widget',
+        module: 'RadarChartWidgetModule',
+        path: './src/app/radar-chart/index.ts',
+        description: 'Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually'
       }
     ]
   },

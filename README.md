@@ -30,6 +30,10 @@ The library contains the following custom widgets:
 
    ![Pareto Chart Preview](public/pareto-chart-preview.png)
 
+7. **Radar Chart Widget**: Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually.
+
+   ![Radar Chart Preview](public/radar-chart-preview.png)
+
 
 ## Installation
 
@@ -52,19 +56,20 @@ To install this widget library as a plugin in your Cumulocity application:
 
 2. Add the modules of the widgets you want to use to your application's `app.module.ts`:
    ```typescript
-   import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule } from 'cumulocity-widget-library';
+    import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule, RadarChartWidgetModule } from 'cumulocity-widget-library';
 
-   @NgModule({
-     imports: [
-       // ... other imports
-       AlarmHeatmapWidgetModule,
-       StackedBarChartWidgetModule,
-       CustomMapWidgetModule,
-       SpcChartWidgetModule,
-       SankeyDiagramWidgetModule,
-       ParetoChartWidgetModule
-     ]
-   })
+    @NgModule({
+      imports: [
+        // ... other imports
+        AlarmHeatmapWidgetModule,
+        StackedBarChartWidgetModule,
+        CustomMapWidgetModule,
+        SpcChartWidgetModule,
+        SankeyDiagramWidgetModule,
+        ParetoChartWidgetModule,
+        RadarChartWidgetModule
+      ]
+    })
    export class AppModule {}
    ```
 
