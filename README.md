@@ -6,35 +6,56 @@ A collection of custom dashboard widgets for the Cumulocity platform. This libra
 
 The library contains the following custom widgets:
 
-1. **Alarm Heatmap Widget**: Visualizes alarm frequency over time as a configurable grid heatmap, allowing you to easily spot peak periods of system alarms.
-   
-   ![Alarm Heatmap Preview](public/alarm-heatmap-preview.png)
-
-2. **Stacked Bar Chart Widget**: Displays a stacked bar chart with selected data points, useful for comparing multiple metrics across categories or time intervals.
-
-   ![Stacked Bar Chart Preview](public/stacked-bar-chart-preview.png)
-
-3. **Custom Map Widget**: Displays a custom map with dynamic tracking markers using GPS or custom coordinates, allowing you to track assets in real time.
-
-   ![Custom Map Preview](public/custom-map-preview.png)
-
-4. **SPC Chart Widget**: Statistical Process Control line chart with control limits and annotations to help monitor and control process performance.
-
-   ![SPC Chart Preview](public/spc-chart-preview.png)
-
-5. **Sankey Diagram Widget**: Displays the breakdown flow of alarms/events down the asset/group hierarchy, illustrating flow pathways and volumes.
-
-   ![Sankey Diagram Preview](public/sankey-diagram-preview.png)
-
-6. **Pareto Chart Widget**: Analyses alarms/events by type in a Pareto distribution, highlighting the most frequent occurrences.
-
-   ![Pareto Chart Preview](public/pareto-chart-preview.png)
-
-7. **Radar Chart Widget**: Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually.
-
-   ![Radar Chart Preview](public/radar-chart-preview.png)
-
-8. **Ideal State Deviation Widget**: Scores an asset from 0 to 100 based on deviation from configured target ranges using custom scoring profiles (Linear, Exponential, Sigmoidal) and grace zones.
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>1. Alarm Heatmap Widget</h4>
+      <p>Visualizes alarm frequency over time as a configurable grid heatmap.</p>
+      <img src="public/alarm-heatmap-preview.png" width="350" alt="Alarm Heatmap Preview"/>
+    </td>
+    <td valign="top" width="50%">
+      <h4>2. Stacked Bar Chart Widget</h4>
+      <p>Displays a stacked bar chart with selected data points.</p>
+      <img src="public/stacked-bar-chart-preview.png" width="350" alt="Stacked Bar Chart Preview"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>3. Custom Map Widget</h4>
+      <p>Displays a map with dynamic tracking markers using GPS or custom coordinates.</p>
+      <img src="public/custom-map-preview.png" width="350" alt="Custom Map Preview"/>
+    </td>
+    <td valign="top" width="50%">
+      <h4>4. SPC Chart Widget</h4>
+      <p>Statistical Process Control line chart with control limits and annotations.</p>
+      <img src="public/spc-chart-preview.png" width="350" alt="SPC Chart Preview"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>5. Sankey Diagram Widget</h4>
+      <p>Displays the breakdown flow of alarms/events down the asset/group hierarchy.</p>
+      <img src="public/sankey-diagram-preview.png" width="350" alt="Sankey Diagram Preview"/>
+    </td>
+    <td valign="top" width="50%">
+      <h4>6. Pareto Chart Widget</h4>
+      <p>Analyses alarms/events by type in a Pareto distribution, highlighting frequent occurrences.</p>
+      <img src="public/pareto-chart-preview.png" width="350" alt="Pareto Chart Preview"/>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>7. Radar Chart Widget</h4>
+      <p>Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually.</p>
+      <img src="public/radar-chart-preview.png" width="350" alt="Radar Chart Preview"/>
+    </td>
+    <td valign="top" width="50%">
+      <h4>8. Ideal State Deviation Widget</h4>
+      <p>Scores an asset from 0 to 100 based on deviation from configured target ranges.</p>
+      <img src="public/ideal-state-deviation-preview.svg" width="350" alt="Ideal State Deviation Preview"/>
+    </td>
+  </tr>
+</table>
 
 
 
