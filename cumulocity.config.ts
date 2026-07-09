@@ -13,7 +13,8 @@ export default {
         'SpcChartWidgetModule',
         'SankeyDiagramWidgetModule',
         'ParetoChartWidgetModule',
-        'RadarChartWidgetModule'
+        'RadarChartWidgetModule',
+        'IdealStateDeviationWidgetModule'
       ]
     },
     package: 'plugin',
@@ -61,6 +62,12 @@ export default {
         module: 'RadarChartWidgetModule',
         path: './src/app/radar-chart/index.ts',
         description: 'Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually'
+      },
+      {
+        name: 'Ideal State Deviation Widget',
+        module: 'IdealStateDeviationWidgetModule',
+        path: './src/app/ideal-state-deviation/index.ts',
+        description: 'Scores an asset from 0 to 100 based on deviation from configured target ranges.'
       }
     ]
   },

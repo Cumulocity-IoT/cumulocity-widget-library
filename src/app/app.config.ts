@@ -14,6 +14,7 @@ import { CustomMapWidgetModule } from './custom-map/index';
 import { SpcChartWidgetModule } from './spc-chart/index';
 import { SankeyDiagramWidgetModule } from './sankey-diagram/index';
 import { ParetoChartWidgetModule } from './pareto-chart/index';
+import { IdealStateDeviationWidgetModule } from './ideal-state-deviation/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +27,8 @@ export const appConfig: ApplicationConfig = {
       CustomMapWidgetModule,
       SpcChartWidgetModule,
       SankeyDiagramWidgetModule,
-      ParetoChartWidgetModule
+      ParetoChartWidgetModule,
+      IdealStateDeviationWidgetModule
     )
   ]
 };

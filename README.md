@@ -34,6 +34,9 @@ The library contains the following custom widgets:
 
    ![Radar Chart Preview](public/radar-chart-preview.png)
 
+8. **Ideal State Deviation Widget**: Scores an asset from 0 to 100 based on deviation from configured target ranges using custom scoring profiles (Linear, Exponential, Sigmoidal) and grace zones.
+
+
 
 ## Installation
 
@@ -56,21 +59,22 @@ To install this widget library as a plugin in your Cumulocity application:
 
 2. Add the modules of the widgets you want to use to your application's `app.module.ts`:
    ```typescript
-    import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule, RadarChartWidgetModule } from 'cumulocity-widget-library';
+     import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule, RadarChartWidgetModule, IdealStateDeviationWidgetModule } from 'cumulocity-widget-library';
 
-    @NgModule({
-      imports: [
-        // ... other imports
-        AlarmHeatmapWidgetModule,
-        StackedBarChartWidgetModule,
-        CustomMapWidgetModule,
-        SpcChartWidgetModule,
-        SankeyDiagramWidgetModule,
-        ParetoChartWidgetModule,
-        RadarChartWidgetModule
-      ]
-    })
-   export class AppModule {}
+     @NgModule({
+       imports: [
+         // ... other imports
+         AlarmHeatmapWidgetModule,
+         StackedBarChartWidgetModule,
+         CustomMapWidgetModule,
+         SpcChartWidgetModule,
+         SankeyDiagramWidgetModule,
+         ParetoChartWidgetModule,
+         RadarChartWidgetModule,
+         IdealStateDeviationWidgetModule
+       ]
+     })
+    export class AppModule {}
    ```
 
 ## Quick Start
