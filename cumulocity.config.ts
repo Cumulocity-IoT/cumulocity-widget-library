@@ -14,7 +14,9 @@ export default {
         'SankeyDiagramWidgetModule',
         'ParetoChartWidgetModule',
         'RadarChartWidgetModule',
-        'IdealStateDeviationWidgetModule'
+        'IdealStateDeviationWidgetModule',
+        'DowntimeGanttWidgetModule',
+        'ScatterPlotWidgetModule'
       ]
     },
     package: 'plugin',
@@ -68,6 +70,18 @@ export default {
         module: 'IdealStateDeviationWidgetModule',
         path: './src/app/ideal-state-deviation/index.ts',
         description: 'Scores an asset from 0 to 100 based on deviation from configured target ranges.'
+      },
+      {
+        name: 'Downtime Gantt Widget',
+        module: 'DowntimeGanttWidgetModule',
+        path: './src/app/downtime-gantt/index.ts',
+        description: 'Visualizes machine states over time based on measurements or events with custom mappings.'
+      },
+      {
+        name: 'Scatter Plot Widget',
+        module: 'ScatterPlotWidgetModule',
+        path: './src/app/scatter-plot/index.ts',
+        description: 'Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay'
       }
     ]
   },

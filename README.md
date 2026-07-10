@@ -55,6 +55,17 @@ The library contains the following custom widgets:
       <img src="public/ideal-state-deviation-preview.svg" width="350" alt="Ideal State Deviation Preview"/>
     </td>
   </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>9. Downtime Gantt Widget</h4>
+      <p>Visualizes machine states over time based on measurements or events with custom mappings.</p>
+    </td>
+    <td valign="top" width="50%">
+      <h4>10. Scatter Plot Widget</h4>
+      <p>Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay.</p>
+      <img src="public/scatter-plot-preview.png" width="350" alt="Scatter Plot Preview"/>
+    </td>
+  </tr>
 </table>
 
 
@@ -80,7 +91,18 @@ To install this widget library as a plugin in your Cumulocity application:
 
 2. Add the modules of the widgets you want to use to your application's `app.module.ts`:
    ```typescript
-     import { AlarmHeatmapWidgetModule, StackedBarChartWidgetModule, CustomMapWidgetModule, SpcChartWidgetModule, SankeyDiagramWidgetModule, ParetoChartWidgetModule, RadarChartWidgetModule, IdealStateDeviationWidgetModule } from 'cumulocity-widget-library';
+     import { 
+       AlarmHeatmapWidgetModule, 
+       StackedBarChartWidgetModule, 
+       CustomMapWidgetModule, 
+       SpcChartWidgetModule, 
+       SankeyDiagramWidgetModule, 
+       ParetoChartWidgetModule, 
+       RadarChartWidgetModule, 
+       IdealStateDeviationWidgetModule,
+       DowntimeGanttWidgetModule,
+       ScatterPlotWidgetModule
+     } from 'cumulocity-widget-library';
 
      @NgModule({
        imports: [
@@ -92,7 +114,9 @@ To install this widget library as a plugin in your Cumulocity application:
          SankeyDiagramWidgetModule,
          ParetoChartWidgetModule,
          RadarChartWidgetModule,
-         IdealStateDeviationWidgetModule
+         IdealStateDeviationWidgetModule,
+         DowntimeGanttWidgetModule,
+         ScatterPlotWidgetModule
        ]
      })
     export class AppModule {}

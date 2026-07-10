@@ -15,6 +15,8 @@ import { SpcChartWidgetModule } from './spc-chart/index';
 import { SankeyDiagramWidgetModule } from './sankey-diagram/index';
 import { ParetoChartWidgetModule } from './pareto-chart/index';
 import { IdealStateDeviationWidgetModule } from './ideal-state-deviation/index';
+import { DowntimeGanttWidgetModule } from './downtime-gantt/index';
+import { ScatterPlotWidgetModule } from './scatter-plot/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +30,9 @@ export const appConfig: ApplicationConfig = {
       SpcChartWidgetModule,
       SankeyDiagramWidgetModule,
       ParetoChartWidgetModule,
-      IdealStateDeviationWidgetModule
+      IdealStateDeviationWidgetModule,
+      DowntimeGanttWidgetModule,
+      ScatterPlotWidgetModule
     )
   ]
 };

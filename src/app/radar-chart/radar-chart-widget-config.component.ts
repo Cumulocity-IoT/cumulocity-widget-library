@@ -97,7 +97,7 @@ interface SelectedDevice {
       <div class="modal-body radar-chart-asset-modal-body" style="max-height: 450px; overflow-y: auto; min-height: 250px;">
         <c8y-asset-selector
           [(ngModel)]="tempDeviceModel"
-          [config]="{ groupsSelectable: true, multi: false }"
+          [config]="{ groupsSelectable: true, multi: false, showUnassignedDevices: true }"
           (onSelected)="onDevicePicked($event)"
         ></c8y-asset-selector>
       </div>
