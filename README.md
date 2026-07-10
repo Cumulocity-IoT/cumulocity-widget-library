@@ -59,6 +59,7 @@ The library contains the following custom widgets:
     <td valign="top" width="50%">
       <h4>9. Downtime Gantt Widget</h4>
       <p>Visualizes machine states over time based on measurements or events with custom mappings.</p>
+      <img src="public/downtime-gantt-preview.png" width="350" alt="Downtime Gantt Preview"/>
     </td>
     <td valign="top" width="50%">
       <h4>10. Scatter Plot Widget</h4>
