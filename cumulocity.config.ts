@@ -5,6 +5,8 @@ export default {
   runTime: {
     name: name,
     version: version,
+    contextPath: 'c8y-pkg-cumulocity-widget-library',
+    key: 'c8y-pkg-cumulocity-widget-library-key',
     remotes: {
       [name]: [
         'AlarmHeatmapWidgetModule',
