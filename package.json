@@ -1,6 +1,9 @@
 {
   "name": "cumulocity-widget-library",
   "version": "1.3.1",
+  "license": "Apache-2.0",
+  "author": "Cumulocity GmbH",
+  "description": "A library of widgets for Cumulocity dashboards",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

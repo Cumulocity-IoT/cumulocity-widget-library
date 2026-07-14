@@ -1,10 +1,12 @@
 import type { ConfigurationOptions } from '@c8y/devkit';
-import { name, version } from './package.json';
+import { name, version, license, description } from './package.json';
 
 export default {
   runTime: {
     name: name,
     version: version,
+    license: license,
+    description: description,
     contextPath: 'c8y-pkg-cumulocity-widget-library',
     key: 'c8y-pkg-cumulocity-widget-library-key',
     remotes: {
