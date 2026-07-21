@@ -5,19 +5,20 @@
  */
 
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit, TemplateRef, ViewChild, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ControlContainer,
   FormBuilder,
   FormGroup,
+  FormsModule,
   NgForm,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InventoryBinaryService, InventoryService } from '@c8y/client';
-import { AlertService, DynamicComponent, FormGroupComponent } from '@c8y/ngx-components';
+import { AlertService, CoreModule, DynamicComponent, FormGroupComponent } from '@c8y/ngx-components';
 import { IconSelectorModule } from '@c8y/ngx-components/icon-selector';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
 import { BehaviorSubject } from 'rxjs';
@@ -39,10 +40,10 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
           (dragleave)="onDragLeave($event)"
           (drop)="onDrop($event)"
         >
-          @if (formGroup.get('binaryId')?.value) {
+          @if (formGroup.get('binaryId')?.value && previewImageUrl()) {
             <div class="image-preview-wrapper m-b-8">
               <img 
-                [src]="'/inventory/binaries/' + formGroup.get('binaryId')?.value" 
+                [src]="previewImageUrl()" 
                 class="img-thumbnail image-preview"
                 alt="Map preview" 
               />
@@ -54,6 +55,11 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
               >
                 <i c8yIcon="trash-o"></i>
               </button>
+            </div>
+          } @else if (formGroup.get('binaryId')?.value && !previewImageUrl()) {
+            <div class="upload-dropzone">
+              <span class="spinner m-b-8"></span>
+              <span class="text-muted">Loading preview...</span>
             </div>
           } @else {
             <div class="upload-dropzone">
@@ -109,16 +115,67 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
       <div class="row">
         <div class="col-sm-8">
           <c8y-form-group>
-            <label class="control-label">Marker Icon</label>
+            <label class="control-label">Default Marker Icon</label>
             <c8y-icon-selector-wrapper formControlName="iconName"></c8y-icon-selector-wrapper>
           </c8y-form-group>
         </div>
         <div class="col-sm-4">
           <c8y-form-group>
-            <label class="control-label">Marker Color</label>
+            <label class="control-label">Default Marker Color</label>
             <input class="form-control" type="color" formControlName="markerColor" style="height: 34px; padding: 2px; cursor: pointer;" />
           </c8y-form-group>
         </div>
+      </div>
+
+      <!-- Device Type Marker Overrides Section -->
+      <div class="m-b-16 bg-gray-50 border-rounded p-12">
+        <h5 class="text-medium m-b-12">Device Type Marker Overrides (Optional)</h5>
+        
+        <!-- Add Override Row -->
+        <div class="override-input-row">
+          <div style="flex: 2; margin-right: 8px;">
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Device Type</label>
+            <input class="form-control input-sm" type="text" [(ngModel)]="newOverrideType" [ngModelOptions]="{standalone: true}" placeholder="e.g. c8y_Linux" />
+          </div>
+          <div style="flex: 1.5; margin-right: 8px;">
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Icon</label>
+            <c8y-icon-selector-wrapper [(ngModel)]="newOverrideIcon" [ngModelOptions]="{standalone: true}"></c8y-icon-selector-wrapper>
+          </div>
+          <div style="width: 50px; margin-right: 8px;">
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Color</label>
+            <input class="form-control input-sm" type="color" [(ngModel)]="newOverrideColor" [ngModelOptions]="{standalone: true}" style="height: 30px; padding: 2px; cursor: pointer; width: 100%;" />
+          </div>
+          <div style="display: flex; align-items: flex-end; height: 30px;">
+            <button type="button" class="btn btn-primary btn-sm" (click)="addTypeOverride()" title="Add override" style="margin: 0; height: 30px; width: 34px; padding: 0; display: flex; align-items: center; justify-content: center;">
+              <i c8yIcon="plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- List of Overrides -->
+        @if (typeOverridesList.length > 0) {
+          <div class="m-t-12 border-top p-t-12" style="max-height: 200px; overflow-y: auto;">
+            @for (ov of typeOverridesList; track $index) {
+              <div class="override-item-card">
+                <div class="override-type-text" title="{{ ov.deviceType }}">
+                  {{ ov.deviceType }}
+                </div>
+                <div class="override-icon-text" title="{{ ov.iconName }}">
+                  <i [c8yIcon]="ov.iconName" class="m-r-4"></i>
+                  <span class="text-muted text-small">{{ ov.iconName }}</span>
+                </div>
+                <div class="override-color-badge">
+                  <span class="badge" [style.background-color]="ov.markerColor">{{ ov.markerColor }}</span>
+                </div>
+                <div class="override-action">
+                  <button type="button" class="btn btn-dot btn-danger btn-xs" (click)="removeTypeOverride($index)" title="Remove">
+                    <i c8yIcon="trash-o"></i>
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        }
       </div>
 
       <!-- Coordinate Input Groups -->
@@ -291,10 +348,76 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    
+    /* Overrides layout styles */
+    .override-input-row {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .override-item-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 6px 12px;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+    .override-type-text {
+      flex: 2;
+      font-weight: 500;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .override-icon-text {
+      flex: 1.5;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .override-color-badge {
+      width: 70px;
+      display: flex;
+      justify-content: center;
+    }
+    .override-color-badge .badge {
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+    .override-action {
+      width: 30px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .override-action button {
+      padding: 0 !important;
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      border-radius: 50% !important;
+    }
   `],
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   standalone: true,
-  imports: [CommonModule, FormGroupComponent, ReactiveFormsModule, CustomMapWidgetComponent, AsyncPipe, IconSelectorModule]
+  imports: [CommonModule, FormGroupComponent, ReactiveFormsModule, FormsModule, CustomMapWidgetComponent, AsyncPipe, IconSelectorModule, CoreModule]
 })
 export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit {
   @Input() config: any = {};
@@ -303,6 +426,12 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
   config$ = new BehaviorSubject<any>(null);
   uploading = false;
   isDragOver = false;
+  previewImageUrl = signal<string | null>(null);
+  
+  typeOverridesList: any[] = [];
+  newOverrideType = '';
+  newOverrideIcon = 'hdd-o';
+  newOverrideColor = '#1776bf';
 
   private alert = inject(AlertService);
   private widgetConfigService = inject(WidgetConfigService);
@@ -311,6 +440,7 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
   private router = inject(Router);
   private binaryService = inject(InventoryBinaryService);
   private inventoryService = inject(InventoryService);
+  private currentPreviewBinaryId: string | null = null;
 
   @ViewChild('widgetPreview')
   set preview(template: TemplateRef<any>) {
@@ -318,12 +448,15 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
   }
 
   ngOnInit() {
+    this.typeOverridesList = this.config.typeOverrides ? JSON.parse(JSON.stringify(this.config.typeOverrides)) : [];
+
     this.formGroup = this.formBuilder.group({
       binaryId: [this.config.binaryId || ''],
       coordMode: [this.config.coordMode || 'gps', Validators.required],
       pollInterval: [this.config.pollInterval !== undefined ? Number(this.config.pollInterval) : 30, Validators.required],
       iconName: [this.config.iconName || 'hdd-o', Validators.required],
       markerColor: [this.config.markerColor || '#1776bf', Validators.required],
+      typeOverrides: [this.typeOverridesList],
       // GPS coords
       lat_tl: [this.config.lat_tl !== undefined ? this.config.lat_tl : ''],
       lng_tl: [this.config.lng_tl !== undefined ? this.config.lng_tl : ''],
@@ -346,6 +479,20 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
       .subscribe(() => {
         this.emitPreview();
       });
+
+    this.formGroup.get('binaryId')?.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(async (binId) => {
+        await this.loadPreviewImage(binId);
+      });
+
+    if (this.config.binaryId) {
+      this.loadPreviewImage(this.config.binaryId);
+    }
+
+    this.destroyRef.onDestroy(() => {
+      this.cleanPreviewImageUrl();
+    });
 
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (this.formGroup.invalid) {
@@ -466,5 +613,64 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
       return match[1];
     }
     return null;
+  }
+
+  async loadPreviewImage(binaryId: string) {
+    if (!binaryId) {
+      this.cleanPreviewImageUrl();
+      this.currentPreviewBinaryId = null;
+      return;
+    }
+
+    if (this.currentPreviewBinaryId === binaryId) {
+      return;
+    }
+
+    this.currentPreviewBinaryId = binaryId;
+    this.cleanPreviewImageUrl();
+
+    try {
+      const response = await this.binaryService.download(binaryId);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      this.previewImageUrl.set(objectUrl);
+    } catch (err) {
+      console.error('Failed to download preview map image binary:', err);
+      this.cleanPreviewImageUrl();
+    }
+  }
+
+  private cleanPreviewImageUrl() {
+    const currentUrl = this.previewImageUrl();
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+      this.previewImageUrl.set(null);
+    }
+  }
+
+  addTypeOverride() {
+    if (!this.newOverrideType.trim()) {
+      this.alert.warning('Please enter a device type.');
+      return;
+    }
+    const exists = this.typeOverridesList.some(o => o.deviceType.toLowerCase() === this.newOverrideType.trim().toLowerCase());
+    if (exists) {
+      this.alert.warning(`An override for device type "${this.newOverrideType}" already exists.`);
+      return;
+    }
+    this.typeOverridesList.push({
+      deviceType: this.newOverrideType.trim(),
+      iconName: this.newOverrideIcon,
+      markerColor: this.newOverrideColor
+    });
+    this.formGroup.patchValue({ typeOverrides: [...this.typeOverridesList] });
+    this.newOverrideType = '';
+    this.newOverrideIcon = 'hdd-o';
+    this.newOverrideColor = '#1776bf';
+  }
+
+  removeTypeOverride(index: number) {
+    this.typeOverridesList.splice(index, 1);
+    this.formGroup.patchValue({ typeOverrides: [...this.typeOverridesList] });
   }
 }

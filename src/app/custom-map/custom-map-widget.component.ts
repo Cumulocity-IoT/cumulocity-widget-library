@@ -4,10 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Component, computed, inject, input, OnDestroy, OnInit, signal, effect } from '@angular/core';
+import { Component, computed, inject, input, OnDestroy, OnInit, signal, effect, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InventoryService } from '@c8y/client';
+import { InventoryService, InventoryBinaryService } from '@c8y/client';
 import { CoreModule } from '@c8y/ngx-components';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 interface MapMarker {
   id: string;
@@ -18,6 +19,9 @@ interface MapMarker {
   top: number; // percentage (0-100)
   active: boolean;
   lastUpdated: string;
+  iconName: string;
+  markerColor: string;
+  type?: string;
 }
 
 @Component({
@@ -29,11 +33,16 @@ interface MapMarker {
           <i c8yIcon="map-o" class="text-large text-muted m-b-8"></i>
           <p class="text-muted">No map image uploaded. Please configure the widget.</p>
         </div>
+      } @else if (!imageUrl()) {
+        <div class="empty-state text-center p-24">
+          <span class="spinner m-b-8"></span>
+          <p class="text-muted">Loading map image...</p>
+        </div>
       } @else {
         <div class="map-viewport">
           <div class="map-wrapper">
             <img 
-              [src]="'/inventory/binaries/' + config()?.binaryId" 
+              [src]="imageUrl()" 
               class="map-image" 
               alt="Custom Map Floor"
               (load)="onImageLoaded()"
@@ -47,22 +56,28 @@ interface MapMarker {
                     [style.left.%]="marker.left"
                     [style.top.%]="marker.top"
                     [class.inactive]="!marker.active"
+                    [popover]="popTemplate"
+                    [popoverContext]="{ marker: marker }"
+                    popoverTitle="{{ marker.name }}"
+                    placement="auto"
+                    triggers="mouseenter:mouseleave"
+                    container="body"
+                    containerClass="map-marker-popover"
                   >
                     <!-- Icon style with premium pulse halo -->
-                    <div class="marker-icon-wrapper" [style.background-color]="config()?.markerColor || '#1776bf'">
-                      <i [c8yIcon]="config()?.iconName || 'hdd-o'" class="marker-device-icon"></i>
-                      <div class="marker-pulse" [style.background-color]="config()?.markerColor || '#1776bf'"></div>
+                    <div class="marker-icon-wrapper" [style.background-color]="marker.markerColor">
+                      <i [c8yIcon]="marker.iconName" class="marker-device-icon"></i>
+                      <div class="marker-pulse" [style.background-color]="marker.markerColor"></div>
                     </div>
-                    
-                    <!-- Premium Tooltip/Label -->
-                    <div class="marker-tooltip">
-                      <div class="tooltip-title">{{ marker.name }}</div>
-                      <div class="tooltip-body">
-                        <div>X: {{ marker.x !== null ? marker.x.toFixed(2) : 'N/A' }}</div>
-                        <div>Y: {{ marker.y !== null ? marker.y.toFixed(2) : 'N/A' }}</div>
-                        <div class="tooltip-time">Updated: {{ marker.lastUpdated }}</div>
+
+                    <ng-template #popTemplate let-marker="marker">
+                      <div class="tooltip-body-content">
+                        <div>Type: {{ marker?.type || 'N/A' }}</div>
+                        <div>X: {{ marker?.x !== null ? marker?.x?.toFixed(2) : 'N/A' }}</div>
+                        <div>Y: {{ marker?.y !== null ? marker?.y?.toFixed(2) : 'N/A' }}</div>
+                        <div class="tooltip-time">Updated: {{ marker?.lastUpdated }}</div>
                       </div>
-                    </div>
+                    </ng-template>
                   </div>
                 }
               }
@@ -163,52 +178,44 @@ interface MapMarker {
       font-size: 12px;
       z-index: 2;
     }
-    /* Tooltip styling */
-    .marker-tooltip {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) scale(0.8);
-      background: rgba(15, 23, 42, 0.95); /* Deep dark background */
-      color: #ffffff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 11px;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      pointer-events: none;
-      opacity: 0;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 20;
+    /* Popover styles */
+    .map-marker-popover {
+      background: rgba(15, 23, 42, 0.95) !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 6px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+      font-family: 'Outfit', 'Inter', sans-serif !important;
+      pointer-events: none !important;
     }
-    .marker-tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 5px;
-      border-style: solid;
-      border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+    .map-marker-popover .popover-header {
+      background: transparent !important;
+      color: #ffffff !important;
+      border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+      font-weight: 600 !important;
+      padding: 8px 12px 4px 12px !important;
+      font-size: 12px !important;
     }
-    .map-marker:hover .marker-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-      pointer-events: auto;
+    .map-marker-popover .popover-body {
+      color: #ffffff !important;
+      padding: 4px 12px 8px 12px !important;
+      font-size: 11px !important;
     }
-    .tooltip-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 2px;
-    }
-    .tooltip-body {
+    .map-marker-popover .tooltip-body-content {
       line-height: 1.4;
     }
-    .tooltip-time {
+    .map-marker-popover .tooltip-time {
       font-size: 9px;
       color: #94a3b8;
       margin-top: 4px;
+    }
+    .map-marker-popover.bs-popover-top > .arrow::after,
+    .map-marker-popover.bs-popover-auto[x-placement^="top"] > .arrow::after {
+      border-top-color: rgba(15, 23, 42, 0.95) !important;
+    }
+    .map-marker-popover.bs-popover-bottom > .arrow::after,
+    .map-marker-popover.bs-popover-auto[x-placement^="bottom"] > .arrow::after {
+      border-bottom-color: rgba(15, 23, 42, 0.95) !important;
     }
     .map-footer {
       display: flex;
@@ -233,26 +240,32 @@ interface MapMarker {
       border-radius: 8px;
     }
   `],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule, CoreModule]
+  imports: [CommonModule, CoreModule, PopoverModule]
 })
 export class CustomMapWidgetComponent implements OnInit, OnDestroy {
   readonly config = input<any>();
 
   imageLoaded = signal<boolean>(false);
+  imageUrl = signal<string | null>(null);
   markers = signal<MapMarker[]>([]);
 
   private inventoryService = inject(InventoryService);
+  private binaryService = inject(InventoryBinaryService);
   private pollIntervalId: any;
   private devicesList: any[] = [];
+  private currentBinaryId: string | null = null;
 
   constructor() {
-    effect(() => {
-      // Trigger whenever target device or pollInterval changes
+    effect(async () => {
+      // Trigger whenever target device, pollInterval or binaryId changes
       const deviceId = this.config()?.device?.id;
       const pollSec = this.config()?.pollInterval;
+      const binaryId = this.config()?.binaryId;
       
       this.restartPolling();
+      await this.loadMapImage(binaryId);
     });
   }
 
@@ -262,6 +275,7 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopPolling();
+    this.cleanImageUrl();
   }
 
   onImageLoaded() {
@@ -309,7 +323,9 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
       }
 
       if (children.length > 0) {
-        this.devicesList = children;
+        const ids = children.map(c => c.id);
+        const detailedResponse = await this.inventoryService.list({ ids: ids.join(','), pageSize: 100 });
+        this.devicesList = detailedResponse.data || [];
       } else {
         this.devicesList = [parentMo];
       }
@@ -341,6 +357,21 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
 
       if (xVal !== null && yVal !== null) {
         const { left, top } = this.calculatePercentages(xVal, yVal);
+        
+        // Resolve marker styles with overrides fallback
+        let iconName = this.config()?.iconName || 'hdd-o';
+        let markerColor = this.config()?.markerColor || '#1776bf';
+
+        if (device.type && this.config()?.typeOverrides) {
+          const override = this.config().typeOverrides.find(
+            (o: any) => o.deviceType && o.deviceType.toLowerCase() === device.type.toLowerCase()
+          );
+          if (override) {
+            iconName = override.iconName || iconName;
+            markerColor = override.markerColor || markerColor;
+          }
+        }
+
         list.push({
           id: device.id,
           name: device.name || device.id,
@@ -349,7 +380,10 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
           left,
           top,
           active: device.c8y_ConnectionState?.status === 'CONNECTED' || true,
-          lastUpdated: new Date().toLocaleTimeString()
+          lastUpdated: new Date().toLocaleTimeString(),
+          iconName,
+          markerColor,
+          type: device.type || 'N/A'
         });
       }
     });
@@ -403,5 +437,38 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
     }
     const num = Number(current);
     return isNaN(num) ? null : num;
+  }
+
+  async loadMapImage(binaryId: string) {
+    if (!binaryId) {
+      this.cleanImageUrl();
+      this.currentBinaryId = null;
+      return;
+    }
+
+    if (this.currentBinaryId === binaryId) {
+      return;
+    }
+
+    this.currentBinaryId = binaryId;
+    this.cleanImageUrl();
+
+    try {
+      const response = await this.binaryService.download(binaryId);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      this.imageUrl.set(objectUrl);
+    } catch (err) {
+      console.error('Failed to download map image binary:', err);
+      this.cleanImageUrl();
+    }
+  }
+
+  private cleanImageUrl() {
+    const currentUrl = this.imageUrl();
+    if (currentUrl) {
+      URL.revokeObjectURL(currentUrl);
+      this.imageUrl.set(null);
+    }
   }
 }
