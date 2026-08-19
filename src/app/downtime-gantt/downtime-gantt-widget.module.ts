@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { FormsModule } from '@angular/forms';
 import { hookWidgetConfig } from '@c8y/ngx-components/context-dashboard';
 import { PRESET_NAME, GlobalContextConnectorComponent, LocalControlsComponent } from '@c8y/ngx-components/global-context';
@@ -17,6 +17,8 @@ import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector'
 import { DowntimeGanttWidgetComponent } from './downtime-gantt-widget.component';
 import { DowntimeGanttWidgetConfigComponent } from './downtime-gantt-widget-config.component';
 import { DOWNTIME_GANTT_PREVIEW } from './preview-image';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -37,8 +39,8 @@ import { DOWNTIME_GANTT_PREVIEW } from './preview-image';
       multi: true,
       useValue: {
         id: 'downtime-gantt-widget',
-        label: 'Downtime Gantt Diagram',
-        description: 'Visualizes machine states over time based on measurements or events with custom mappings.',
+        label: gettext('Downtime Gantt Diagram'),
+        description: gettext('Visualizes machine states over time based on measurements or events with custom mappings.'),
         previewImage: DOWNTIME_GANTT_PREVIEW,
         component: DowntimeGanttWidgetComponent,
         configComponent: DowntimeGanttWidgetConfigComponent,
@@ -58,7 +60,7 @@ import { DOWNTIME_GANTT_PREVIEW } from './preview-image';
     hookWidgetConfig({
       widgetId: 'downtime-gantt-widget',
       priority: 10,
-      label: 'Time context',
+      label: gettext('Time context'),
       initialState: {
         controls: PRESET_NAME.DEFAULT
       },
@@ -67,4 +69,6 @@ import { DOWNTIME_GANTT_PREVIEW } from './preview-image';
     })
   ]
 })
-export class DowntimeGanttWidgetModule {}
+export class DowntimeGanttWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}

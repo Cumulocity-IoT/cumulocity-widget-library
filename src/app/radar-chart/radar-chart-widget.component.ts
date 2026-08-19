@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MeasurementService } from '@c8y/client';
-import { DashboardChildComponent, WidgetTimeContextDateRangeService, MeasurementRealtimeService } from '@c8y/ngx-components';
+import { DashboardChildComponent, WidgetTimeContextDateRangeService, MeasurementRealtimeService, CoreModule, gettext } from '@c8y/ngx-components';
 import { AlarmSeverityToIconPipe, AlarmSeverityToLabelPipe } from '@c8y/ngx-components/alarms';
 import { ChartAlarmsService, ChartEventsService, ChartHelpersService } from '@c8y/ngx-components/echart';
 import {
@@ -75,17 +69,17 @@ interface NormalizedPoint {
         @if (isLoading) {
           <div class="state-container text-center p-24">
             <span class="spinner"></span>
-            <p class="m-t-8 text-muted text-small">Loading telemetry data...</p>
+            <p class="m-t-8 text-muted text-small">{{ 'Loading telemetry data...' | translate }}</p>
           </div>
         } @else if (!config?.devices || config.devices.length === 0) {
           <div class="state-container text-center p-24">
             <i c8yIcon="hdd-o" class="text-muted text-large m-b-8"></i>
-            <p class="text-muted">No devices selected. Please configure the widget.</p>
+            <p class="text-muted">{{ 'No devices selected. Please configure the widget.' | translate }}</p>
           </div>
         } @else if (!config?.datapoints || config.datapoints.length < 3) {
           <div class="state-container text-center p-24">
             <i c8yIcon="area-chart" class="text-muted text-large m-b-8"></i>
-            <p class="text-muted">Please select at least 3 datapoints to render the radar chart.</p>
+            <p class="text-muted">{{ 'Please select at least 3 datapoints to render the radar chart.' | translate }}</p>
           </div>
         } @else {
           <!-- SVG Spider Chart -->
@@ -147,7 +141,7 @@ interface NormalizedPoint {
                   @if (pt.isMissing) {
                     <!-- Cross/X marker for N/A -->
                     <g [attr.transform]="'translate(' + pt.x + ',' + pt.y + ')'" class="na-marker">
-                      <circle r="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"></circle>
+                      <circle r="4" fill="var(--c8y-card-background-default, rgba(128, 128, 128, 0.2))" stroke="var(--c8y-root-component-border-color, #94a3b8)" stroke-width="1"></circle>
                       <line x1="-3" y1="-3" x2="3" y2="3" stroke="#e11d48" stroke-width="1.5"></line>
                       <line x1="3" y1="-3" x2="-3" y2="3" stroke="#e11d48" stroke-width="1.5"></line>
                     </g>
@@ -158,7 +152,7 @@ interface NormalizedPoint {
                       [attr.cy]="pt.y" 
                       r="4.5" 
                       [attr.fill]="getDeviceColor(devIdx)" 
-                      stroke="#ffffff" 
+                      stroke="var(--c8y-card-background-default, transparent)" 
                       stroke-width="1.5"
                       class="value-dot"
                     >
@@ -176,7 +170,7 @@ interface NormalizedPoint {
               <table class="table table-striped table-hover c8y-table">
                 <thead>
                   <tr>
-                    <th>Device / Asset</th>
+                    <th translate>Device / Asset</th>
                     @for (dp of config.datapoints; track dp.id || $index) {
                       <th>{{ dp.label }}</th>
                     }
@@ -194,7 +188,7 @@ interface NormalizedPoint {
                           @if (dev.values[getDpKey(dp)] !== null) {
                             {{ dev.values[getDpKey(dp)] | number:'1.1-2' }} <span class="text-muted text-small">{{ dp.unit }}</span>
                           } @else {
-                            <span class="text-danger font-medium"><i c8yIcon="exclamation-triangle"></i> N/A</span>
+                            <span class="text-danger font-medium"><i c8yIcon="exclamation-triangle"></i> {{ 'N/A' | translate }}</span>
                           }
                         </td>
                       }
@@ -210,13 +204,14 @@ interface NormalizedPoint {
   `,
   styles: [`
     .radar-widget-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 100%;
       box-sizing: border-box;
-      background: #ffffff;
+      background: transparent;
+      color: var(--c8y-text-color, inherit);
     }
     .radar-content {
       flex: 1;
@@ -252,18 +247,19 @@ interface NormalizedPoint {
     }
     .grid-polygon {
       fill: none;
-      stroke: #e2e8f0;
+      stroke: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       stroke-width: 1;
     }
     .axis-line {
-      stroke: #cbd5e1;
+      stroke: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       stroke-width: 1;
       stroke-dasharray: 2,2;
     }
     .axis-label {
       font-size: 10px;
-      fill: #475569;
+      fill: var(--c8y-text-muted, #94a3b8);
       font-weight: 500;
+      font-family: var(--c8y-font-family-base, inherit);
     }
     
     /* SVG Element Transitions for Smooth Telemetry Animation */
@@ -301,7 +297,7 @@ interface NormalizedPoint {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 2px solid rgba(0,0,0,0.1);
+      border: 2px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.1));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 0.8s linear infinite;
@@ -312,7 +308,7 @@ interface NormalizedPoint {
     .table-container {
       max-height: 200px;
       overflow-y: auto;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 6px;
     }
     .c8y-table {
@@ -320,8 +316,8 @@ interface NormalizedPoint {
       font-size: 11px;
     }
     .c8y-table th {
-      background: #f8fafc;
-      color: #334155;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      color: var(--c8y-text-color, inherit);
       font-weight: 600;
       position: sticky;
       top: 0;

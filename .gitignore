@@ -44,4 +44,7 @@ Thumbs.db
 
 # Agent files
 .agent/
+.agent.zip
+.npm/
 
+cumulocity-web-wiki

@@ -16,20 +16,18 @@ import { SpcChartWidgetComponent } from './spc-chart-widget.component';
   selector: 'lib-spc-chart-widget-config',
   standalone: false,
   template: `
-
-
     <!-- Static Lines Section -->
     <div class="form-group">
       <label translate style="font-weight: bold; margin-bottom: 8px;">Static Lines</label>
-      <div *ngIf="!config.staticLines || config.staticLines.length === 0" class="text-muted p-8">
+      <div *ngIf="!config.staticLines || config.staticLines.length === 0" class="text-muted p-8" translate>
         No static lines added.
       </div>
       <div *ngFor="let line of config.staticLines; let i = index" class="row style-row m-b-8" style="display: flex; align-items: center;">
         <div class="col-md-5">
-          <input type="number" class="form-control" [(ngModel)]="line.value" placeholder="Value" name="line-value-{{i}}">
+          <input type="number" class="form-control" [(ngModel)]="line.value" [placeholder]="'Value' | translate" name="line-value-{{i}}">
         </div>
         <div class="col-md-5">
-          <input type="text" class="form-control" [(ngModel)]="line.label" placeholder="Label" name="line-label-{{i}}">
+          <input type="text" class="form-control" [(ngModel)]="line.label" [placeholder]="'Label' | translate" name="line-label-{{i}}">
         </div>
         <div class="col-md-2">
           <button type="button" class="btn btn-clean btn-xs text-danger" (click)="removeLine(i)">
@@ -38,7 +36,7 @@ import { SpcChartWidgetComponent } from './spc-chart-widget.component';
         </div>
       </div>
       <button type="button" class="btn btn-default btn-xs" (click)="addLine()">
-        <i c8yIcon="plus-circle"></i> Add Line
+        <i c8yIcon="plus-circle"></i> {{ 'Add Line' | translate }}
       </button>
     </div>
 
@@ -47,20 +45,20 @@ import { SpcChartWidgetComponent } from './spc-chart-widget.component';
     <!-- Areas Section -->
     <div class="form-group">
       <label translate style="font-weight: bold; margin-bottom: 8px;">Control Areas / Limits</label>
-      <div *ngIf="!config.areas || config.areas.length === 0" class="text-muted p-8">
+      <div *ngIf="!config.areas || config.areas.length === 0" class="text-muted p-8" translate>
         No control areas added.
       </div>
-      <div *ngFor="let area of config.areas; let i = index" class="p-8 m-b-8 border-bottom" style="border: 1px solid #ddd; border-radius: 4px; padding: 12px; margin-bottom: 12px;">
+      <div *ngFor="let area of config.areas; let i = index" class="p-8 m-b-8 border-bottom" style="border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px; padding: 12px; margin-bottom: 12px;">
         <div class="row style-row" style="margin-bottom: 8px; display: flex; align-items: center;">
           <div class="col-md-4">
             <select class="form-control" [(ngModel)]="area.type" name="area-type-{{i}}">
-              <option value="upper">Upper Limit</option>
-              <option value="lower">Lower Limit</option>
-              <option value="range">Range</option>
+              <option value="upper" translate>Upper Limit</option>
+              <option value="lower" translate>Lower Limit</option>
+              <option value="range" translate>Range</option>
             </select>
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control" [(ngModel)]="area.label" placeholder="Area Label" name="area-label-{{i}}">
+            <input type="text" class="form-control" [(ngModel)]="area.label" [placeholder]="'Area Label' | translate" name="area-label-{{i}}">
           </div>
           <div class="col-md-2 text-right">
             <button type="button" class="btn btn-clean btn-xs text-danger" (click)="removeArea(i)">
@@ -71,24 +69,24 @@ import { SpcChartWidgetComponent } from './spc-chart-widget.component';
 
         <div class="row style-row" style="display: flex; align-items: center;">
           <div class="col-md-4" *ngIf="area.type !== 'range'">
-            <input type="number" class="form-control" [(ngModel)]="area.value" placeholder="Threshold Value" name="area-val-{{i}}">
+            <input type="number" class="form-control" [(ngModel)]="area.value" [placeholder]="'Threshold Value' | translate" name="area-val-{{i}}">
           </div>
           <div class="col-md-3" *ngIf="area.type === 'range'">
-            <input type="number" class="form-control" [(ngModel)]="area.min" placeholder="Min Value" name="area-min-{{i}}">
+            <input type="number" class="form-control" [(ngModel)]="area.min" [placeholder]="'Min Value' | translate" name="area-min-{{i}}">
           </div>
           <div class="col-md-3" *ngIf="area.type === 'range'">
-            <input type="number" class="form-control" [(ngModel)]="area.max" placeholder="Max Value" name="area-max-{{i}}">
+            <input type="number" class="form-control" [(ngModel)]="area.max" [placeholder]="'Max Value' | translate" name="area-max-{{i}}">
           </div>
           <div class="col-md-4">
             <div style="display: flex; align-items: center;">
-              <input type="color" class="form-control-color" [(ngModel)]="area.color" name="area-color-{{i}}" style="width: 40px; height: 32px; padding: 2px; cursor: pointer; border: 1px solid #ccc; border-radius: 4px; margin-right: 8px;">
-              <span>Color</span>
+              <input type="color" class="form-control-color" [(ngModel)]="area.color" name="area-color-{{i}}" style="width: 40px; height: 32px; padding: 2px; cursor: pointer; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px; margin-right: 8px;">
+              <span translate>Color</span>
             </div>
           </div>
         </div>
       </div>
       <button type="button" class="btn btn-default btn-xs" (click)="addArea()">
-        <i c8yIcon="plus-circle"></i> Add Area
+        <i c8yIcon="plus-circle"></i> {{ 'Add Area' | translate }}
       </button>
     </div>
 
@@ -132,7 +130,7 @@ export class SpcChartWidgetConfigComponent implements OnInit {
   }
 
   addArea() {
-    this.config.areas.push({ type: 'upper', value: 0, min: 0, max: 0, label: '', color: '#ff0000' });
+    this.config.areas.push({ type: 'upper', value: 0, min: 0, max: 0, label: '', color: '#E51A1A' });
   }
 
   removeArea(index: number) {

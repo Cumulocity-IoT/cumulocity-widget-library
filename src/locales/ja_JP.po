@@ -1,0 +1,1032 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cumulocity-widget-library\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language: ja_JP\n"
+"Language-Team: Japanese\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Alarm Heatmap"
+msgstr "アラームヒートマップ"
+
+msgid "Visualizes alarm frequency over time as a configurable grid heatmap"
+msgstr "アラームの頻度を経時的に設定可能なグリッドヒートマップとして可視化します"
+
+msgid "Visualizes alarm frequencies in a premium grid layout over a configured time range."
+msgstr "設定された時間範囲でアラーム頻度をグリッドレイアウトで可視化します。"
+
+msgid "Custom Map Tracker"
+msgstr "カスタムマップトラッカー"
+
+msgid "Displays a custom map with dynamic tracking markers using GPS or custom coordinate systems."
+msgstr "GPSまたはカスタム座標系を使用して動的追跡マーカーを表示するカスタムマップ。"
+
+msgid "Time context"
+msgstr "時間コンテキスト"
+
+msgid "Heatmap Parameters"
+msgstr "ヒートマップパラメータ"
+
+msgid "Time Range"
+msgstr "時間範囲"
+
+msgid "Last Hour"
+msgstr "過去1時間"
+
+msgid "Last Day"
+msgstr "過去1日"
+
+msgid "Last Week"
+msgstr "過去1週間"
+
+msgid "Last Month"
+msgstr "過去1か月"
+
+msgid "Last Minute"
+msgstr "過去1分"
+
+msgid "Last 2 Hours"
+msgstr "過去2時間"
+
+msgid "Last 4 Hours"
+msgstr "過去4時間"
+
+msgid "Last 8 Hours"
+msgstr "過去8時間"
+
+msgid "Time Aggregation Level"
+msgstr "時間集約レベル"
+
+msgid "1 Minute (60 cols)"
+msgstr "1分 (60列)"
+
+msgid "5 Minutes (12 cols)"
+msgstr "5分 (12列)"
+
+msgid "Hourly (24 cols)"
+msgstr "毎時 (24列)"
+
+msgid "Daily (7 cols)"
+msgstr "毎日 (7列)"
+
+msgid "Daily (28-31 cols)"
+msgstr "毎日 (28〜31列)"
+
+msgid "Analyse children alarms instead of the asset itself"
+msgstr "アセット自体の代わりに子アラームを分析する"
+
+msgid "Alarm Types Filter"
+msgstr "アラームタイプフィルター"
+
+msgid "Comma-separated list of alarm types, e.g. c8y_ThresholdAlarm, c8y_UnavailabilityAlarm"
+msgstr "カンマ区切りのアラームタイプ一覧 (例: c8y_ThresholdAlarm, c8y_UnavailabilityAlarm)"
+
+msgid "Leave empty to include all alarm types."
+msgstr "すべてのアラームタイプを含めるには空のままにします。"
+
+msgid "Please fill out all required configuration options."
+msgstr "すべての必須設定項目を入力してください。"
+
+msgid "Refresh"
+msgstr "更新"
+
+msgid "Total Alarms"
+msgstr "総アラーム数"
+
+msgid "Max in Bucket"
+msgstr "バケット内最大"
+
+msgid "Active Types"
+msgstr "アクティブなタイプ"
+
+msgid "Loading alarm heatmap..."
+msgstr "アラームヒートマップを読み込み中..."
+
+msgid "No target asset/group or device configured."
+msgstr "ターゲットアセット/グループまたはデバイスが設定されていません。"
+
+msgid "No alarms found matching the filter criteria in the selected range."
+msgstr "選択した範囲でフィルター条件に一致するアラームは見つかりませんでした。"
+
+msgid "Alarm Type"
+msgstr "アラームタイプ"
+
+msgid "Alarms:"
+msgstr "アラーム:"
+
+msgid "Less"
+msgstr "少ない"
+
+msgid "More"
+msgstr "多い"
+
+msgid "Custom Map"
+msgstr "カスタムマップ"
+
+msgid "Displays a custom map with dynamic tracking markers using GPS or custom coordinates"
+msgstr "GPSまたはカスタム座標を使用して動的追跡マーカーを表示するカスタムマップ"
+
+msgid "Map Image URL"
+msgstr "マップ画像URL"
+
+msgid "Drop map image here or browse"
+msgstr "マップ画像をここにドロップまたは参照"
+
+msgid "Supports PNG, JPG, SVG, WebP up to 5MB"
+msgstr "PNG、JPG、SVG、WebPに対応 (最大5MB)"
+
+msgid "Uploading image..."
+msgstr "画像をアップロード中..."
+
+msgid "Coordinate System"
+msgstr "座標系"
+
+msgid "Real GPS Coordinates (GeoJSON / Real-world GPS bounding box)"
+msgstr "リアルGPS座標 (GeoJSON / 実世界GPSバウンディングボックス)"
+
+msgid "Custom (X/Y Coordinates in %)"
+msgstr "カスタム (X/Y座標 %)"
+
+msgid "GPS Bounding Box Coordinates"
+msgstr "GPSバウンディングボックス座標"
+
+msgid "GPS Coordinate Configuration"
+msgstr "GPS座標設定"
+
+msgid "Custom Coordinate Configuration"
+msgstr "カスタム座標設定"
+
+msgid "Top Left Lat"
+msgstr "左上 緯度 (Lat)"
+
+msgid "Top Left Lng"
+msgstr "左上 経度 (Lng)"
+
+msgid "Bottom Right Lat"
+msgstr "右下 緯度 (Lat)"
+
+msgid "Bottom Right Lng"
+msgstr "右下 経度 (Lng)"
+
+msgid "Top Left X"
+msgstr "左上 X"
+
+msgid "Top Left Y"
+msgstr "左上 Y"
+
+msgid "Bottom Right X"
+msgstr "右下 X"
+
+msgid "Bottom Right Y"
+msgstr "右下 Y"
+
+msgid "Update Interval (Seconds)"
+msgstr "更新間隔 (秒)"
+
+msgid "Manage Tracked Devices"
+msgstr "追跡対象デバイスの管理"
+
+msgid "Add Device"
+msgstr "デバイスを追加"
+
+msgid "Select Device"
+msgstr "デバイスを選択"
+
+msgid "Change"
+msgstr "変更"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Select"
+msgstr "選択"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Loading map and tracked devices..."
+msgstr "マップと追跡対象デバイスを読み込み中..."
+
+msgid "No Map Image Configured"
+msgstr "マップ画像が設定されていません"
+
+msgid "Please upload or specify a map image URL in the widget configuration settings."
+msgstr "ウィジェット設定でマップ画像をアップロードするかURLを指定してください。"
+
+msgid "Please upload a map image and select at least one tracked device."
+msgstr "マップ画像をアップロードし、少なくとも1つの追跡対象デバイスを選択してください。"
+
+msgid "Status:"
+msgstr "ステータス:"
+
+msgid "Last Update:"
+msgstr "最終更新:"
+
+msgid "Open Device Details"
+msgstr "デバイスの詳細を開く"
+
+msgid "Devices Tracked"
+msgstr "追跡デバイス数"
+
+msgid "Active Alarms"
+msgstr "アクティブなアラーム"
+
+msgid "Critical Alarms"
+msgstr "クリティカルアラーム"
+
+msgid "Device Type Overrides"
+msgstr "デバイスタイプの上書き"
+
+msgid "Override marker icon and color for specific device types."
+msgstr "特定のデバイスタイプのマーカーアイコンと色を上書きします。"
+
+msgid "Type (exact match)"
+msgstr "タイプ (完全一致)"
+
+msgid "Icon"
+msgstr "アイコン"
+
+msgid "Color"
+msgstr "色"
+
+msgid "Downtime Gantt Diagram"
+msgstr "ダウンタイムガントチャート"
+
+msgid "Visualizes machine states over time based on measurements or events with custom mappings."
+msgstr "カスタムマッピングを使用して、測定値またはイベントに基づいてマシンの状態を経時的に可視化します。"
+
+msgid "Input Data Source"
+msgstr "入力データソース"
+
+msgid "Measurement"
+msgstr "測定値"
+
+msgid "Event"
+msgstr "イベント"
+
+msgid "Measurement & Asset Selection"
+msgstr "測定値およびアセットの選択"
+
+msgid "Target Device / Asset"
+msgstr "対象デバイス / アセット"
+
+msgid "No device selected. Please select a target device."
+msgstr "デバイスが選択されていません。対象デバイスを選択してください。"
+
+msgid "Event Type"
+msgstr "イベントタイプ"
+
+msgid "State Property Path"
+msgstr "状態プロパティパス"
+
+msgid "Dotted paths are supported (e.g. c8y_MachineStatus.state)."
+msgstr "ドット区切りのパスがサポートされています (例: c8y_MachineStatus.state)。"
+
+msgid "State Mappings"
+msgstr "状態マッピング"
+
+msgid "Map incoming state values to labels and colors. Identify which states represent machine downtime."
+msgstr "受信した状態値をラベルと色にマッピングします。どの状態がマシンのダウンタイムを表すかを指定します。"
+
+msgid "Value"
+msgstr "値"
+
+msgid "Label"
+msgstr "ラベル"
+
+msgid "Is Downtime"
+msgstr "ダウンタイム"
+
+msgid "Downtime"
+msgstr "ダウンタイム"
+
+msgid "Display Settings"
+msgstr "表示設定"
+
+msgid "Show summary cards (Machine Status, Availability, Uptime/Downtime)"
+msgstr "サマリーカードを表示 (マシンステータス、稼働率、稼働時間/ダウンタイム)"
+
+msgid "Show downtime logs table"
+msgstr "ダウンタイムログテーブルを表示"
+
+msgid "Select Target Device"
+msgstr "対象デバイスを選択"
+
+msgid "Please select a measurement data point."
+msgstr "測定データポイントを選択してください。"
+
+msgid "Please select a target device."
+msgstr "対象デバイスを選択してください。"
+
+msgid "Please enter event type and property path."
+msgstr "イベントタイプとプロパティパスを入力してください。"
+
+msgid "Please configure at least one state mapping."
+msgstr "少なくとも1つの状態マッピングを設定してください。"
+
+msgid "Mapping for this value already exists."
+msgstr "この値のマッピングは既に存在します。"
+
+msgid "Could not resolve selected asset ID."
+msgstr "選択したアセットIDを解決できませんでした。"
+
+msgid "Loading machine state timeline..."
+msgstr "マシンの状態タイムラインを読み込み中..."
+
+msgid "No device or data point configured. Please edit widget settings."
+msgstr "デバイスまたはデータポイントが設定されていません。ウィジェット設定を編集してください。"
+
+msgid "No state records found for this period."
+msgstr "この期間の状態レコードは見つかりませんでした。"
+
+msgid "Machine Status"
+msgstr "マシンステータス"
+
+msgid "Current State"
+msgstr "現在の状態"
+
+msgid "Availability"
+msgstr "稼働率"
+
+msgid "Total Uptime"
+msgstr "総稼働時間"
+
+msgid "Total Downtime"
+msgstr "総ダウンタイム"
+
+msgid "Downtime Incidents"
+msgstr "ダウンタイムインシデント"
+
+msgid "Downtime Logs"
+msgstr "ダウンタイムログ"
+
+msgid "Downtime Log"
+msgstr "ダウンタイムログ"
+
+msgid "State"
+msgstr "状態"
+
+msgid "Start Time"
+msgstr "開始時刻"
+
+msgid "Started At"
+msgstr "開始日時"
+
+msgid "End Time"
+msgstr "終了時刻"
+
+msgid "Ended At"
+msgstr "終了日時"
+
+msgid "Duration"
+msgstr "期間"
+
+msgid "Ongoing"
+msgstr "進行中"
+
+msgid "Go to Live"
+msgstr "ライブへ移動"
+
+msgid "Use mouse wheel to zoom, drag to pan the timeline."
+msgstr "マウスホイールで拡大縮小、ドラッグでタイムラインを移動します。"
+
+msgid "No downtime events recorded in this period."
+msgstr "この期間に記録されたダウンタイムイベントはありません。"
+
+msgid "Machine is operating at 100% availability."
+msgstr "マシンは稼働率100%で稼働しています。"
+
+msgid "Ideal State Deviation"
+msgstr "理想状態からの乖離"
+
+msgid "Scores an asset from 0 to 100 based on deviation from configured target ranges."
+msgstr "設定された目標範囲からの乖離に基づいて、アセットを0〜100でスコアリングします。"
+
+msgid "Calculation Mode"
+msgstr "計算モード"
+
+msgid "Linear Decay"
+msgstr "線形減衰"
+
+msgid "Exponential Decay"
+msgstr "指数減衰"
+
+msgid "Sigmoidal (S-Curve)"
+msgstr "シグモイド (S字カーブ)"
+
+msgid "Defines how the score drops from 100 to 0 as the value deviates from the ideal state."
+msgstr "値が理想状態から乖離するにつれてスコアが100から0に低下する方法を定義します。"
+
+msgid "Exponent (p):"
+msgstr "指数 (p):"
+
+msgid "Strict (0.5)"
+msgstr "厳格 (0.5)"
+
+msgid "Standard (2.0)"
+msgstr "標準 (2.0)"
+
+msgid "Lenient (5.0)"
+msgstr "寛容 (5.0)"
+
+msgid "Grace Zone:"
+msgstr "許容範囲:"
+
+msgid "Size of the boundary around the ideal target (0% to 20%) that still receives a perfect 100% score."
+msgstr "完璧な100%スコアを維持する理想目標前後の許容範囲サイズ (0%〜20%)。"
+
+msgid "Show individual measurement scores"
+msgstr "個々の測定スコアを表示"
+
+msgid "Data point selection"
+msgstr "データポイントの選択"
+
+msgid "Loading metrics configuration..."
+msgstr "メトリクス設定を読み込み中..."
+
+msgid "No device selected. Please edit the widget settings."
+msgstr "デバイスが選択されていません。ウィジェット設定を編集してください。"
+
+msgid "No data points selected. Please edit the widget settings."
+msgstr "データポイントが選択されていません。ウィジェット設定を編集してください。"
+
+msgid "SCORE"
+msgstr "スコア"
+
+msgid "Individual Scores"
+msgstr "個別のスコア"
+
+msgid "Current:"
+msgstr "現在値:"
+
+msgid "Ideal:"
+msgstr "目標値:"
+
+msgid "Pareto Chart"
+msgstr "パレート図"
+
+msgid "Analyses alarms/events by type in a Pareto distribution."
+msgstr "アラーム/イベントをタイプ別にパレート分布で分析します。"
+
+msgid "Analysis Mode"
+msgstr "分析モード"
+
+msgid "Alarms Breakdown"
+msgstr "アラームの内訳"
+
+msgid "Events Breakdown"
+msgstr "イベントの内訳"
+
+msgid "Time Frame"
+msgstr "期間"
+
+msgid "Analyse children alarms/events instead of the asset itself"
+msgstr "アセット自体の代わりに子のアラーム/イベントを分析する"
+
+msgid "Plot X-Axis By"
+msgstr "X軸のプロット基準"
+
+msgid "Alarm/Event Type"
+msgstr "アラーム/イベントタイプ"
+
+msgid "Child Device/Asset"
+msgstr "子デバイス/アセット"
+
+msgid "Type Filter Mode"
+msgstr "タイプフィルターモード"
+
+msgid "No Filter (All Types)"
+msgstr "フィルターなし (すべてのタイプ)"
+
+msgid "Whitelist (Only listed types)"
+msgstr "ホワイトリスト (指定したタイプのみ)"
+
+msgid "Blacklist (Ignore listed types)"
+msgstr "ブラックリスト (指定したタイプを除外)"
+
+msgid "Types List"
+msgstr "タイプ一覧"
+
+msgid "Enter a comma-separated list of alarm/event types."
+msgstr "カンマ区切りのアラーム/イベントタイプを入力してください。"
+
+msgid "Fetching alarms/events..."
+msgstr "アラーム/イベントを取得中..."
+
+msgid "No alarms/events match the filter criteria in the selected range."
+msgstr "選択した範囲でフィルター条件に一致するアラーム/イベントはありません。"
+
+msgid "An error occurred while fetching alarms/events data."
+msgstr "アラーム/イベントデータの取得中にエラーが発生しました。"
+
+msgid "Failed to fetch data for Pareto chart."
+msgstr "パレート図のデータ取得に失敗しました。"
+
+msgid "Count"
+msgstr "件数"
+
+msgid "Cumulative %"
+msgstr "累積 %"
+
+msgid "Percentage"
+msgstr "割合"
+
+msgid "Radar/Spider Chart"
+msgstr "レーダー/スパイダーチャート"
+
+msgid "Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually"
+msgstr "最大5台のデバイスを最大10個のデータポイントで比較し、欠落データを視覚的に表示します"
+
+msgid "Compare Devices (Up to 5)"
+msgstr "デバイスの比較 (最大5台)"
+
+msgid "No devices selected. Click "Add Device" to select one."
+msgstr "デバイスが選択されていません。「デバイスを追加」をクリックして選択してください。"
+
+msgid "Choose device color"
+msgstr "デバイスの色を選択"
+
+msgid "Remove device"
+msgstr "デバイスを削除"
+
+msgid "Show data table under the chart"
+msgstr "チャートの下にデータテーブルを表示"
+
+msgid "Select Device or Asset"
+msgstr "デバイスまたはアセットを選択"
+
+msgid "Please select at least one device."
+msgstr "少なくとも1つのデバイスを選択してください。"
+
+msgid "You can select a maximum of 5 devices."
+msgstr "選択できるデバイスは最大5台です。"
+
+msgid "Device is already added."
+msgstr "デバイスは既に追加されています。"
+
+msgid "Loading telemetry data..."
+msgstr "テレメトリデータを読み込み中..."
+
+msgid "No devices selected. Please configure the widget."
+msgstr "デバイスが選択されていません。ウィジェットを設定してください。"
+
+msgid "Please select at least 3 datapoints to render the radar chart."
+msgstr "レーダーチャートを描画するには、少なくとも3つのデータポイントを選択してください。"
+
+msgid "Device / Asset"
+msgstr "デバイス / アセット"
+
+msgid "N/A"
+msgstr "該当なし"
+
+msgid "Sankey Diagram"
+msgstr "サンキーダイアグラム"
+
+msgid "Displays the breakdown flow of alarms/events down the asset/group hierarchy."
+msgstr "アセット/グループ階層に沿ったアラーム/イベントの内訳フローを表示します。"
+
+msgid "Event or Alarm Type"
+msgstr "イベントまたはアラームタイプ"
+
+msgid "Enter the exact type string to filter by, or leave blank to count all types."
+msgstr "フィルターする正確なタイプ文字列を入力するか、すべてのタイプを対象にする場合は空のままにします。"
+
+msgid "Hierarchy Search Depth"
+msgstr "階層検索の深さ"
+
+msgid "Depth of children search (1: immediate children, 2: children + grandchildren, etc. Max 5)"
+msgstr "子要素検索の深さ (1: 直下の子、2: 子と孫など、最大5)"
+
+msgid "Configure Layer Colors"
+msgstr "レイヤーカラーの設定"
+
+msgid "Root Asset Color (Level 0)"
+msgstr "ルートアセットの色 (レベル0)"
+
+msgid "Children Color (Level 1)"
+msgstr "子の色 (レベル1)"
+
+msgid "Grandchildren Color (Level 2)"
+msgstr "孫の色 (レベル2)"
+
+msgid "Level 3 Color"
+msgstr "レベル3の色"
+
+msgid "Level 4 Color"
+msgstr "レベル4の色"
+
+msgid "Level 5 Color"
+msgstr "レベル5の色"
+
+msgid "Direct Flows Color (Self)"
+msgstr "直接フローの色 (自身)"
+
+msgid "Loading hierarchy & counts..."
+msgstr "階層とカウントを読み込み中..."
+
+msgid "No target group/asset configured."
+msgstr "対象グループ/アセットが設定されていません。"
+
+msgid "No events/alarms found in the selected range & hierarchy."
+msgstr "選択した範囲と階層にイベント/アラームは見つかりませんでした。"
+
+msgid "An error occurred while fetching the hierarchy and counts."
+msgstr "階層とカウントの取得中にエラーが発生しました。"
+
+msgid "Scatter Plot"
+msgstr "散布図"
+
+msgid "Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay"
+msgstr "カスタマイズ可能な時間ベースのカラーグラデーションとライブ再生でX対Yのテレメトリ測定値をプロットします"
+
+msgid "X-Axis Data Point"
+msgstr "X軸データポイント"
+
+msgid "Y-Axis Data Point"
+msgstr "Y軸データポイント"
+
+msgid "Default Time Window"
+msgstr "デフォルトの時間枠"
+
+msgid "Aggregation Settings"
+msgstr "集約設定"
+
+msgid "Enable Data Aggregation"
+msgstr "データ集約を有効にする"
+
+msgid "Aggregation Value"
+msgstr "集約値"
+
+msgid "Average (avg)"
+msgstr "平均 (avg)"
+
+msgid "Minimum (min)"
+msgstr "最小値 (min)"
+
+msgid "Maximum (max)"
+msgstr "最大値 (max)"
+
+msgid "Time Bucket Interval"
+msgstr "時間バケット間隔"
+
+msgid "Minutely"
+msgstr "毎分"
+
+msgid "Hourly"
+msgstr "毎時"
+
+msgid "Daily"
+msgstr "毎日"
+
+msgid "Time-Based Color Gradient"
+msgstr "時間ベースのカラーグラデーション"
+
+msgid "Start Color (Older points)"
+msgstr "開始色 (古いポイント)"
+
+msgid "End Color (Newer points)"
+msgstr "終了色 (新しいポイント)"
+
+msgid "Newer"
+msgstr "新しい"
+
+msgid "Older"
+msgstr "古い"
+
+msgid "Please select an X-Axis Data Point."
+msgstr "X軸データポイントを選択してください。"
+
+msgid "Please select a Y-Axis Data Point."
+msgstr "Y軸データポイントを選択してください。"
+
+msgid "Refresh Data"
+msgstr "データを更新"
+
+msgid "Aligning measurement feeds..."
+msgstr "測定フィードを整列中..."
+
+msgid "No paired X/Y measurements found in this window."
+msgstr "この時間枠内にペアとなるX/Y測定値は見つかりませんでした。"
+
+msgid "Verify that both measurements are being sent with matched timestamps, or enable Aggregation in settings."
+msgstr "両方の測定値が一致したタイムスタンプで送信されていることを確認するか、設定で集約を有効にしてください。"
+
+msgid "Start Replay"
+msgstr "再生を開始"
+
+msgid "Pause Replay"
+msgstr "再生を一時停止"
+
+msgid "Exit Replay and return to Live data"
+msgstr "再生を終了してライブデータに戻る"
+
+msgid "points"
+msgstr "ポイント"
+
+msgid "Speed:"
+msgstr "速度:"
+
+msgid "Current Time:"
+msgstr "現在時刻:"
+
+msgid "SPC Chart"
+msgstr "SPC管理図"
+
+msgid "Statistical Process Control line chart with control limits and annotations"
+msgstr "管理限界と注釈を備えた統計的プロセス管理 (SPC) 折れ線グラフ"
+
+msgid "Static Lines"
+msgstr "静的ライン"
+
+msgid "No static lines added."
+msgstr "静的ラインは追加されていません。"
+
+msgid "Add Line"
+msgstr "ラインを追加"
+
+msgid "Control Areas / Limits"
+msgstr "管理領域 / 限界値"
+
+msgid "No control areas added."
+msgstr "管理領域は追加されていません。"
+
+msgid "Upper Limit"
+msgstr "上限値"
+
+msgid "Lower Limit"
+msgstr "下限値"
+
+msgid "Range"
+msgstr "範囲"
+
+msgid "Area Label"
+msgstr "領域ラベル"
+
+msgid "Threshold Value"
+msgstr "しきい値"
+
+msgid "Min Value"
+msgstr "最小値"
+
+msgid "Max Value"
+msgstr "最大値"
+
+msgid "Add Area"
+msgstr "領域を追加"
+
+msgid "Stacked Bar Chart"
+msgstr "積み上げ棒グラフ"
+
+msgid "Displays a stacked bar chart with selected data points"
+msgstr "選択したデータポイントを含む積み上げ棒グラフを表示します"
+
+msgid "Data Limit"
+msgstr "データ上限数"
+
+msgid " to select one."
+msgstr " をクリックして選択してください。"
+
+msgid "10 seconds"
+msgstr "10秒"
+
+msgid "30 seconds (Default)"
+msgstr "30秒 (デフォルト)"
+
+msgid "5 seconds"
+msgstr "5秒"
+
+msgid "A heat level has a minimum higher than its maximum threshold."
+msgstr "最小値が最大しきい値より大きいヒートレベルがあります。"
+
+msgid "Add override"
+msgstr "オーバーライドを追加"
+
+msgid "Aggregating alarms..."
+msgstr "アラームを集約中..."
+
+msgid "Aggregation Level"
+msgstr "集約レベル"
+
+msgid "Alarms"
+msgstr "アラーム"
+
+msgid "All GPS coordinate boundaries (Top Left and Bottom Right) must be configured."
+msgstr "すべてのGPS座標境界 (左上および右下) を設定する必要があります。"
+
+msgid "All custom coordinate boundaries (Top Left and Bottom Right) must be configured."
+msgstr "すべてのカスタム座標境界 (左上および右下) を設定する必要があります。"
+
+msgid "An override for this device type already exists."
+msgstr "このデバイスタイプのオーバーライドは既に存在します。"
+
+msgid "Change device"
+msgstr "デバイスを変更"
+
+msgid "Choose an image or drag here"
+msgstr "画像を選択またはここにドラッグ"
+
+msgid "Configure Heat Levels (5 levels, open-ended)"
+msgstr "ヒートレベルの設定 (5段階、上限なし)"
+
+msgid "Coordinate Mode"
+msgstr "座標モード"
+
+msgid "Coordinate paths for X and Y must be provided."
+msgstr "XとYの座標パスを指定する必要があります。"
+
+msgid "Custom Coordinates (x, y)"
+msgstr "カスタム座標 (x, y)"
+
+msgid "Custom Map Floor"
+msgstr "カスタムマップフロア"
+
+msgid "Custom Range"
+msgstr "カスタム範囲"
+
+msgid "Default Marker Color"
+msgstr "デフォルトマーカー色"
+
+msgid "Default Marker Icon"
+msgstr "デフォルトマーカーアイコン"
+
+msgid "Device Coordinate Mapping"
+msgstr "デバイス座標マッピング"
+
+msgid "Device Type"
+msgstr "デバイスタイプ"
+
+msgid "Device Type Marker Overrides (Optional)"
+msgstr "デバイスタイプ別マーカーオーバーライド (オプション)"
+
+msgid "Devices showing"
+msgstr "表示中のデバイス"
+
+msgid "Display Label"
+msgstr "表示ラベル"
+
+msgid "Every 2 Hours"
+msgstr "2時間ごと"
+
+msgid "Every 4 Hours"
+msgstr "4時間ごと"
+
+msgid "Every 6 Hours"
+msgstr "6時間ごと"
+
+msgid "Every Day"
+msgstr "毎日"
+
+msgid "Every Hour"
+msgstr "毎時"
+
+msgid "Failed to upload map image."
+msgstr "マップ画像のアップロードに失敗しました。"
+
+msgid "Fetching state data..."
+msgstr "状態データを取得中..."
+
+msgid "From"
+msgstr "開始"
+
+msgid "GPS Coordinates (lat, lng)"
+msgstr "GPS座標 (緯度, 経度)"
+
+msgid "Gaps or overlaps detected between heat levels. Consecutive level ranges must be contiguous."
+msgstr "ヒートレベル間にギャップまたは重複が検出されました。連続するレベル範囲は隣接している必要があります。"
+
+msgid "Intermediate heat level cannot be open-ended."
+msgstr "中間のヒートレベルは上限なしにできません。"
+
+msgid "Last 24 Hours"
+msgstr "過去24時間"
+
+msgid "Legend (Alarms count):"
+msgstr "凡例 (アラーム数):"
+
+msgid "Level"
+msgstr "レベル"
+
+msgid "Loading map image..."
+msgstr "マップ画像を読み込み中..."
+
+msgid "Loading preview..."
+msgstr "プレビューを読み込み中..."
+
+msgid "Map Image"
+msgstr "マップ画像"
+
+msgid "Map image uploaded successfully."
+msgstr "マップ画像が正常にアップロードされました。"
+
+msgid "Map preview"
+msgstr "マッププレビュー"
+
+msgid "Max"
+msgstr "最大"
+
+msgid "Max limit"
+msgstr "上限値"
+
+msgid "Min"
+msgstr "最小"
+
+msgid "Mode"
+msgstr "モード"
+
+msgid "No data found in the selected range."
+msgstr "選択した範囲内にデータが見つかりませんでした。"
+
+msgid "No map image uploaded. Please configure the widget."
+msgstr "マップ画像がアップロードされていません。ウィジェットを設定してください。"
+
+msgid "No target device selected. Please configure the widget or place it in a device dashboard."
+msgstr "対象デバイスが選択されていません。ウィジェットを設定するか、デバイスダッシュボードに配置してください。"
+
+msgid "Open-ended"
+msgstr "上限なし"
+
+msgid "Please complete the widget configuration."
+msgstr "ウィジェットの設定を完了してください。"
+
+msgid "Please configure state mappings in the widget settings."
+msgstr "ウィジェット設定で状態マッピングを設定してください。"
+
+msgid "Please enter a device type."
+msgstr "デバイスタイプを入力してください。"
+
+msgid "Please enter valid widget configuration options."
+msgstr "有効なウィジェット設定オプションを入力してください。"
+
+msgid "Please upload a map image."
+msgstr "マップ画像をアップロードしてください。"
+
+msgid "Polling"
+msgstr "ポーリング"
+
+msgid "Raw value"
+msgstr "生の値"
+
+msgid "Remove image"
+msgstr "画像を削除"
+
+msgid "Remove mapping"
+msgstr "マッピングを削除"
+
+msgid "Scroll timeline to current live time"
+msgstr "タイムラインを現在のライブ時刻にスクロール"
+
+msgid "Supports PNG, JPG, WebP"
+msgstr "PNG、JPG、WebPに対応"
+
+msgid "The final heat level (Level 5) must be open-ended."
+msgstr "最後のヒートレベル (レベル5) は上限なしである必要があります。"
+
+msgid "Timeline & Transitions"
+msgstr "タイムラインと状態遷移"
+
+msgid "To"
+msgstr "終了"
+
+msgid "Total Active Uptime"
+msgstr "総稼働時間"
+
+msgid "Type"
+msgstr "タイプ"
+
+msgid "Update Interval"
+msgstr "更新間隔"
+
+msgid "Updated"
+msgstr "更新済み"
+
+msgid "X Coordinate Path"
+msgstr "X座標パス"
+
+msgid "Y Coordinate Path"
+msgstr "Y座標パス"
+
+msgid "e.g. 0 or stopped"
+msgstr "例: 0 または stopped"
+
+msgid "e.g. Stopped"
+msgstr "例: 停止"
+
+msgid "e.g. c8y_MachineStateEvent"
+msgstr "例: c8y_MachineStateEvent"
+
+msgid "e.g. c8y_ThresholdAlarm (Leave empty for all)"
+msgstr "例: c8y_ThresholdAlarm (すべて対象にする場合は空欄)"
+
+msgid "e.g. c8y_ThresholdAlarm, c8y_ConnectionAlarm"
+msgstr "例: c8y_ThresholdAlarm, c8y_ConnectionAlarm"
+
+msgid "e.g. status or state"
+msgstr "例: status または state"
+

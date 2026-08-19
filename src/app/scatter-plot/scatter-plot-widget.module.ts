@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { FormsModule } from '@angular/forms';
 import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector';
 import { DateTimePickerModule } from '@c8y/ngx-components';
@@ -16,6 +16,8 @@ import { PRESET_NAME } from '@c8y/ngx-components/global-context';
 import { ScatterPlotWidgetComponent } from './scatter-plot-widget.component';
 import { ScatterPlotWidgetConfigComponent } from './scatter-plot-widget-config.component';
 import { SCATTER_PLOT_PREVIEW } from './preview-image';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -34,8 +36,8 @@ import { SCATTER_PLOT_PREVIEW } from './preview-image';
       multi: true,
       useValue: {
         id: 'scatter-plot-widget',
-        label: 'Scatter Plot',
-        description: 'Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay',
+        label: gettext('Scatter Plot'),
+        description: gettext('Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay'),
         previewImage: SCATTER_PLOT_PREVIEW,
         component: ScatterPlotWidgetComponent,
         configComponent: ScatterPlotWidgetConfigComponent,
@@ -56,7 +58,7 @@ import { SCATTER_PLOT_PREVIEW } from './preview-image';
     hookWidgetConfig({
       widgetId: 'scatter-plot-widget',
       priority: 10,
-      label: 'Time context',
+      label: gettext('Time context'),
       initialState: {
         controls: PRESET_NAME.DEFAULT
       },
@@ -65,4 +67,6 @@ import { SCATTER_PLOT_PREVIEW } from './preview-image';
     })
   ]
 })
-export class ScatterPlotWidgetModule {}
+export class ScatterPlotWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}

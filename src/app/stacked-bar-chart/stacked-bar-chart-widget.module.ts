@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { StackedBarChartWidgetComponent } from './stacked-bar-chart-widget.component';
 import { StackedBarChartWidgetConfigComponent } from './stacked-bar-chart-widget-config.component';
 import { STACKED_BAR_CHART_PREVIEW } from './preview-image';
@@ -16,6 +16,8 @@ import { DateTimePickerModule } from '@c8y/ngx-components';
 import { hookWidgetConfig } from '@c8y/ngx-components/context-dashboard';
 import { PRESET_NAME, GlobalContextConnectorComponent, LocalControlsComponent } from '@c8y/ngx-components/global-context';
 import { ChartsComponent } from '@c8y/ngx-components/echart';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
     imports: [
@@ -35,8 +37,8 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
             multi: true,
             useValue: {
                 id: 'stacked-bar-chart-widget',
-                label: 'Stacked Bar Chart',
-                description: 'Displays a stacked bar chart with selected data points',
+                label: gettext('Stacked Bar Chart'),
+                description: gettext('Displays a stacked bar chart with selected data points'),
                 previewImage: STACKED_BAR_CHART_PREVIEW,
                 component: StackedBarChartWidgetComponent,
                 configComponent: StackedBarChartWidgetConfigComponent,
@@ -56,7 +58,7 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
         hookWidgetConfig({
             widgetId: 'stacked-bar-chart-widget',
             priority: 10,
-            label: 'Time context',
+            label: gettext('Time context'),
             initialState: {
                 controls: PRESET_NAME.DEFAULT
             },
@@ -66,7 +68,7 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
         hookWidgetConfig({
             widgetId: 'stacked-bar-chart-widget',
             priority: 20,
-            label: 'Data point selection',
+            label: gettext('Data point selection'),
             initialState: {
                 minActiveCount: 1,
                 controlName: 'datapoints'
@@ -79,4 +81,6 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
         })
     ]
 })
-export class StackedBarChartWidgetModule { }
+export class StackedBarChartWidgetModule {
+    constructor(_i18n: WidgetTranslationService) {}
+}

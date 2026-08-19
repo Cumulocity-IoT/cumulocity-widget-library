@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { InventoryService, InventoryBinaryService } from '@c8y/client';
 import { CoreModule } from '@c8y/ngx-components';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { WidgetTranslationService } from '../i18n.service';
 
 interface MapMarker {
   id: string;
@@ -31,12 +32,12 @@ interface MapMarker {
       @if (!config()?.binaryId) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="map-o" class="text-large text-muted m-b-8"></i>
-          <p class="text-muted">No map image uploaded. Please configure the widget.</p>
+          <p class="text-muted">{{ 'No map image uploaded. Please configure the widget.' | translate }}</p>
         </div>
       } @else if (!imageUrl()) {
         <div class="empty-state text-center p-24">
           <span class="spinner m-b-8"></span>
-          <p class="text-muted">Loading map image...</p>
+          <p class="text-muted">{{ 'Loading map image...' | translate }}</p>
         </div>
       } @else {
         <div class="map-viewport">
@@ -44,7 +45,7 @@ interface MapMarker {
             <img 
               [src]="imageUrl()" 
               class="map-image" 
-              alt="Custom Map Floor"
+              [alt]="'Custom Map Floor' | translate"
               (load)="onImageLoaded()"
             />
             
@@ -72,10 +73,10 @@ interface MapMarker {
 
                     <ng-template #popTemplate let-marker="marker">
                       <div class="tooltip-body-content">
-                        <div>Type: {{ marker?.type || 'N/A' }}</div>
+                        <div>{{ 'Type' | translate }}: {{ marker?.type || 'N/A' }}</div>
                         <div>X: {{ marker?.x !== null ? marker?.x?.toFixed(2) : 'N/A' }}</div>
                         <div>Y: {{ marker?.y !== null ? marker?.y?.toFixed(2) : 'N/A' }}</div>
-                        <div class="tooltip-time">Updated: {{ marker?.lastUpdated }}</div>
+                        <div class="tooltip-time">{{ 'Updated' | translate }}: {{ marker?.lastUpdated }}</div>
                       </div>
                     </ng-template>
                   </div>
@@ -88,7 +89,7 @@ interface MapMarker {
         <!-- Legend / Info footer -->
         <div class="map-footer m-t-12 p-8 border-rounded bg-gray-50">
           <span class="text-small text-muted font-medium">
-            Devices showing: {{ markers().length }} | Mode: {{ config()?.coordMode === 'gps' ? 'GPS' : 'Custom' }} | Polling: {{ config()?.pollInterval || 30 }}s
+            {{ 'Devices showing' | translate }}: {{ markers().length }} | {{ 'Mode' | translate }}: {{ (config()?.coordMode === 'gps' ? 'GPS' : 'Custom') | translate }} | {{ 'Polling' | translate }}: {{ config()?.pollInterval || 30 }}s
           </span>
         </div>
       }
@@ -96,19 +97,20 @@ interface MapMarker {
   `,
   styles: [`
     .map-widget-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       box-sizing: border-box;
+      color: var(--c8y-text-color, inherit);
     }
     .map-viewport {
       flex: 1;
       position: relative;
       overflow: auto;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
-      background: #f1f5f9;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
       display: flex;
       justify-content: center;
       align-items: center;
@@ -137,15 +139,15 @@ interface MapMarker {
     }
     .marker-pulse {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
       border-radius: 50%;
-      animation: marker-pulse-anim 1.8s infinite ease-out;
-      z-index: -1;
-      pointer-events: none;
+      background: var(--c8y-brand-primary, #1776bf);
       opacity: 0.4;
+      animation: marker-pulse-anim 2s infinite;
+      z-index: 1;
     }
     .map-marker.inactive .marker-pulse {
       display: none;
@@ -164,8 +166,8 @@ interface MapMarker {
     .marker-icon-wrapper {
       width: 24px;
       height: 24px;
-      background: #1776bf;
-      border: 2px solid #ffffff;
+      background: var(--c8y-brand-primary, #1776bf);
+      border: 2px solid var(--c8y-card-background-default, transparent);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -180,24 +182,24 @@ interface MapMarker {
     }
     /* Popover styles */
     .map-marker-popover {
-      background: rgba(15, 23, 42, 0.95) !important;
-      color: #ffffff !important;
-      border: none !important;
+      background: var(--c8y-root-component-background-expanded, #1e293b) !important;
+      color: var(--c8y-text-color, #ffffff) !important;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)) !important;
       border-radius: 6px !important;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-      font-family: 'Outfit', 'Inter', sans-serif !important;
+      font-family: var(--c8y-font-family-base, inherit) !important;
       pointer-events: none !important;
     }
     .map-marker-popover .popover-header {
       background: transparent !important;
-      color: #ffffff !important;
-      border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+      color: var(--c8y-text-color, #ffffff) !important;
+      border-bottom: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)) !important;
       font-weight: 600 !important;
       padding: 8px 12px 4px 12px !important;
       font-size: 12px !important;
     }
     .map-marker-popover .popover-body {
-      color: #ffffff !important;
+      color: var(--c8y-text-color, #ffffff) !important;
       padding: 4px 12px 8px 12px !important;
       font-size: 11px !important;
     }
@@ -206,16 +208,16 @@ interface MapMarker {
     }
     .map-marker-popover .tooltip-time {
       font-size: 9px;
-      color: #94a3b8;
+      color: var(--c8y-text-muted, #94a3b8);
       margin-top: 4px;
     }
     .map-marker-popover.bs-popover-top > .arrow::after,
     .map-marker-popover.bs-popover-auto[x-placement^="top"] > .arrow::after {
-      border-top-color: rgba(15, 23, 42, 0.95) !important;
+      border-top-color: var(--c8y-root-component-background-expanded, #1e293b) !important;
     }
     .map-marker-popover.bs-popover-bottom > .arrow::after,
     .map-marker-popover.bs-popover-auto[x-placement^="bottom"] > .arrow::after {
-      border-bottom-color: rgba(15, 23, 42, 0.95) !important;
+      border-bottom-color: var(--c8y-root-component-background-expanded, #1e293b) !important;
     }
     .map-footer {
       display: flex;
@@ -224,10 +226,10 @@ interface MapMarker {
     }
     .border-rounded {
       border-radius: 6px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
     .bg-gray-50 {
-      background-color: #f8fafc;
+      background-color: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
     }
     .empty-state {
       display: flex;
@@ -235,8 +237,8 @@ interface MapMarker {
       align-items: center;
       justify-content: center;
       min-height: 200px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
     }
   `],
@@ -253,6 +255,7 @@ export class CustomMapWidgetComponent implements OnInit, OnDestroy {
 
   private inventoryService = inject(InventoryService);
   private binaryService = inject(InventoryBinaryService);
+  private i18n = inject(WidgetTranslationService);
   private pollIntervalId: any;
   private devicesList: any[] = [];
   private currentBinaryId: string | null = null;

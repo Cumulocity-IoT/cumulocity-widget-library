@@ -17,6 +17,7 @@ import { ParetoChartWidgetModule } from './pareto-chart/index';
 import { IdealStateDeviationWidgetModule } from './ideal-state-deviation/index';
 import { DowntimeGanttWidgetModule } from './downtime-gantt/index';
 import { ScatterPlotWidgetModule } from './scatter-plot/index';
+import { RadarChartWidgetModule } from './radar-chart/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,7 +33,8 @@ export const appConfig: ApplicationConfig = {
       ParetoChartWidgetModule,
       IdealStateDeviationWidgetModule,
       DowntimeGanttWidgetModule,
-      ScatterPlotWidgetModule
+      ScatterPlotWidgetModule,
+      RadarChartWidgetModule
     )
   ]
 };

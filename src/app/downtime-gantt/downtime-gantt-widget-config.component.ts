@@ -1,12 +1,6 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, Input, OnInit, ViewChild, TemplateRef, inject } from '@angular/core';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
-import { AlertService } from '@c8y/ngx-components';
+import { AlertService, gettext } from '@c8y/ngx-components';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 interface StateMapping {
@@ -32,7 +26,7 @@ interface StateMapping {
             [(ngModel)]="config.inputType" 
             (change)="onInputTypeChange()"
           />
-          <span></span> Measurement
+          <span></span> <span translate>Measurement</span>
         </label>
         <label class="c8y-radio">
           <input 
@@ -42,7 +36,7 @@ interface StateMapping {
             [(ngModel)]="config.inputType" 
             (change)="onInputTypeChange()"
           />
-          <span></span> Event
+          <span></span> <span translate>Event</span>
         </label>
       </div>
     </div>
@@ -76,18 +70,20 @@ interface StateMapping {
               type="button" 
               class="btn btn-default" 
               (click)="openModal(deviceModal)"
-              title="Change device"
+              [title]="'Change device' | translate"
+              translate
             >
               Change
             </button>
           } @else {
             <p class="text-warning text-small" style="margin: 0; flex: 1;">
-              <i c8yIcon="warning"></i> No device selected. Please select a target device.
+              <i c8yIcon="warning"></i> {{ 'No device selected. Please select a target device.' | translate }}
             </p>
             <button 
               type="button" 
               class="btn btn-primary btn-sm" 
               (click)="openModal(deviceModal)"
+              translate
             >
               Select Device
             </button>
@@ -102,7 +98,7 @@ interface StateMapping {
             <input 
               type="text" 
               class="form-control" 
-              placeholder="e.g. c8y_MachineStateEvent" 
+              [placeholder]="'e.g. c8y_MachineStateEvent' | translate" 
               [(ngModel)]="config.eventType" 
               required
             />
@@ -114,11 +110,11 @@ interface StateMapping {
             <input 
               type="text" 
               class="form-control" 
-              placeholder="e.g. status or state" 
+              [placeholder]="'e.g. status or state' | translate" 
               [(ngModel)]="config.eventStateProperty" 
               required
             />
-            <p class="help-block text-muted text-xsmall m-t-4">
+            <p class="help-block text-muted text-xsmall m-t-4" translate>
               Dotted paths are supported (e.g. c8y_MachineStatus.state).
             </p>
           </div>
@@ -129,7 +125,7 @@ interface StateMapping {
     <!-- State Value Mappings -->
     <div class="m-t-24 border-top p-t-16">
       <label class="control-label" style="font-size: 14px; font-weight: 600;" translate>State Mappings</label>
-      <p class="text-muted text-xsmall m-b-12">
+      <p class="text-muted text-xsmall m-b-12" translate>
         Map incoming state values to labels and colors. Identify which states represent machine downtime.
       </p>
 
@@ -137,10 +133,10 @@ interface StateMapping {
       <table class="table table-condensed table-hover c8y-table m-b-12">
         <thead>
           <tr>
-            <th>Value</th>
-            <th>Label</th>
-            <th style="width: 75px; text-align: center;">Color</th>
-            <th style="width: 100px; text-align: center;">Is Downtime</th>
+            <th translate>Value</th>
+            <th translate>Label</th>
+            <th style="width: 75px; text-align: center;" translate>Color</th>
+            <th style="width: 100px; text-align: center;" translate>Is Downtime</th>
             <th style="width: 50px;"></th>
           </tr>
         </thead>
@@ -152,7 +148,7 @@ interface StateMapping {
                   type="text" 
                   class="form-control input-sm" 
                   [(ngModel)]="mapping.value" 
-                  placeholder="Raw value"
+                  [placeholder]="'Raw value' | translate"
                 />
               </td>
               <td>
@@ -160,13 +156,13 @@ interface StateMapping {
                   type="text" 
                   class="form-control input-sm" 
                   [(ngModel)]="mapping.label" 
-                  placeholder="Display Label"
+                  [placeholder]="'Display Label' | translate"
                 />
               </td>
               <td style="text-align: center;">
                 <input 
                   type="color" 
-                  style="width: 32px; height: 26px; padding: 0; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; background: transparent; vertical-align: middle;"
+                  style="width: 32px; height: 26px; padding: 0; border: 1px solid var(--c8y-root-component-border-color, #cbd5e1); border-radius: 4px; cursor: pointer; background: transparent; vertical-align: middle;"
                   [(ngModel)]="mapping.color"
                 />
               </td>
@@ -184,7 +180,7 @@ interface StateMapping {
                   type="button" 
                   class="btn btn-xs btn-clean text-danger" 
                   (click)="removeMapping(idx)"
-                  title="Remove mapping"
+                  [title]="'Remove mapping' | translate"
                 >
                   <i c8yIcon="trash-o"></i>
                 </button>
@@ -195,35 +191,35 @@ interface StateMapping {
       </table>
 
       <!-- Add Mapping Row -->
-      <div style="display: flex; gap: 8px; align-items: flex-end; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px dashed #cbd5e1;">
+      <div style="display: flex; gap: 8px; align-items: flex-end; background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05)); padding: 12px; border-radius: 6px; border: 1px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));">
         <div style="flex: 2;">
-          <label class="text-xsmall text-muted" style="margin-bottom: 2px;">Value</label>
+          <label class="text-xsmall text-muted" style="margin-bottom: 2px;" translate>Value</label>
           <input 
             type="text" 
             class="form-control input-sm" 
-            placeholder="e.g. 0 or stopped"
+            [placeholder]="'e.g. 0 or stopped' | translate"
             [(ngModel)]="newMapping.value"
           />
         </div>
         <div style="flex: 2;">
-          <label class="text-xsmall text-muted" style="margin-bottom: 2px;">Label</label>
+          <label class="text-xsmall text-muted" style="margin-bottom: 2px;" translate>Label</label>
           <input 
             type="text" 
             class="form-control input-sm" 
-            placeholder="e.g. Stopped"
+            [placeholder]="'e.g. Stopped' | translate"
             [(ngModel)]="newMapping.label"
           />
         </div>
         <div style="width: 50px; text-align: center;">
-          <label class="text-xsmall text-muted" style="margin-bottom: 2px;">Color</label>
+          <label class="text-xsmall text-muted" style="margin-bottom: 2px;" translate>Color</label>
           <input 
             type="color" 
-            style="width: 100%; height: 30px; padding: 0; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; background: transparent;"
+            style="width: 100%; height: 30px; padding: 0; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px; cursor: pointer; background: transparent;"
             [(ngModel)]="newMapping.color"
           />
         </div>
         <div style="width: 80px; text-align: center;">
-          <label class="text-xsmall text-muted" style="margin-bottom: 2px;">Downtime</label>
+          <label class="text-xsmall text-muted" style="margin-bottom: 2px;" translate>Downtime</label>
           <div style="height: 30px; display: flex; align-items: center; justify-content: center;">
             <label class="c8y-checkbox" style="margin: 0; padding: 0; display: inline-block;">
               <input 
@@ -241,7 +237,7 @@ interface StateMapping {
             (click)="addMapping()"
             [disabled]="!newMapping.value || !newMapping.label"
           >
-            <i c8yIcon="plus"></i> Add
+            <i c8yIcon="plus"></i> {{ 'Add' | translate }}
           </button>
         </div>
       </div>
@@ -258,7 +254,7 @@ interface StateMapping {
             [(ngModel)]="config.showStats" 
           />
           <span></span>
-          Show summary cards (Machine Status, Availability, Uptime/Downtime)
+          {{ 'Show summary cards (Machine Status, Availability, Uptime/Downtime)' | translate }}
         </label>
         <label class="c8y-checkbox" style="display: block;">
           <input 
@@ -267,7 +263,7 @@ interface StateMapping {
             [(ngModel)]="config.showLogs" 
           />
           <span></span>
-          Show downtime logs table
+          {{ 'Show downtime logs table' | translate }}
         </label>
       </div>
     </div>
@@ -302,7 +298,7 @@ interface StateMapping {
     <ng-template #widgetPreview>
       <lib-downtime-gantt-widget [config]="config"></lib-downtime-gantt-widget>
     </ng-template>
-  `
+  `,
 })
 export class DowntimeGanttWidgetConfigComponent implements OnInit {
   @Input() config: any = {};
@@ -362,7 +358,7 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (this.config.inputType === 'measurement') {
         if (!this.config.datapoints || this.config.datapoints.length === 0) {
-          this.alertService.warning('Please select a measurement data point.');
+          this.alertService.warning(gettext('Please select a measurement data point.'));
           return false;
         }
         
@@ -376,11 +372,11 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
         }
       } else {
         if (!this.config.device || !this.config.device.id) {
-          this.alertService.warning('Please select a target device.');
+          this.alertService.warning(gettext('Please select a target device.'));
           return false;
         }
         if (!this.config.eventType || !this.config.eventStateProperty) {
-          this.alertService.warning('Please enter event type and property path.');
+          this.alertService.warning(gettext('Please enter event type and property path.'));
           return false;
         }
         
@@ -389,7 +385,7 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
       }
 
       if (!this.config.stateMappings || this.config.stateMappings.length === 0) {
-        this.alertService.warning('Please configure at least one state mapping.');
+        this.alertService.warning(gettext('Please configure at least one state mapping.'));
         return false;
       }
 
@@ -397,20 +393,35 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
       Object.assign(currentConfig, this.config);
       return true;
     });
+    if (this.config.stateMappings.length === 0) {
+      if (this.config.stateSourceType === 'event') {
+        this.config.stateMappings = [
+          { value: 'stopped', label: 'Stopped', color: '#E51A1A', isDowntime: true },
+          { value: 'running', label: 'Running', color: '#119D11', isDowntime: false },
+          { value: 'idle', label: 'Idle', color: '#FF8800', isDowntime: false }
+        ];
+      } else {
+        this.config.stateMappings = [
+          { value: '0', label: 'Stopped', color: '#E51A1A', isDowntime: true },
+          { value: '1', label: 'Running', color: '#119D11', isDowntime: false },
+          { value: '2', label: 'Idle', color: '#FF8800', isDowntime: false }
+        ];
+      }
+    }
   }
 
   setDefaultMappings() {
     if (this.config.inputType === 'measurement') {
       this.config.stateMappings = [
-        { value: '0', label: 'Stopped', color: '#e74c3c', isDowntime: true },
-        { value: '1', label: 'Running', color: '#2ecc71', isDowntime: false },
-        { value: '2', label: 'Idle', color: '#f39c12', isDowntime: false }
+        { value: '0', label: 'Stopped', color: '#E51A1A', isDowntime: true },
+        { value: '1', label: 'Running', color: '#119D11', isDowntime: false },
+        { value: '2', label: 'Idle', color: '#FF8800', isDowntime: false }
       ];
     } else {
       this.config.stateMappings = [
-        { value: 'stopped', label: 'Stopped', color: '#e74c3c', isDowntime: true },
-        { value: 'running', label: 'Running', color: '#2ecc71', isDowntime: false },
-        { value: 'idle', label: 'Idle', color: '#f39c12', isDowntime: false }
+        { value: 'stopped', label: 'Stopped', color: '#E51A1A', isDowntime: true },
+        { value: 'running', label: 'Running', color: '#119D11', isDowntime: false },
+        { value: 'idle', label: 'Idle', color: '#FF8800', isDowntime: false }
       ];
     }
   }
@@ -426,7 +437,7 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
 
     // Check for duplicates
     if (this.config.stateMappings.some((m: any) => m.value.toString().trim().toLowerCase() === this.newMapping.value.toString().trim().toLowerCase())) {
-      this.alertService.warning(`Mapping for value "${this.newMapping.value}" already exists.`);
+      this.alertService.warning(gettext('Mapping for this value already exists.'));
       return;
     }
 
@@ -503,7 +514,7 @@ export class DowntimeGanttWidgetConfigComponent implements OnInit {
     }
 
     if (!id) {
-      this.alertService.warning('Could not resolve selected asset ID.');
+      this.alertService.warning(gettext('Could not resolve selected asset ID.'));
       return;
     }
 

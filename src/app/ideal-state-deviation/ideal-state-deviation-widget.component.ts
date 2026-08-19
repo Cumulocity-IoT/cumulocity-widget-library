@@ -7,7 +7,7 @@
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { MeasurementService } from '@c8y/client';
-import { MeasurementRealtimeService } from '@c8y/ngx-components';
+import { CoreModule, MeasurementRealtimeService, gettext } from '@c8y/ngx-components';
 import { Subscription } from 'rxjs';
 
 interface ActiveMetric {
@@ -31,17 +31,17 @@ interface ActiveMetric {
       @if (isLoading) {
         <div class="state-container text-center p-24">
           <span class="spinner"></span>
-          <p class="m-t-8 text-muted text-small">Loading metrics configuration...</p>
+          <p class="m-t-8 text-muted text-small">{{ 'Loading metrics configuration...' | translate }}</p>
         </div>
       } @else if (!config?.device?.id) {
         <div class="state-container text-center p-24">
           <i c8yIcon="hdd-o" class="text-muted text-large m-b-8"></i>
-          <p class="text-muted">No device selected. Please edit the widget settings.</p>
+          <p class="text-muted">{{ 'No device selected. Please edit the widget settings.' | translate }}</p>
         </div>
       } @else if (!config?.datapoints || config.datapoints.length === 0) {
         <div class="state-container text-center p-24">
           <i c8yIcon="sliders" class="text-muted text-large m-b-8"></i>
-          <p class="text-muted">No data points selected. Please edit the widget settings.</p>
+          <p class="text-muted">{{ 'No data points selected. Please edit the widget settings.' | translate }}</p>
         </div>
       } @else {
         <div class="widget-content">
@@ -82,7 +82,7 @@ interface ActiveMetric {
                   text-anchor="middle" 
                   class="score-label-svg"
                 >
-                  SCORE
+                  {{ 'SCORE' | translate }}
                 </text>
               </svg>
             </div>
@@ -91,17 +91,17 @@ interface ActiveMetric {
           <!-- Individual Metrics List (Right side, takes 50% width) -->
           @if (config.showDetailedList !== false) {
             <div class="metrics-list">
-              <h5 class="section-title">Individual Scores</h5>
+              <h5 class="section-title" translate>Individual Scores</h5>
               <div class="metrics-grid">
                 @for (m of metrics; track m.fragment + '.' + m.series) {
                   <div class="metric-row">
                     <div class="metric-info">
                       <span class="metric-label" [title]="m.label">{{ m.label }}</span>
                       <span class="metric-value-row">
-                        Current: <strong>{{ m.currentVal !== null ? (m.currentVal | number:'1.1-2') : 'N/A' }}{{ m.unit ? ' ' + m.unit : '' }}</strong>
+                        {{ 'Current:' | translate }} <strong>{{ m.currentVal !== null ? (m.currentVal | number:'1.1-2') : 'N/A' }}{{ m.unit ? ' ' + m.unit : '' }}</strong>
                       </span>
                       <span class="metric-value-row text-muted">
-                        Ideal: {{ m.target }}{{ m.unit ? ' ' + m.unit : '' }}
+                        {{ 'Ideal:' | translate }} {{ m.target }}{{ m.unit ? ' ' + m.unit : '' }}
                       </span>
                     </div>
                     <div class="metric-status">
@@ -127,11 +127,12 @@ interface ActiveMetric {
   `,
   styles: [`
     .deviation-widget-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       height: 100%;
       width: 100%;
       box-sizing: border-box;
-      background: #ffffff;
+      background: transparent;
+      color: var(--c8y-text-color, inherit);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -182,7 +183,7 @@ interface ActiveMetric {
     }
     .ring-bg {
       fill: none;
-      stroke: #f1f5f9;
+      stroke: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       stroke-width: 8;
     }
     .ring-progress {
@@ -197,13 +198,13 @@ interface ActiveMetric {
     .score-value-svg {
       font-size: 28px;
       font-weight: 800;
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       transition: fill 0.4s ease;
     }
     .score-label-svg {
       font-size: 6px;
       font-weight: 700;
-      fill: #94a3b8;
+      fill: var(--c8y-text-muted, #94a3b8);
       letter-spacing: 0.1em;
     }
     .metrics-list {
@@ -214,12 +215,12 @@ interface ActiveMetric {
     .section-title {
       font-size: 11px;
       font-weight: 600;
-      color: #64748b;
+      color: var(--c8y-text-muted, #64748b);
       margin-top: 0;
       margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       padding-bottom: 4px;
     }
     .metrics-grid {
@@ -233,10 +234,11 @@ interface ActiveMetric {
       justify-content: space-between;
       align-items: center;
       padding: 6px 12px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 6px;
       gap: 12px;
+      color: var(--c8y-text-color, inherit);
     }
     .metric-info {
       display: flex;
@@ -247,14 +249,14 @@ interface ActiveMetric {
     .metric-label {
       font-size: 12px;
       font-weight: 600;
-      color: #1e293b;
+      color: var(--c8y-text-color, inherit);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .metric-value-row {
       font-size: 10px;
-      color: #475569;
+      color: var(--c8y-text-muted, #94a3b8);
       margin-top: 1px;
     }
     .metric-status {
@@ -266,7 +268,7 @@ interface ActiveMetric {
     }
     .metric-progress-bar-bg {
       height: 5px;
-      background: #e2e8f0;
+      background: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 3px;
       flex: 1;
       overflow: hidden;
@@ -287,7 +289,7 @@ interface ActiveMetric {
       display: inline-block;
       width: 28px;
       height: 28px;
-      border: 3px solid rgba(0,0,0,0.08);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.08));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 0.8s linear infinite;

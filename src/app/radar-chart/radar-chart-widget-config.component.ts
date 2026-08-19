@@ -1,12 +1,6 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, Input, OnInit, ViewChild, TemplateRef, inject } from '@angular/core';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
-import { AlertService } from '@c8y/ngx-components';
+import { AlertService, gettext } from '@c8y/ngx-components';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 interface SelectedDevice {
@@ -25,7 +19,7 @@ interface SelectedDevice {
       <!-- Selected Devices List (Cleaned layout with color picker) -->
       <div class="m-b-12">
         @if (selectedDevices.length === 0) {
-          <p class="text-muted text-small"><i c8yIcon="info-circle"></i> No devices selected. Click "Add Device" to select one.</p>
+          <p class="text-muted text-small"><i c8yIcon="info-circle"></i> {{ 'No devices selected. Click "Add Device" to select one.' | translate }}</p>
         } @else {
           <ul class="list-group">
             @for (dev of selectedDevices; track dev.id; let idx = $index) {
@@ -34,10 +28,10 @@ interface SelectedDevice {
                   <!-- Color Picker input -->
                   <input 
                     type="color" 
-                    style="width: 24px; height: 24px; padding: 0; border: 1px solid #cbd5e1; border-radius: 4px; margin-right: 12px; cursor: pointer; background: transparent;"
+                    style="width: 24px; height: 24px; padding: 0; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px; margin-right: 12px; cursor: pointer; background: transparent;"
                     [(ngModel)]="dev.color"
                     (change)="updateDeviceColor(idx, dev.color)"
-                    title="Choose device color"
+                    [title]="'Choose device color' | translate"
                   />
                   <div>
                     <i c8yIcon="hdd-o" class="m-r-8"></i>
@@ -49,7 +43,7 @@ interface SelectedDevice {
                   <button 
                     type="button" 
                     class="btn btn-xs btn-clean text-danger" 
-                    title="Remove device"
+                    [title]="'Remove device' | translate"
                     (click)="removeDevice(idx)"
                   >
                     <i c8yIcon="trash-o"></i>
@@ -68,7 +62,7 @@ interface SelectedDevice {
           class="btn btn-default btn-sm" 
           (click)="openModal(deviceModal)"
         >
-          <i c8yIcon="plus"></i> Add Device
+          <i c8yIcon="plus"></i> {{ 'Add Device' | translate }}
         </button>
       }
     </div>
@@ -84,7 +78,7 @@ interface SelectedDevice {
             [(ngModel)]="config.showTable" 
           />
           <span></span>
-          Show data table under the chart
+          {{ 'Show data table under the chart' | translate }}
         </label>
       </div>
     </div>
@@ -132,7 +126,7 @@ export class RadarChartWidgetConfigComponent implements OnInit {
   private alertService = inject(AlertService);
   private modalService = inject(BsModalService);
 
-  private defaultColors = ['#1776bf', '#25b875', '#e67e22', '#9b59b6', '#e74c3c'];
+  private defaultColors = ['#00A1F2', '#119D11', '#FF8800', '#FFBE00', '#E51A1A'];
 
   @ViewChild('widgetPreview')
   set preview(template: TemplateRef<any>) {
@@ -163,7 +157,7 @@ export class RadarChartWidgetConfigComponent implements OnInit {
       const activeDevices = this.selectedDevices.filter(d => d && d.id);
 
       if (activeDevices.length === 0) {
-        this.alertService.warning('Please select at least one device.');
+        this.alertService.warning(gettext('Please select at least one device.'));
         return false;
       }
 
@@ -182,7 +176,7 @@ export class RadarChartWidgetConfigComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     if (this.selectedDevices.length >= 5) {
-      this.alertService.danger('You can select a maximum of 5 devices.');
+      this.alertService.danger(gettext('You can select a maximum of 5 devices.'));
       return;
     }
     this.tempDeviceModel = null;
@@ -238,13 +232,13 @@ export class RadarChartWidgetConfigComponent implements OnInit {
     }
 
     if (!id) {
-      this.alertService.warning('Could not resolve selected asset ID. Model data: ' + JSON.stringify(eventObj));
+      this.alertService.warning(gettext('Could not resolve selected asset ID.'));
       return;
     }
 
     // Duplication Check
     if (this.selectedDevices.some(d => d.id === id)) {
-      this.alertService.warning('Device is already added.');
+      this.alertService.warning(gettext('Device is already added.'));
       this.closeModal();
       return;
     }

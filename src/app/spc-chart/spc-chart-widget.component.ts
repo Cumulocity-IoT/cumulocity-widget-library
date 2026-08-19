@@ -310,12 +310,13 @@ export class SpcChartWidgetComponent implements OnInit, OnDestroy, OnChanges, Do
           show: true,
           position: 'insideStartTop', // Inside left boundary, on top of the line
           formatter: line.label || '',
-          color: '#333',
-          fontWeight: 'bold'
+          color: 'var(--c8y-text-color, #333)',
+          fontWeight: 'bold',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         },
         lineStyle: {
           type: 'dashed',
-          color: '#333333',
+          color: 'var(--c8y-text-muted, #333333)',
           width: 1.5
         }
       });
@@ -346,16 +347,17 @@ export class SpcChartWidgetComponent implements OnInit, OnDestroy, OnChanges, Do
           {
             yAxis: yAxisStart,
             itemStyle: {
-              color: area.color || '#ff0000',
+              color: area.color || '#E51A1A',
               opacity: 0.15 // 15% opacity transparency
             },
             label: {
               show: true,
               position: area.type === 'lower' ? 'insideBottomRight' : 'insideTopRight',
               formatter: area.label || '',
-              color: '#333333',
+              color: 'var(--c8y-text-color, #333333)',
               fontWeight: 'bold',
-              fontSize: 11
+              fontSize: 11,
+              fontFamily: 'var(--c8y-font-family-base, inherit)'
             }
           },
           {

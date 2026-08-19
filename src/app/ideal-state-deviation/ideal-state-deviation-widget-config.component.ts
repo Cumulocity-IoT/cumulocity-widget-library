@@ -17,11 +17,11 @@ import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
         class="form-control" 
         [(ngModel)]="config.calculationMode" 
       >
-        <option value="linear">Linear Decay</option>
-        <option value="exponential">Exponential Decay</option>
-        <option value="sigmoid">Sigmoidal (S-Curve)</option>
+        <option value="linear" translate>Linear Decay</option>
+        <option value="exponential" translate>Exponential Decay</option>
+        <option value="sigmoid" translate>Sigmoidal (S-Curve)</option>
       </select>
-      <p class="help-block text-muted text-xsmall m-t-4">
+      <p class="help-block text-muted text-xsmall m-t-4" translate>
         Defines how the score drops from 100 to 0 as the value deviates from the ideal state.
       </p>
     </div>
@@ -29,7 +29,7 @@ import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
     <!-- Exponent Slider (Visible only in Exponential Mode) -->
     @if (config.calculationMode === 'exponential') {
       <div class="form-group">
-        <label class="control-label" translate>Exponent (p): {{ config.exponent | number:'1.1-1' }}</label>
+        <label class="control-label">{{ 'Exponent (p):' | translate }} {{ config.exponent | number:'1.1-1' }}</label>
         <input 
           type="range" 
           class="form-control" 
@@ -39,16 +39,16 @@ import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
           [(ngModel)]="config.exponent" 
         />
         <div style="display: flex; justify-content: space-between;" class="text-xsmall text-muted m-t-4">
-          <span>Strict (0.5)</span>
-          <span>Standard (2.0)</span>
-          <span>Lenient (5.0)</span>
+          <span>{{ 'Strict (0.5)' | translate }}</span>
+          <span>{{ 'Standard (2.0)' | translate }}</span>
+          <span>{{ 'Lenient (5.0)' | translate }}</span>
         </div>
       </div>
     }
 
     <!-- Grace Zone Slider -->
     <div class="form-group m-t-16">
-      <label class="control-label" translate>Grace Zone: {{ config.graceZone | number:'1.0-0' }}%</label>
+      <label class="control-label">{{ 'Grace Zone:' | translate }} {{ config.graceZone | number:'1.0-0' }}%</label>
       <input 
         type="range" 
         class="form-control" 
@@ -57,7 +57,7 @@ import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
         step="1" 
         [(ngModel)]="config.graceZone" 
       />
-      <p class="help-block text-muted text-xsmall m-t-4">
+      <p class="help-block text-muted text-xsmall m-t-4" translate>
         Size of the boundary around the ideal target (0% to 20%) that still receives a perfect 100% score.
       </p>
     </div>
@@ -73,7 +73,7 @@ import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
             [(ngModel)]="config.showDetailedList" 
           />
           <span></span>
-          Show individual measurement scores
+          {{ 'Show individual measurement scores' | translate }}
         </label>
       </div>
     </div>

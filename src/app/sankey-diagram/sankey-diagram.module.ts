@@ -6,10 +6,12 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { SankeyDiagramComponent } from './sankey-diagram.component';
 import { SankeyDiagramConfigComponent } from './sankey-diagram-config.component';
 import { SANKEY_PREVIEW } from './preview-image';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -25,8 +27,8 @@ import { SANKEY_PREVIEW } from './preview-image';
       multi: true,
       useValue: {
         id: 'c8y.widget.sankey.diagram',
-        label: 'Sankey Diagram',
-        description: 'Displays the breakdown flow of alarms/events down the asset/group hierarchy.',
+        label: gettext('Sankey Diagram'),
+        description: gettext('Displays the breakdown flow of alarms/events down the asset/group hierarchy.'),
         previewImage: SANKEY_PREVIEW,
         component: SankeyDiagramComponent,
         configComponent: SankeyDiagramConfigComponent,
@@ -53,5 +55,7 @@ import { SANKEY_PREVIEW } from './preview-image';
     }
   ]
 })
-export class SankeyDiagramWidgetModule {}
+export class SankeyDiagramWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}
 export { SankeyDiagramComponent, SankeyDiagramConfigComponent };

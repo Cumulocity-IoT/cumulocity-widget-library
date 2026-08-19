@@ -1,15 +1,10 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, Input, OnDestroy, OnInit, ViewChild, OnChanges, SimpleChanges, inject, DoCheck, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { CoreModule, WidgetTimeContextDateRangeService, MeasurementRealtimeService, DashboardChildComponent } from '@c8y/ngx-components';
+import { CoreModule, WidgetTimeContextDateRangeService, MeasurementRealtimeService, DashboardChildComponent, gettext } from '@c8y/ngx-components';
 import { MeasurementService } from '@c8y/client';
 import { Subscription } from 'rxjs';
 import * as echarts from 'echarts';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-scatter-plot-widget',
@@ -36,19 +31,19 @@ import * as echarts from 'echarts';
           <div class="time-override-select">
             <i c8yIcon="clock-o" class="m-r-4"></i>
             <select [(ngModel)]="localTimeWindow" (change)="onTimeWindowChange()" class="form-control input-sm select-override">
-              <option value="lastMinute">Last Minute</option>
-              <option value="lastHour">Last Hour</option>
-              <option value="last2Hours">Last 2 Hours</option>
-              <option value="last4Hours">Last 4 Hours</option>
-              <option value="last8Hours">Last 8 Hours</option>
-              <option value="lastDay">Last Day</option>
+              <option value="lastMinute" translate>Last Minute</option>
+              <option value="lastHour" translate>Last Hour</option>
+              <option value="last2Hours" translate>Last 2 Hours</option>
+              <option value="last4Hours" translate>Last 4 Hours</option>
+              <option value="last8Hours" translate>Last 8 Hours</option>
+              <option value="lastDay" translate>Last Day</option>
             </select>
           </div>
           
           <button 
             type="button" 
             class="btn btn-clean btn-xs" 
-            title="Refresh Data"
+            [title]="'Refresh Data' | translate"
             (click)="loadData()"
             [disabled]="loading"
           >
@@ -69,14 +64,14 @@ import * as echarts from 'echarts';
           <!-- Loading spinner -->
           <div class="center-state">
             <span class="spinner"></span>
-            <p class="m-t-8 text-muted text-small font-medium">Aligning measurement feeds...</p>
+            <p class="m-t-8 text-muted text-small font-medium">{{ 'Aligning measurement feeds...' | translate }}</p>
           </div>
         } @else if (fullDataset.length === 0) {
           <!-- Empty State -->
           <div class="center-state empty-state">
             <i c8yIcon="line-chart" class="text-muted text-large m-b-8"></i>
-            <p class="text-muted font-medium text-center">No paired X/Y measurements found in this window.</p>
-            <small class="text-muted text-center m-t-4" style="max-width: 250px;">
+            <p class="text-muted font-medium text-center">{{ 'No paired X/Y measurements found in this window.' | translate }}</p>
+            <small class="text-muted text-center m-t-4" style="max-width: 250px;" translate>
               Verify that both measurements are being sent with matched timestamps, or enable Aggregation in settings.
             </small>
           </div>
@@ -99,7 +94,7 @@ import * as echarts from 'echarts';
               type="button" 
               class="btn btn-primary btn-sm btn-replay-action" 
               (click)="toggleReplay()"
-              [title]="replayActive ? 'Pause Replay' : 'Start Replay'"
+              [title]="(replayActive ? 'Pause Replay' : 'Start Replay') | translate"
             >
               <i [c8yIcon]="replayActive ? 'pause' : 'play'"></i>
             </button>
@@ -114,12 +109,12 @@ import * as echarts from 'echarts';
                 (input)="onSliderInput($event)"
                 class="replay-slider"
               />
-              <span class="replay-counter">{{ replayProgress }} / {{ fullDataset.length }} points</span>
+              <span class="replay-counter">{{ replayProgress }} / {{ fullDataset.length }} {{ 'points' | translate }}</span>
             </div>
 
             <!-- Speed control -->
             <div class="speed-select-wrapper">
-              <span class="speed-label">Speed:</span>
+              <span class="speed-label" translate>Speed:</span>
               <select [(ngModel)]="replaySpeed" (change)="onSpeedChange()" class="form-control input-sm speed-select">
                 <option [value]="0.5">0.5x</option>
                 <option [value]="1">1.0x</option>
@@ -136,7 +131,7 @@ import * as echarts from 'echarts';
               class="btn btn-danger btn-sm btn-replay-action"
               (click)="exitReplay()"
               [disabled]="!replayActive && replayProgress === fullDataset.length"
-              title="Exit Replay and return to Live data"
+              [title]="'Exit Replay and return to Live data' | translate"
               style="margin-left: 8px;"
             >
               <i c8yIcon="times"></i>
@@ -146,7 +141,7 @@ import * as echarts from 'echarts';
           <!-- Chronology Timestamp indicator -->
           <div class="timestamp-hud">
             <i c8yIcon="clock-o" class="m-r-4"></i>
-            <span>Current Time: <strong>{{ currentReplayTimeStr }}</strong></span>
+            <span>{{ 'Current Time:' | translate }} <strong>{{ currentReplayTimeStr }}</strong></span>
           </div>
         </div>
       }
@@ -154,13 +149,13 @@ import * as echarts from 'echarts';
   `,
   styles: [`
     .scatter-widget-container {
-      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 100%;
-      background: #ffffff;
-      color: #1e293b;
+      background: transparent;
+      color: var(--c8y-text-color, inherit);
       box-sizing: border-box;
       position: relative;
     }
@@ -169,8 +164,8 @@ import * as echarts from 'echarts';
       justify-content: space-between;
       align-items: center;
       padding: 8px 12px;
-      background: #f8fafc;
-      border-bottom: 1px solid #cbd5e1;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border-bottom: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 4px 4px 0 0;
     }
     .widget-meta {
@@ -179,8 +174,8 @@ import * as echarts from 'echarts';
       gap: 8px;
     }
     .widget-label-badge {
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: rgba(23, 118, 191, 0.12);
+      color: var(--c8y-brand-primary, #1776bf);
       font-weight: 600;
       font-size: 10px;
       text-transform: uppercase;
@@ -189,7 +184,7 @@ import * as echarts from 'echarts';
       letter-spacing: 0.5px;
     }
     .device-name-badge {
-      color: #64748b;
+      color: var(--c8y-text-muted, #94a3b8);
       font-weight: 500;
       font-size: 11px;
     }
@@ -201,17 +196,17 @@ import * as echarts from 'echarts';
     .time-override-select {
       display: flex;
       align-items: center;
-      color: #64748b;
+      color: var(--c8y-text-muted, #94a3b8);
       font-size: 11px;
     }
     .select-override {
       height: 24px;
       padding: 0px 4px;
       font-size: 11px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 4px;
-      background: #ffffff;
-      color: #334155;
+      background: var(--c8y-form-control-background-default, var(--c8y-root-component-background-default, transparent));
+      color: var(--c8y-text-color, inherit);
       font-weight: 500;
       cursor: pointer;
     }
@@ -238,18 +233,18 @@ import * as echarts from 'echarts';
       width: 80%;
     }
     .warning-state, .empty-state {
-      background: #f8fafc;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
       padding: 16px;
       border-radius: 8px;
-      border: 1px dashed #cbd5e1;
+      border: 1px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
     .spinner {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(0,0,0,0.1);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.1));
       border-radius: 50%;
-      border-top-color: #3b82f6;
+      border-top-color: var(--c8y-brand-primary, #3b82f6);
       animation: spin 1s linear infinite;
     }
     @keyframes spin {
@@ -261,8 +256,8 @@ import * as echarts from 'echarts';
 
     /* Replay HUD Dock Panel */
     .replay-control-dock {
-      background: #f8fafc;
-      border-top: 1px solid #cbd5e1;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border-top: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       padding: 8px 12px;
       display: flex;
       flex-direction: column;
@@ -270,8 +265,8 @@ import * as echarts from 'echarts';
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .active-dock {
-      background: #eff6ff;
-      border-top-color: #bfdbfe;
+      background: rgba(23, 118, 191, 0.12);
+      border-top-color: var(--c8y-brand-primary, #1776bf);
     }
     .replay-main-row {
       display: flex;
@@ -289,27 +284,6 @@ import * as echarts from 'echarts';
       justify-content: center;
       padding: 0;
       flex-shrink: 0;
-      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
-    }
-    .scrubber-container {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-    .replay-slider {
-      flex: 1;
-      cursor: pointer;
-      height: 4px;
-      accent-color: #3b82f6;
-    }
-    .replay-counter {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 500;
-      white-space: nowrap;
-      min-width: 75px;
       text-align: right;
     }
     .speed-select-wrapper {
@@ -320,7 +294,7 @@ import * as echarts from 'echarts';
     }
     .speed-label {
       font-size: 11px;
-      color: #64748b;
+      color: var(--c8y-text-muted, #64748b);
       font-weight: 500;
     }
     .speed-select {
@@ -341,13 +315,13 @@ import * as echarts from 'echarts';
       display: flex;
       align-items: center;
       font-size: 10px;
-      color: #64748b;
-      border-top: 1px solid #cbd5e1;
+      color: var(--c8y-text-muted, #64748b);
+      border-top: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       padding-top: 4px;
       margin-top: 2px;
     }
     .timestamp-hud strong {
-      color: #1e293b;
+      color: var(--c8y-text-color, inherit);
       margin-left: 4px;
     }
   `]
@@ -361,6 +335,7 @@ export class ScatterPlotWidgetComponent implements OnInit, OnDestroy, OnChanges,
   private measurementRealtime = inject(MeasurementRealtimeService);
   private changeRef = inject(ChangeDetectorRef);
   private dashboardChild = inject(DashboardChildComponent, { optional: true });
+  private translateService = inject(TranslateService);
 
   // States
   loading = false;
@@ -849,19 +824,19 @@ export class ScatterPlotWidgetComponent implements OnInit, OnDestroy, OnChanges,
         max: dpX.max !== undefined && dpX.max !== null ? Number(dpX.max) : undefined,
         nameTextStyle: {
           fontWeight: 600,
-          color: '#475569',
-          fontFamily: 'Outfit, sans-serif'
+          color: 'var(--c8y-text-color, #475569)',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         },
         splitLine: {
           show: true,
           lineStyle: {
             type: 'dashed',
-            color: '#e2e8f0'
+            color: 'rgba(128, 128, 128, 0.15)'
           }
         },
         axisLabel: {
-          color: '#64748b',
-          fontFamily: 'Outfit, sans-serif'
+          color: 'var(--c8y-text-muted, #64748b)',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         }
       },
       yAxis: {
@@ -874,19 +849,19 @@ export class ScatterPlotWidgetComponent implements OnInit, OnDestroy, OnChanges,
         max: dpY.max !== undefined && dpY.max !== null ? Number(dpY.max) : undefined,
         nameTextStyle: {
           fontWeight: 600,
-          color: '#475569',
-          fontFamily: 'Outfit, sans-serif'
+          color: 'var(--c8y-text-color, #475569)',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         },
         splitLine: {
           show: true,
           lineStyle: {
             type: 'dashed',
-            color: '#e2e8f0'
+            color: 'rgba(128, 128, 128, 0.15)'
           }
         },
         axisLabel: {
-          color: '#64748b',
-          fontFamily: 'Outfit, sans-serif'
+          color: 'var(--c8y-text-muted, #64748b)',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         }
       },
       visualMap: {
@@ -902,12 +877,12 @@ export class ScatterPlotWidgetComponent implements OnInit, OnDestroy, OnChanges,
         top: 'center',
         itemHeight: 120,
         itemWidth: 14,
-        text: ['Newer', 'Older'],
+        text: [this.translateService.instant('Newer'), this.translateService.instant('Older')],
         textStyle: {
-          color: '#64748b',
+          color: 'var(--c8y-text-muted, #64748b)',
           fontWeight: 500,
           fontSize: 10,
-          fontFamily: 'Outfit, sans-serif'
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         },
         formatter: (value: any) => {
           const date = new Date(Number(value));

@@ -82,17 +82,17 @@ interface DataPoint {
         @if (isLoading) {
           <div class="state-container text-center p-24">
             <span class="spinner"></span>
-            <p class="m-t-8 text-muted text-small">Fetching state data...</p>
+            <p class="m-t-8 text-muted text-small">{{ 'Fetching state data...' | translate }}</p>
           </div>
         } @else if (!getTargetDeviceId()) {
           <div class="state-container text-center p-24">
             <i c8yIcon="hdd-o" class="text-muted text-large m-b-8"></i>
-            <p class="text-muted">No target device selected. Please configure the widget or place it in a device dashboard.</p>
+            <p class="text-muted">{{ 'No target device selected. Please configure the widget or place it in a device dashboard.' | translate }}</p>
           </div>
         } @else if (!config?.stateMappings || config.stateMappings.length === 0) {
           <div class="state-container text-center p-24">
             <i c8yIcon="gears" class="text-muted text-large m-b-8"></i>
-            <p class="text-muted">Please configure state mappings in the widget settings.</p>
+            <p class="text-muted">{{ 'Please configure state mappings in the widget settings.' | translate }}</p>
           </div>
         } @else {
           <!-- Stats Summary Bar (Availability, Downtime, Uptime) -->
@@ -100,27 +100,27 @@ interface DataPoint {
             <div class="stats-grid">
               <!-- Current Status -->
               <div class="stat-card current-status-card">
-                <div class="stat-header">Machine Status</div>
+                <div class="stat-header" translate>Machine Status</div>
                 <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; margin-top: 4px;">
                   <span class="status-indicator" [style.background-color]="currentStatusColor" [style.box-shadow]="'0 0 12px ' + currentStatusColor"></span>
-                  <span class="status-label">{{ currentStatusLabel }}</span>
+                  <span class="status-label">{{ currentStatusLabel | translate }}</span>
                 </div>
               </div>
 
               <!-- Availability -->
               <div class="stat-card">
-                <div class="stat-header">Availability</div>
+                <div class="stat-header" translate>Availability</div>
                 <div class="stat-body">
                   <span class="stat-value">{{ availability | number:'1.1-1' }}%</span>
                   <div class="availability-bar-container">
-                    <div class="availability-bar" [style.width.%]="availability" [style.background-color]="availability > 90 ? '#2ecc71' : availability > 70 ? '#f39c12' : '#e74c3c'"></div>
+                    <div class="availability-bar" [style.width.%]="availability" [style.background-color]="availability > 90 ? '#119D11' : availability > 70 ? '#FF8800' : '#E51A1A'"></div>
                   </div>
                 </div>
               </div>
 
               <!-- Downtime -->
               <div class="stat-card">
-                <div class="stat-header">Total Downtime</div>
+                <div class="stat-header" translate>Total Downtime</div>
                 <div class="stat-body">
                   <span class="stat-value text-danger">{{ formattedDowntime }}</span>
                 </div>
@@ -128,7 +128,7 @@ interface DataPoint {
 
               <!-- Uptime -->
               <div class="stat-card">
-                <div class="stat-header">Total Active Uptime</div>
+                <div class="stat-header" translate>Total Active Uptime</div>
                 <div class="stat-body">
                   <span class="stat-value text-success">{{ formattedUptime }}</span>
                 </div>
@@ -139,45 +139,45 @@ interface DataPoint {
           <!-- Gantt Chart -->
           <div class="chart-section m-t-16" style="position: relative;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <div class="chart-title" style="margin: 0;">Timeline & Transitions</div>
+              <div class="chart-title" style="margin: 0;" translate>Timeline & Transitions</div>
               @if (contextConfig.refreshOption === 'live') {
                 <button 
                   type="button" 
                   class="btn btn-default btn-xs"
                   (click)="goToLive()"
                   style="display: flex; align-items: center; gap: 4px; border-radius: 4px; font-weight: 500;"
-                  title="Scroll timeline to current live time"
+                  [title]="'Scroll timeline to current live time' | translate"
                 >
                   <span class="status-indicator" style="width: 8px; height: 8px; margin: 0; background-color: #e74c3c; animation: pulse 1.5s infinite;"></span>
-                  Go to Live
+                  {{ 'Go to Live' | translate }}
                 </button>
               }
             </div>
             <div #chartContainer class="chart-container"></div>
             <p class="help-block text-muted text-center text-xsmall" style="margin-top: 4px;">
-              <i c8yIcon="info-circle"></i> Use mouse wheel to zoom, drag to pan the timeline.
+              <i c8yIcon="info-circle"></i> {{ 'Use mouse wheel to zoom, drag to pan the timeline.' | translate }}
             </p>
           </div>
 
           <!-- Downtime Log Table -->
           @if (config?.showLogs) {
             <div class="log-section m-t-24">
-              <div class="log-header">Downtime Logs</div>
+              <div class="log-header" translate>Downtime Logs</div>
               @if (downtimeBlocks.length === 0) {
                 <div class="no-downtime-state">
                   <i c8yIcon="check-circle" class="text-success text-large m-b-8"></i>
-                  <p class="text-success font-medium">No downtime events recorded in this period.</p>
-                  <small class="text-muted">Machine is operating at 100% availability.</small>
+                  <p class="text-success font-medium">{{ 'No downtime events recorded in this period.' | translate }}</p>
+                  <small class="text-muted">{{ 'Machine is operating at 100% availability.' | translate }}</small>
                 </div>
               } @else {
                 <div class="table-responsive">
                   <table class="table table-striped table-hover c8y-table">
                     <thead>
                       <tr>
-                        <th>State</th>
-                        <th>Started At</th>
-                        <th>Ended At</th>
-                        <th>Duration</th>
+                        <th translate>State</th>
+                        <th translate>Started At</th>
+                        <th translate>Ended At</th>
+                        <th translate>Duration</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -185,7 +185,7 @@ interface DataPoint {
                         <tr>
                           <td>
                             <span class="state-badge" [style.background-color]="block.color"></span>
-                            <strong>{{ block.label }}</strong>
+                            <strong>{{ block.label | translate }}</strong>
                           </td>
                           <td>{{ block.startDateStr }}</td>
                           <td>{{ block.endDateStr }}</td>
@@ -204,13 +204,13 @@ interface DataPoint {
   `,
   styles: [`
     .gantt-widget-container {
-      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 100%;
-      background: #ffffff;
-      color: #1e293b;
+      background: transparent;
+      color: var(--c8y-text-color, inherit);
       box-sizing: border-box;
       position: relative;
     }
@@ -233,7 +233,7 @@ interface DataPoint {
       display: inline-block;
       width: 28px;
       height: 28px;
-      border: 3px solid rgba(0,0,0,0.08);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.08));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776bf);
       animation: spin 0.8s linear infinite;
@@ -253,8 +253,8 @@ interface DataPoint {
       margin-bottom: 16px;
     }
     .stat-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
       padding: 12px 16px;
       display: flex;
@@ -262,16 +262,17 @@ interface DataPoint {
       justify-content: space-between;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
       transition: all 0.2s ease;
+      color: var(--c8y-text-color, inherit);
     }
     .stat-card:hover {
-      border-color: #cbd5e1;
+      border-color: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.35));
       transform: translateY(-1px);
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
     .stat-header {
       font-size: 10px;
       font-weight: 700;
-      color: #64748b;
+      color: var(--c8y-text-muted, #64748b);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 4px;
@@ -284,10 +285,11 @@ interface DataPoint {
       font-size: 20px;
       font-weight: 800;
       line-height: 1.2;
+      color: var(--c8y-text-color, inherit);
     }
     .stat-subtext {
       font-size: 10px;
-      color: #94a3b8;
+      color: var(--c8y-text-muted, #94a3b8);
       margin-top: 2px;
     }
     .status-indicator {
@@ -305,11 +307,12 @@ interface DataPoint {
     .status-label {
       font-size: 16px;
       font-weight: 700;
+      color: var(--c8y-text-color, inherit);
     }
     .availability-bar-container {
       width: 100%;
       height: 4px;
-      background: #e2e8f0;
+      background: var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 2px;
       margin-top: 6px;
       overflow: hidden;
@@ -320,8 +323,8 @@ interface DataPoint {
       transition: width 0.5s ease-out;
     }
     .chart-section {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
       padding: 16px;
       display: flex;
@@ -330,7 +333,7 @@ interface DataPoint {
     .chart-title {
       font-size: 12px;
       font-weight: 700;
-      color: #334155;
+      color: var(--c8y-text-color, inherit);
       margin-bottom: 12px;
     }
     .chart-container {
@@ -345,14 +348,14 @@ interface DataPoint {
     .log-header {
       font-size: 14px;
       font-weight: 700;
-      color: #1e293b;
+      color: var(--c8y-text-color, inherit);
       margin-bottom: 12px;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       padding-bottom: 8px;
     }
     .no-downtime-state {
-      background: #f0fdf4;
-      border: 1px dashed #bbf7d0;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px dashed rgba(34, 197, 94, 0.3);
       border-radius: 8px;
       padding: 24px;
       text-align: center;
@@ -367,19 +370,19 @@ interface DataPoint {
     }
     .table-responsive {
       border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       overflow: hidden;
     }
     .table {
       margin-bottom: 0;
     }
     .table th {
-      background: #f8fafc;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
       font-size: 11px;
       font-weight: 700;
-      color: #64748b;
+      color: var(--c8y-text-muted, #64748b);
       text-transform: uppercase;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
   `]
 })
@@ -1061,9 +1064,9 @@ export class DowntimeGanttWidgetComponent implements OnInit, OnChanges, OnDestro
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
-          color: '#475569',
+          color: 'var(--c8y-text-muted, #64748b)',
           fontSize: 10,
-          fontFamily: 'Outfit, sans-serif'
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         }
       },
       grid: {
@@ -1080,13 +1083,13 @@ export class DowntimeGanttWidgetComponent implements OnInit, OnChanges, OnDestro
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#f1f5f9'
+            color: 'rgba(128, 128, 128, 0.15)'
           }
         },
         axisLabel: {
-          color: '#64748b',
+          color: 'var(--c8y-text-muted, #64748b)',
           fontSize: 9,
-          fontFamily: 'Outfit, sans-serif'
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
         }
       },
       yAxis: {

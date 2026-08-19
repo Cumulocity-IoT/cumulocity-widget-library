@@ -15,7 +15,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { AlertService, DynamicComponent, FormGroupComponent } from '@c8y/ngx-components';
+import { AlertService, DynamicComponent, FormGroupComponent, gettext, CoreModule } from '@c8y/ngx-components';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
 import { BehaviorSubject } from 'rxjs';
 import { ParetoChartComponent } from './pareto-chart.component';
@@ -27,23 +27,23 @@ import { ParetoChartComponent } from './pareto-chart.component';
 
       <!-- Mode Selector -->
       <c8y-form-group>
-        <label class="control-label">Analysis Mode</label>
+        <label class="control-label" translate>Analysis Mode</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="mode">
-            <option value="alarms">Alarms Breakdown</option>
-            <option value="events">Events Breakdown</option>
+            <option value="alarms" translate>Alarms Breakdown</option>
+            <option value="events" translate>Events Breakdown</option>
           </select>
         </div>
       </c8y-form-group>
 
       <!-- Timeframe selector -->
       <c8y-form-group>
-        <label class="control-label">Time Frame</label>
+        <label class="control-label" translate>Time Frame</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="timeRange">
-            <option value="lastHour">Last Hour</option>
-            <option value="lastDay">Last Day</option>
-            <option value="lastWeek">Last Week</option>
+            <option value="lastHour" translate>Last Hour</option>
+            <option value="lastDay" translate>Last Day</option>
+            <option value="lastWeek" translate>Last Week</option>
           </select>
         </div>
       </c8y-form-group>
@@ -53,18 +53,18 @@ import { ParetoChartComponent } from './pareto-chart.component';
         <label class="c8y-checkbox">
           <input type="checkbox" formControlName="analyseChildren" />
           <span></span>
-          <span>Analyse children alarms/events instead of the asset itself</span>
+          <span translate>Analyse children alarms/events instead of the asset itself</span>
         </label>
       </c8y-form-group>
 
       <!-- Group By selector (visible only when children analysis is checked) -->
       @if (formGroup.get('analyseChildren')?.value) {
         <c8y-form-group>
-          <label class="control-label">Plot X-Axis By</label>
+          <label class="control-label" translate>Plot X-Axis By</label>
           <div class="c8y-select-wrapper">
             <select class="form-control" formControlName="groupBy">
-              <option value="type">Alarm/Event Type</option>
-              <option value="child">Child Device/Asset</option>
+              <option value="type" translate>Alarm/Event Type</option>
+              <option value="child" translate>Child Device/Asset</option>
             </select>
           </div>
         </c8y-form-group>
@@ -72,12 +72,12 @@ import { ParetoChartComponent } from './pareto-chart.component';
 
       <!-- Type Filter Mode -->
       <c8y-form-group>
-        <label class="control-label">Type Filter Mode</label>
+        <label class="control-label" translate>Type Filter Mode</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="typeFilterMode">
-            <option value="none">No Filter (All Types)</option>
-            <option value="whitelist">Whitelist (Only listed types)</option>
-            <option value="blacklist">Blacklist (Ignore listed types)</option>
+            <option value="none" translate>No Filter (All Types)</option>
+            <option value="whitelist" translate>Whitelist (Only listed types)</option>
+            <option value="blacklist" translate>Blacklist (Ignore listed types)</option>
           </select>
         </div>
       </c8y-form-group>
@@ -85,14 +85,14 @@ import { ParetoChartComponent } from './pareto-chart.component';
       <!-- Types List (visible if whitelist or blacklist selected) -->
       @if (formGroup.get('typeFilterMode')?.value !== 'none') {
         <c8y-form-group>
-          <label class="control-label">Types List</label>
+          <label class="control-label" translate>Types List</label>
           <input 
             class="form-control" 
             type="text" 
             formControlName="typesList" 
-            placeholder="e.g. c8y_ThresholdAlarm, c8y_ConnectionAlarm" 
+            [placeholder]="'e.g. c8y_ThresholdAlarm, c8y_ConnectionAlarm' | translate" 
           />
-          <small class="text-muted">Enter a comma-separated list of alarm/event types.</small>
+          <small class="text-muted" translate>Enter a comma-separated list of alarm/event types.</small>
         </c8y-form-group>
       }
 
@@ -105,7 +105,7 @@ import { ParetoChartComponent } from './pareto-chart.component';
   `,
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   standalone: true,
-  imports: [CommonModule, FormGroupComponent, ReactiveFormsModule, ParetoChartComponent, AsyncPipe]
+  imports: [CommonModule, CoreModule, FormGroupComponent, ReactiveFormsModule, ParetoChartComponent, AsyncPipe]
 })
 export class ParetoChartConfigComponent implements DynamicComponent, OnInit, OnChanges {
   @Input() config: any = {};
@@ -145,7 +145,7 @@ export class ParetoChartConfigComponent implements DynamicComponent, OnInit, OnC
 
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (this.formGroup.invalid) {
-        this.alert.warning('Please fill out all required configuration options.');
+        this.alert.warning(gettext('Please fill out all required configuration options.'));
         return false;
       }
 

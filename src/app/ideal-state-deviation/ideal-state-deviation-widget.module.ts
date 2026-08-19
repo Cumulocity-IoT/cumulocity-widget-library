@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { FormsModule } from '@angular/forms';
 import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector';
 import { hookWidgetConfig } from '@c8y/ngx-components/context-dashboard';
@@ -14,6 +14,8 @@ import { hookWidgetConfig } from '@c8y/ngx-components/context-dashboard';
 import { IdealStateDeviationWidgetComponent } from './ideal-state-deviation-widget.component';
 import { IdealStateDeviationWidgetConfigComponent } from './ideal-state-deviation-widget-config.component';
 import { IDEAL_STATE_DEVIATION_PREVIEW } from './preview-image';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -30,8 +32,8 @@ import { IDEAL_STATE_DEVIATION_PREVIEW } from './preview-image';
       multi: true,
       useValue: {
         id: 'ideal-state-deviation-widget',
-        label: 'Ideal State Deviation',
-        description: 'Scores an asset from 0 to 100 based on deviation from configured target ranges.',
+        label: gettext('Ideal State Deviation'),
+        description: gettext('Scores an asset from 0 to 100 based on deviation from configured target ranges.'),
         previewImage: IDEAL_STATE_DEVIATION_PREVIEW,
         component: IdealStateDeviationWidgetComponent,
         configComponent: IdealStateDeviationWidgetConfigComponent,
@@ -50,7 +52,7 @@ import { IDEAL_STATE_DEVIATION_PREVIEW } from './preview-image';
     hookWidgetConfig({
       widgetId: 'ideal-state-deviation-widget',
       priority: 20,
-      label: 'Data point selection',
+      label: gettext('Data point selection'),
       initialState: {
         minActiveCount: 1,
         maxActiveCount: 10,
@@ -71,4 +73,6 @@ import { IDEAL_STATE_DEVIATION_PREVIEW } from './preview-image';
     })
   ]
 })
-export class IdealStateDeviationWidgetModule {}
+export class IdealStateDeviationWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}

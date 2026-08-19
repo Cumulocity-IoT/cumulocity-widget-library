@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, Input, OnInit, ViewChild, TemplateRef, inject } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
-import { AlertService } from '@c8y/ngx-components';
+import { AlertService, gettext } from '@c8y/ngx-components';
 
 @Component({
   selector: 'lib-scatter-plot-widget-config',
@@ -37,12 +31,12 @@ import { AlertService } from '@c8y/ngx-components';
       <div class="form-group">
         <label class="control-label" translate>Default Time Window</label>
         <select class="form-control" name="timeWindow" [(ngModel)]="config.timeWindow">
-          <option value="lastMinute">Last Minute</option>
-          <option value="lastHour">Last Hour</option>
-          <option value="last2Hours">Last 2 Hours</option>
-          <option value="last4Hours">Last 4 Hours</option>
-          <option value="last8Hours">Last 8 Hours</option>
-          <option value="lastDay">Last Day</option>
+          <option value="lastMinute" translate>Last Minute</option>
+          <option value="lastHour" translate>Last Hour</option>
+          <option value="last2Hours" translate>Last 2 Hours</option>
+          <option value="last4Hours" translate>Last 4 Hours</option>
+          <option value="last8Hours" translate>Last 8 Hours</option>
+          <option value="lastDay" translate>Last Day</option>
         </select>
       </div>
 
@@ -58,7 +52,7 @@ import { AlertService } from '@c8y/ngx-components';
               [(ngModel)]="config.aggregation.active" 
             />
             <span></span>
-            Enable Data Aggregation
+            {{ 'Enable Data Aggregation' | translate }}
           </label>
         </div>
 
@@ -66,17 +60,17 @@ import { AlertService } from '@c8y/ngx-components';
           <div class="col-md-6 form-group">
             <label class="control-label" translate>Aggregation Value</label>
             <select class="form-control" name="aggType" [(ngModel)]="config.aggregation.type">
-              <option value="avg">Average (avg)</option>
-              <option value="min">Minimum (min)</option>
-              <option value="max">Maximum (max)</option>
+              <option value="avg" translate>Average (avg)</option>
+              <option value="min" translate>Minimum (min)</option>
+              <option value="max" translate>Maximum (max)</option>
             </select>
           </div>
           <div class="col-md-6 form-group">
             <label class="control-label" translate>Time Bucket Interval</label>
             <select class="form-control" name="aggInterval" [(ngModel)]="config.aggregation.interval">
-              <option value="MINUTELY">Minutely</option>
-              <option value="HOURLY">Hourly</option>
-              <option value="DAILY">Daily</option>
+              <option value="MINUTELY" translate>Minutely</option>
+              <option value="HOURLY" translate>Hourly</option>
+              <option value="DAILY" translate>Daily</option>
             </select>
           </div>
         </div>
@@ -95,7 +89,7 @@ import { AlertService } from '@c8y/ngx-components';
                 name="customStartColor" 
                 [(ngModel)]="config.customStartColor" 
                 (change)="onCustomColorsChange()"
-                style="width: 48px; height: 36px; padding: 2px; cursor: pointer; border: 1px solid #ccc; border-radius: 4px;"
+                style="width: 48px; height: 36px; padding: 2px; cursor: pointer; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px;"
               />
               <span>{{ config.customStartColor }}</span>
             </div>
@@ -108,7 +102,7 @@ import { AlertService } from '@c8y/ngx-components';
                 name="customEndColor" 
                 [(ngModel)]="config.customEndColor" 
                 (change)="onCustomColorsChange()"
-                style="width: 48px; height: 36px; padding: 2px; cursor: pointer; border: 1px solid #ccc; border-radius: 4px;"
+                style="width: 48px; height: 36px; padding: 2px; cursor: pointer; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2)); border-radius: 4px;"
               />
               <span>{{ config.customEndColor }}</span>
             </div>
@@ -156,11 +150,11 @@ export class ScatterPlotWidgetConfigComponent implements OnInit {
     // Register before-save validation hook
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (!currentConfig.datapointX || currentConfig.datapointX.length === 0) {
-        this.alertService.warning('Please select an X-Axis Data Point.');
+        this.alertService.warning(gettext('Please select an X-Axis Data Point.'));
         return false;
       }
       if (!currentConfig.datapointY || currentConfig.datapointY.length === 0) {
-        this.alertService.warning('Please select a Y-Axis Data Point.');
+        this.alertService.warning(gettext('Please select a Y-Axis Data Point.'));
         return false;
       }
       return true;
@@ -180,10 +174,10 @@ export class ScatterPlotWidgetConfigComponent implements OnInit {
         };
       }
       if (!this._config.customStartColor) {
-        this._config.customStartColor = '#3b82f6'; // Sleek blue
+        this._config.customStartColor = '#00A1F2'; // Cumulocity Blue
       }
       if (!this._config.customEndColor) {
-        this._config.customEndColor = '#ef4444'; // Sleek red
+        this._config.customEndColor = '#E51A1A'; // Cumulocity Red
       }
       // Always enforce gradientColors to match start/end pickers
       this._config.gradientColors = [this._config.customStartColor, this._config.customEndColor];

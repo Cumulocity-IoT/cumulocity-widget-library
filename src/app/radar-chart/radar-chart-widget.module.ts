@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { FormsModule } from '@angular/forms';
 import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector';
 import { DateTimePickerModule } from '@c8y/ngx-components';
@@ -18,6 +18,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { RadarChartWidgetComponent } from './radar-chart-widget.component';
 import { RadarChartWidgetConfigComponent } from './radar-chart-widget-config.component';
 import { RADAR_CHART_PREVIEW } from './preview-image';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -39,8 +41,8 @@ import { RADAR_CHART_PREVIEW } from './preview-image';
       multi: true,
       useValue: {
         id: 'radar-chart-widget',
-        label: 'Radar/Spider Chart',
-        description: 'Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually',
+        label: gettext('Radar/Spider Chart'),
+        description: gettext('Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually'),
         previewImage: RADAR_CHART_PREVIEW,
         component: RadarChartWidgetComponent,
         configComponent: RadarChartWidgetConfigComponent,
@@ -60,7 +62,7 @@ import { RADAR_CHART_PREVIEW } from './preview-image';
     hookWidgetConfig({
       widgetId: 'radar-chart-widget',
       priority: 10,
-      label: 'Time context',
+      label: gettext('Time context'),
       initialState: {
         controls: PRESET_NAME.DEFAULT
       },
@@ -70,7 +72,7 @@ import { RADAR_CHART_PREVIEW } from './preview-image';
     hookWidgetConfig({
       widgetId: 'radar-chart-widget',
       priority: 20,
-      label: 'Data point selection',
+      label: gettext('Data point selection'),
       initialState: {
         minActiveCount: 3,
         maxActiveCount: 10,
@@ -90,4 +92,6 @@ import { RADAR_CHART_PREVIEW } from './preview-image';
     })
   ]
 })
-export class RadarChartWidgetModule {}
+export class RadarChartWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}

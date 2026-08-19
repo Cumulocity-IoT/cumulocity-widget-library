@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlarmService, EventService, InventoryService } from '@c8y/client';
-import { CoreModule } from '@c8y/ngx-components';
+import { CoreModule, gettext } from '@c8y/ngx-components';
 import * as echarts from 'echarts';
 
 interface TypeCount {
@@ -22,7 +16,7 @@ interface TypeCount {
       <div class="pareto-actions">
         <button 
           class="btn btn-clean" 
-          title="Refresh" 
+          [title]="'Refresh' | translate" 
           (click)="refreshData()"
           [disabled]="loading()"
         >
@@ -33,17 +27,17 @@ interface TypeCount {
       @if (loading()) {
         <div class="loading-state text-center p-24">
           <span class="spinner"></span>
-          <p class="m-t-8 text-muted text-small">Fetching alarms/events...</p>
+          <p class="m-t-8 text-muted text-small">{{ 'Fetching alarms/events...' | translate }}</p>
         </div>
       } @else if (errorMsg()) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="exclamation-circle" class="text-danger text-large m-b-8"></i>
-          <p class="text-muted">{{ errorMsg() }}</p>
+          <p class="text-muted">{{ errorMsg()! | translate }}</p>
         </div>
       } @else if (!hasData()) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="info" class="text-muted text-large m-b-8"></i>
-          <p class="text-muted">No alarms/events match the filter criteria in the selected range.</p>
+          <p class="text-muted">{{ 'No alarms/events match the filter criteria in the selected range.' | translate }}</p>
         </div>
       }
 
@@ -57,12 +51,13 @@ interface TypeCount {
   `,
   styles: [`
     .pareto-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       box-sizing: border-box;
       position: relative;
+      color: var(--c8y-text-color, inherit);
     }
     .pareto-actions {
       display: flex;
@@ -105,15 +100,15 @@ interface TypeCount {
       align-items: center;
       justify-content: center;
       min-height: 200px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
     }
     .spinner {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(0,0,0,0.1);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.1));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 1s ease-in-out infinite;
@@ -167,7 +162,7 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
   async refreshData() {
     const parentId = this.config()?.device?.id;
     if (!parentId) {
-      this.errorMsg.set('No target asset/group or device configured.');
+      this.errorMsg.set(gettext('No target asset/group or device configured.'));
       this.hasData.set(false);
       return;
     }
@@ -302,7 +297,7 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
 
     } catch (err) {
       console.error('Failed to load Pareto Chart data:', err);
-      this.errorMsg.set('An error occurred while fetching alarms/events data.');
+      this.errorMsg.set(gettext('An error occurred while fetching alarms/events data.'));
       this.hasData.set(false);
     } finally {
       this.loading.set(false);
@@ -328,7 +323,7 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
   }
 
   private initChart(data: TypeCount[]) {
-    if (!this.chartContainer) return;
+    if (!this.chartContainer?.nativeElement) return;
 
     this.destroyChart();
 
@@ -356,7 +351,11 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
       },
       legend: {
         data: ['Count', 'Cumulative %'],
-        bottom: 0
+        bottom: 0,
+        textStyle: {
+          color: 'var(--c8y-text-muted, #64748b)',
+          fontFamily: 'var(--c8y-font-family-base, inherit)'
+        }
       },
       grid: {
         top: 45,
@@ -376,7 +375,9 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
             interval: 0,
             rotate: types.length > 5 ? 30 : 0,
             overflow: 'truncate',
-            width: 100
+            width: 100,
+            color: 'var(--c8y-text-muted, #64748b)',
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
           }
         }
       ],
@@ -385,13 +386,20 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
           type: 'value',
           name: 'Count',
           position: 'left',
+          nameTextStyle: {
+            color: 'var(--c8y-text-muted, #64748b)',
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
+          },
           axisLabel: {
-            formatter: '{value}'
+            formatter: '{value}',
+            color: 'var(--c8y-text-muted, #64748b)',
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
           },
           splitLine: {
             show: true,
             lineStyle: {
-              type: 'dashed'
+              type: 'dashed',
+              color: 'rgba(128, 128, 128, 0.15)'
             }
           }
         },
@@ -401,8 +409,14 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
           min: 0,
           max: 100,
           position: 'right',
+          nameTextStyle: {
+            color: 'var(--c8y-text-muted, #64748b)',
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
+          },
           axisLabel: {
-            formatter: '{value}%'
+            formatter: '{value}%',
+            color: 'var(--c8y-text-muted, #64748b)',
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
           },
           splitLine: {
             show: false
@@ -415,7 +429,7 @@ export class ParetoChartComponent implements OnInit, OnDestroy {
           type: 'bar',
           data: counts,
           itemStyle: {
-            color: '#1776bf',
+            color: 'var(--c8y-brand-primary, #1776bf)',
             borderRadius: [4, 4, 0, 0]
           },
           barMaxWidth: 40

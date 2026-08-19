@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2026 Cumulocity GmbH.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Component, ElementRef, inject, input, OnDestroy, OnInit, signal, ViewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlarmService, EventService, InventoryService } from '@c8y/client';
-import { CoreModule } from '@c8y/ngx-components';
+import { CoreModule, gettext } from '@c8y/ngx-components';
 import * as echarts from 'echarts';
 
 interface AssetNode {
@@ -26,7 +20,7 @@ interface AssetNode {
       <div class="sankey-actions">
         <button 
           class="btn btn-clean" 
-          title="Refresh" 
+          [title]="'Refresh' | translate" 
           (click)="refreshData()"
           [disabled]="loading()"
         >
@@ -37,17 +31,17 @@ interface AssetNode {
       @if (loading()) {
         <div class="loading-state text-center p-24">
           <span class="spinner"></span>
-          <p class="m-t-8 text-muted text-small">Loading hierarchy & counts...</p>
+          <p class="m-t-8 text-muted text-small">{{ 'Loading hierarchy & counts...' | translate }}</p>
         </div>
       } @else if (errorMsg()) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="exclamation-circle" class="text-danger text-large m-b-8"></i>
-          <p class="text-muted">{{ errorMsg() }}</p>
+          <p class="text-muted">{{ errorMsg()! | translate }}</p>
         </div>
       } @else if (!hasData()) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="info" class="text-muted text-large m-b-8"></i>
-          <p class="text-muted">No events/alarms found in the selected range & hierarchy.</p>
+          <p class="text-muted">{{ 'No events/alarms found in the selected range & hierarchy.' | translate }}</p>
         </div>
       }
 
@@ -61,12 +55,13 @@ interface AssetNode {
   `,
   styles: [`
     .sankey-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       display: flex;
       flex-direction: column;
       height: 100%;
       box-sizing: border-box;
       position: relative;
+      color: var(--c8y-text-color, inherit);
     }
     .sankey-actions {
       display: flex;
@@ -109,15 +104,15 @@ interface AssetNode {
       align-items: center;
       justify-content: center;
       min-height: 200px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
     }
     .spinner {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(0,0,0,0.1);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.1));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 1s ease-in-out infinite;
@@ -170,7 +165,7 @@ export class SankeyDiagramComponent implements OnInit, OnDestroy {
   async refreshData() {
     const parentId = this.config()?.device?.id;
     if (!parentId) {
-      this.errorMsg.set('No target group/asset configured.');
+      this.errorMsg.set(gettext('No target group/asset configured.'));
       this.hasData.set(false);
       return;
     }
@@ -212,7 +207,7 @@ export class SankeyDiagramComponent implements OnInit, OnDestroy {
 
     } catch (err) {
       console.error('Failed to load Sankey diagram data:', err);
-      this.errorMsg.set('An error occurred while fetching the hierarchy and counts.');
+      this.errorMsg.set(gettext('An error occurred while fetching the hierarchy and counts.'));
       this.hasData.set(false);
     } finally {
       this.loading.set(false);
@@ -388,14 +383,14 @@ export class SankeyDiagramComponent implements OnInit, OnDestroy {
         nodeColor = this.config()?.directColor || '#7f8c8d';
       } else {
         const colors = [
-          this.config()?.level0Color || '#1776bf',
-          this.config()?.level1Color || '#f39c12',
-          this.config()?.level2Color || '#2ecc71',
-          this.config()?.level3Color || '#9b59b6',
-          this.config()?.level4Color || '#e74c3c',
-          this.config()?.level5Color || '#1abc9c'
+          this.config()?.level0Color || '#00A1F2',
+          this.config()?.level1Color || '#FF8800',
+          this.config()?.level2Color || '#119D11',
+          this.config()?.level3Color || '#FFBE00',
+          this.config()?.level4Color || '#E51A1A',
+          this.config()?.level5Color || '#006699'
         ];
-        nodeColor = colors[level] || '#1776bf';
+        nodeColor = colors[level] || '#00A1F2';
       }
 
       return {
@@ -455,12 +450,13 @@ export class SankeyDiagramComponent implements OnInit, OnDestroy {
           layout: 'none',
           label: {
             position: 'right',
-            color: '#4c566a',
-            fontSize: 12
+            color: 'var(--c8y-text-color, #4c566a)',
+            fontSize: 12,
+            fontFamily: 'var(--c8y-font-family-base, inherit)'
           },
           itemStyle: {
             borderWidth: 1,
-            borderColor: '#aaa'
+            borderColor: 'var(--c8y-root-component-border-color, #aaa)'
           }
         }
       ]

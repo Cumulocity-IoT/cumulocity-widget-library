@@ -18,13 +18,17 @@ import {
 } from '@angular/forms';
 import {
   AlertService,
+  CoreModule,
   DynamicComponent,
-  FormGroupComponent
+  FormGroupComponent,
+  gettext
 } from '@c8y/ngx-components';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
 import { BehaviorSubject } from 'rxjs';
 import { AlarmHeatmapComponent } from './alarm-heatmap.component';
 import { WidgetConfig, HeatLevel } from './widget-config.model';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @Component({
   selector: 'c8y-alarm-heatmap-config',
@@ -33,13 +37,13 @@ import { WidgetConfig, HeatLevel } from './widget-config.model';
       
       <!-- Timeframe configuration -->
       <c8y-form-group>
-        <label class="control-label">Time Range</label>
+        <label class="control-label" translate>Time Range</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="timeRange">
-            <option value="last24h">Last 24 Hours</option>
-            <option value="lastWeek">Last Week</option>
-            <option value="lastMonth">Last Month</option>
-            <option value="custom">Custom Range</option>
+            <option value="last24h" translate>Last 24 Hours</option>
+            <option value="lastWeek" translate>Last Week</option>
+            <option value="lastMonth" translate>Last Month</option>
+            <option value="custom" translate>Custom Range</option>
           </select>
         </div>
       </c8y-form-group>
@@ -48,13 +52,13 @@ import { WidgetConfig, HeatLevel } from './widget-config.model';
         <div class="row">
           <div class="col-sm-6">
             <c8y-form-group>
-              <label class="control-label">From</label>
+              <label class="control-label" translate>From</label>
               <input class="form-control" type="datetime-local" formControlName="customFrom" />
             </c8y-form-group>
           </div>
           <div class="col-sm-6">
             <c8y-form-group>
-              <label class="control-label">To</label>
+              <label class="control-label" translate>To</label>
               <input class="form-control" type="datetime-local" formControlName="customTo" />
             </c8y-form-group>
           </div>
@@ -63,40 +67,40 @@ import { WidgetConfig, HeatLevel } from './widget-config.model';
 
       <!-- Aggregation Settings -->
       <c8y-form-group>
-        <label class="control-label">Aggregation Level</label>
+        <label class="control-label" translate>Aggregation Level</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="aggregationLevel">
-            <option value="hourly">Every Hour</option>
-            <option value="2h">Every 2 Hours</option>
-            <option value="4h">Every 4 Hours</option>
-            <option value="6h">Every 6 Hours</option>
-            <option value="daily">Every Day</option>
+            <option value="hourly" translate>Every Hour</option>
+            <option value="2h" translate>Every 2 Hours</option>
+            <option value="4h" translate>Every 4 Hours</option>
+            <option value="6h" translate>Every 6 Hours</option>
+            <option value="daily" translate>Every Day</option>
           </select>
         </div>
       </c8y-form-group>
 
       <!-- 5 Heat Levels Configuration with Strict Gap & Overlap Validations -->
       <div class="m-t-24">
-        <h5 class="text-medium m-b-12">Configure Heat Levels (5 levels, open-ended)</h5>
+        <h5 class="text-medium m-b-12" translate>Configure Heat Levels (5 levels, open-ended)</h5>
         
         <div formArrayName="heatLevels">
           @for (levelGroup of heatLevelsArray.controls; track $index) {
             <div [formGroupName]="$index" class="row m-b-8 align-items-center">
               <div class="col-xs-2">
-                <span class="badge" [style.background-color]="levelGroup.get('color')?.value" style="color: #000; padding: 6px 12px; border: 1px solid #ccc;">
-                  Level {{ $index + 1 }}
+                <span class="badge" [style.background-color]="levelGroup.get('color')?.value" style="color: inherit; padding: 6px 12px; border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));">
+                  {{ 'Level' | translate }} {{ $index + 1 }}
                 </span>
               </div>
               <div class="col-xs-4">
                 <div class="input-group">
-                  <span class="input-group-addon">Min</span>
+                  <span class="input-group-addon" translate>Min</span>
                   <input class="form-control" type="number" formControlName="min" />
                 </div>
               </div>
               <div class="col-xs-4">
                 <div class="input-group">
-                  <span class="input-group-addon">Max</span>
-                  <input class="form-control" type="number" formControlName="max" [placeholder]="$index === 4 ? 'Open-ended' : 'Max limit'" />
+                  <span class="input-group-addon" translate>Max</span>
+                  <input class="form-control" type="number" formControlName="max" [placeholder]="$index === 4 ? ('Open-ended' | translate) : ('Max limit' | translate)" />
                 </div>
               </div>
               <div class="col-xs-2">
@@ -121,7 +125,7 @@ import { WidgetConfig, HeatLevel } from './widget-config.model';
   `],
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   standalone: true,
-  imports: [CommonModule, FormGroupComponent, ReactiveFormsModule, AlarmHeatmapComponent, AsyncPipe]
+  imports: [CommonModule, CoreModule, FormGroupComponent, ReactiveFormsModule, AlarmHeatmapComponent, AsyncPipe]
 })
 export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
   @Input() config: WidgetConfig = {};
@@ -133,6 +137,7 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
   private widgetConfigService = inject(WidgetConfigService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private i18n = inject(WidgetTranslationService);
 
   @ViewChild('widgetPreview')
   set preview(template: TemplateRef<any>) {
@@ -145,11 +150,11 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
 
   // Pre-loaded default palette to give a beautiful aesthetic out of the box
   defaultLevels: HeatLevel[] = [
-    { min: 0, max: 0, color: '#FFFFFF' },
-    { min: 1, max: 2, color: '#FEE2E2' },
-    { min: 3, max: 5, color: '#FCA5A5' },
-    { min: 6, max: 10, color: '#EF4444' },
-    { min: 11, max: null, color: '#991B1B' }
+    { min: 0, max: 0, color: 'rgba(128, 128, 128, 0.08)' },
+    { min: 1, max: 2, color: '#FAD1D1' },
+    { min: 3, max: 5, color: '#F58C8C' },
+    { min: 6, max: 10, color: '#E51A1A' },
+    { min: 11, max: null, color: '#8A0B0B' }
   ];
 
   ngOnInit() {
@@ -187,7 +192,7 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
 
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (this.formGroup.invalid) {
-        this.alert.warning('Please enter valid widget configuration options.');
+        this.alert.warning(gettext('Please enter valid widget configuration options.'));
         return false;
       }
 
@@ -233,7 +238,7 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
       const maxVal = levels[i].max !== null ? Number(levels[i].max) : null;
 
       if (maxVal !== null && minVal > maxVal) {
-        this.alert.danger(`Level ${i + 1} has a minimum higher than its maximum threshold.`);
+        this.alert.danger(gettext('A heat level has a minimum higher than its maximum threshold.'));
         return false;
       }
     }
@@ -244,13 +249,13 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
       const nextMin = levels[i + 1].min;
 
       if (currentMax === null) {
-        this.alert.danger(`Level ${i + 1} cannot be open ended because it is not the final level.`);
+        this.alert.danger(gettext('Intermediate heat level cannot be open-ended.'));
         return false;
       }
 
       if (nextMin !== currentMax + 1) {
         this.alert.danger(
-          `Gaps or overlaps detected between Level ${i + 1} and Level ${i + 2}. Level ${i + 2}'s Min (${nextMin}) must be exactly one increment above Level ${i + 1}'s Max (${currentMax}).`
+          gettext('Gaps or overlaps detected between heat levels. Consecutive level ranges must be contiguous.')
         );
         return false;
       }
@@ -258,10 +263,11 @@ export class AlarmHeatmapConfigComponent implements DynamicComponent, OnInit {
 
     // 3. Confirm final level is indeed open ended
     if (levels[4].max !== null) {
-      this.alert.danger('The final heat level (Level 5) must be open-ended.');
+      this.alert.danger(gettext('The final heat level (Level 5) must be open-ended.'));
       return false;
     }
 
     return true;
   }
 }
+

@@ -18,11 +18,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InventoryBinaryService, InventoryService } from '@c8y/client';
-import { AlertService, CoreModule, DynamicComponent, FormGroupComponent } from '@c8y/ngx-components';
+import { AlertService, CoreModule, DynamicComponent, FormGroupComponent, gettext } from '@c8y/ngx-components';
 import { IconSelectorModule } from '@c8y/ngx-components/icon-selector';
 import { WidgetConfigService } from '@c8y/ngx-components/context-dashboard';
 import { BehaviorSubject } from 'rxjs';
 import { CustomMapWidgetComponent } from './custom-map-widget.component';
+import { WidgetTranslationService } from '../i18n.service';
 
 @Component({
   selector: 'c8y-custom-map-widget-config',
@@ -31,7 +32,7 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
       
       <!-- Image Upload Section -->
       <c8y-form-group>
-        <label class="control-label">Map Image</label>
+        <label class="control-label" translate>Map Image</label>
         <div 
           class="image-upload-container"
           [class.drag-over]="isDragOver"
@@ -45,13 +46,13 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
               <img 
                 [src]="previewImageUrl()" 
                 class="img-thumbnail image-preview"
-                alt="Map preview" 
+                [alt]="'Map preview' | translate" 
               />
               <button 
                 type="button" 
                 class="btn btn-dot btn-danger delete-btn" 
                 (click)="removeImage()" 
-                title="Remove image"
+                [title]="'Remove image' | translate"
               >
                 <i c8yIcon="trash-o"></i>
               </button>
@@ -59,7 +60,7 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
           } @else if (formGroup.get('binaryId')?.value && !previewImageUrl()) {
             <div class="upload-dropzone">
               <span class="spinner m-b-8"></span>
-              <span class="text-muted">Loading preview...</span>
+              <span class="text-muted">{{ 'Loading preview...' | translate }}</span>
             </div>
           } @else {
             <div class="upload-dropzone">
@@ -74,11 +75,11 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
               <label for="file-upload" class="upload-label">
                 @if (uploading) {
                   <span class="spinner m-b-8"></span>
-                  <span class="text-muted">Uploading image...</span>
+                  <span class="text-muted">{{ 'Uploading image...' | translate }}</span>
                 } @else {
                   <i c8yIcon="upload" class="text-large text-muted m-b-8"></i>
-                  <span class="text-medium">Choose an image or drag here</span>
-                  <span class="text-small text-muted">Supports PNG, JPG, WebP</span>
+                  <span class="text-medium">{{ 'Choose an image or drag here' | translate }}</span>
+                  <span class="text-small text-muted">{{ 'Supports PNG, JPG, WebP' | translate }}</span>
                 }
               </label>
             </div>
@@ -88,40 +89,38 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
 
       <!-- Coordinate Mode Selector -->
       <c8y-form-group>
-        <label class="control-label">Coordinate Mode</label>
+        <label class="control-label" translate>Coordinate Mode</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="coordMode">
-            <option value="gps">GPS Coordinates (lat, lng)</option>
-            <option value="custom">Custom Coordinates (x, y)</option>
+            <option value="gps" translate>GPS Coordinates (lat, lng)</option>
+            <option value="custom" translate>Custom Coordinates (x, y)</option>
           </select>
         </div>
       </c8y-form-group>
 
       <!-- Polling Interval Selector -->
       <c8y-form-group>
-        <label class="control-label">Update Interval</label>
+        <label class="control-label" translate>Update Interval</label>
         <div class="c8y-select-wrapper">
           <select class="form-control" formControlName="pollInterval">
-            <option [value]="5">5 seconds</option>
-            <option [value]="10">10 seconds</option>
-            <option [value]="30">30 seconds (Default)</option>
+            <option [value]="5">{{ '5 seconds' | translate }}</option>
+            <option [value]="10">{{ '10 seconds' | translate }}</option>
+            <option [value]="30">{{ '30 seconds (Default)' | translate }}</option>
           </select>
         </div>
       </c8y-form-group>
-
-
 
       <!-- Icon and Color Configuration -->
       <div class="row">
         <div class="col-sm-8">
           <c8y-form-group>
-            <label class="control-label">Default Marker Icon</label>
+            <label class="control-label" translate>Default Marker Icon</label>
             <c8y-icon-selector-wrapper formControlName="iconName"></c8y-icon-selector-wrapper>
           </c8y-form-group>
         </div>
         <div class="col-sm-4">
           <c8y-form-group>
-            <label class="control-label">Default Marker Color</label>
+            <label class="control-label" translate>Default Marker Color</label>
             <input class="form-control" type="color" formControlName="markerColor" style="height: 34px; padding: 2px; cursor: pointer;" />
           </c8y-form-group>
         </div>
@@ -129,24 +128,24 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
 
       <!-- Device Type Marker Overrides Section -->
       <div class="m-b-16 bg-gray-50 border-rounded p-12">
-        <h5 class="text-medium m-b-12">Device Type Marker Overrides (Optional)</h5>
+        <h5 class="text-medium m-b-12" translate>Device Type Marker Overrides (Optional)</h5>
         
         <!-- Add Override Row -->
         <div class="override-input-row">
           <div style="flex: 2; margin-right: 8px;">
-            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Device Type</label>
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;" translate>Device Type</label>
             <input class="form-control input-sm" type="text" [(ngModel)]="newOverrideType" [ngModelOptions]="{standalone: true}" placeholder="e.g. c8y_Linux" />
           </div>
           <div style="flex: 1.5; margin-right: 8px;">
-            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Icon</label>
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;" translate>Icon</label>
             <c8y-icon-selector-wrapper [(ngModel)]="newOverrideIcon" [ngModelOptions]="{standalone: true}"></c8y-icon-selector-wrapper>
           </div>
           <div style="width: 50px; margin-right: 8px;">
-            <label class="control-label text-small" style="margin-bottom: 4px; display: block;">Color</label>
+            <label class="control-label text-small" style="margin-bottom: 4px; display: block;" translate>Color</label>
             <input class="form-control input-sm" type="color" [(ngModel)]="newOverrideColor" [ngModelOptions]="{standalone: true}" style="height: 30px; padding: 2px; cursor: pointer; width: 100%;" />
           </div>
           <div style="display: flex; align-items: flex-end; height: 30px;">
-            <button type="button" class="btn btn-primary btn-sm" (click)="addTypeOverride()" title="Add override" style="margin: 0; height: 30px; width: 34px; padding: 0; display: flex; align-items: center; justify-content: center;">
+            <button type="button" class="btn btn-primary btn-sm" (click)="addTypeOverride()" [title]="'Add override' | translate" style="margin: 0; height: 30px; width: 34px; padding: 0; display: flex; align-items: center; justify-content: center;">
               <i c8yIcon="plus"></i>
             </button>
           </div>
@@ -168,7 +167,7 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
                   <span class="badge" [style.background-color]="ov.markerColor">{{ ov.markerColor }}</span>
                 </div>
                 <div class="override-action">
-                  <button type="button" class="btn btn-dot btn-danger btn-xs" (click)="removeTypeOverride($index)" title="Remove">
+                  <button type="button" class="btn btn-dot btn-danger btn-xs" (click)="removeTypeOverride($index)" [title]="'Remove' | translate">
                     <i c8yIcon="trash-o"></i>
                   </button>
                 </div>
@@ -181,19 +180,19 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
       <!-- Coordinate Input Groups -->
       @if (formGroup.get('coordMode')?.value === 'gps') {
         <div class="coordinates-section p-12 m-b-16 bg-gray-50 border-rounded">
-          <h5 class="text-medium m-b-12">GPS Coordinate Configuration</h5>
+          <h5 class="text-medium m-b-12" translate>GPS Coordinate Configuration</h5>
           
           <!-- Top Left -->
           <div class="row">
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Top Left Lat</label>
+                <label class="control-label" translate>Top Left Lat</label>
                 <input class="form-control" type="number" formControlName="lat_tl" placeholder="e.g. 51.5074" />
               </c8y-form-group>
             </div>
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Top Left Lng</label>
+                <label class="control-label" translate>Top Left Lng</label>
                 <input class="form-control" type="number" formControlName="lng_tl" placeholder="e.g. -0.1278" />
               </c8y-form-group>
             </div>
@@ -203,13 +202,13 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
           <div class="row">
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Bottom Right Lat</label>
+                <label class="control-label" translate>Bottom Right Lat</label>
                 <input class="form-control" type="number" formControlName="lat_br" placeholder="e.g. 51.4874" />
               </c8y-form-group>
             </div>
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Bottom Right Lng</label>
+                <label class="control-label" translate>Bottom Right Lng</label>
                 <input class="form-control" type="number" formControlName="lng_br" placeholder="e.g. -0.1078" />
               </c8y-form-group>
             </div>
@@ -217,19 +216,19 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
         </div>
       } @else {
         <div class="coordinates-section p-12 m-b-16 bg-gray-50 border-rounded">
-          <h5 class="text-medium m-b-12">Custom Coordinate Configuration</h5>
+          <h5 class="text-medium m-b-12" translate>Custom Coordinate Configuration</h5>
           
           <!-- Top Left -->
           <div class="row">
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Top Left X</label>
+                <label class="control-label" translate>Top Left X</label>
                 <input class="form-control" type="number" formControlName="x_tl" placeholder="e.g. 0" />
               </c8y-form-group>
             </div>
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Top Left Y</label>
+                <label class="control-label" translate>Top Left Y</label>
                 <input class="form-control" type="number" formControlName="y_tl" placeholder="e.g. 0" />
               </c8y-form-group>
             </div>
@@ -239,30 +238,30 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
           <div class="row">
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Bottom Right X</label>
+                <label class="control-label" translate>Bottom Right X</label>
                 <input class="form-control" type="number" formControlName="x_br" placeholder="e.g. 100" />
               </c8y-form-group>
             </div>
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Bottom Right Y</label>
+                <label class="control-label" translate>Bottom Right Y</label>
                 <input class="form-control" type="number" formControlName="y_br" placeholder="e.g. 100" />
               </c8y-form-group>
             </div>
           </div>
 
           <!-- Path mapping configured via JSONPath / Dot-notation -->
-          <h5 class="text-medium m-t-16 m-b-12">Device Coordinate Mapping</h5>
+          <h5 class="text-medium m-t-16 m-b-12" translate>Device Coordinate Mapping</h5>
           <div class="row">
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">X Coordinate Path</label>
+                <label class="control-label" translate>X Coordinate Path</label>
                 <input class="form-control" type="text" formControlName="xPath" placeholder="e.g. c8y_Position.x" />
               </c8y-form-group>
             </div>
             <div class="col-sm-6">
               <c8y-form-group>
-                <label class="control-label">Y Coordinate Path</label>
+                <label class="control-label" translate>Y Coordinate Path</label>
                 <input class="form-control" type="text" formControlName="yPath" placeholder="e.g. c8y_Position.y" />
               </c8y-form-group>
             </div>
@@ -279,10 +278,10 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
   `,
   styles: [`
     .image-upload-container {
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 8px;
       padding: 16px;
-      background: #f8fafc;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
       transition: all 0.2s ease;
     }
     .image-upload-container:hover,
@@ -290,7 +289,7 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
       border-color: var(--c8y-brand-primary, #1776BF);
     }
     .image-upload-container.drag-over {
-      background: #eff6ff;
+      background: rgba(23, 118, 191, 0.12);
     }
     .image-upload-container.drag-over * {
       pointer-events: none;
@@ -331,16 +330,16 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
     }
     .border-rounded {
       border-radius: 6px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
     .bg-gray-50 {
-      background-color: #f8fafc;
+      background-color: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
     }
     .spinner {
       display: inline-block;
       width: 20px;
       height: 20px;
-      border: 2px solid rgba(0,0,0,0.1);
+      border: 2px solid var(--c8y-root-component-border-color, rgba(0,0,0,0.1));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 0.8s linear infinite;
@@ -360,12 +359,13 @@ import { CustomMapWidgetComponent } from './custom-map-widget.component';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+      background: var(--c8y-card-background-default, rgba(128, 128, 128, 0.05));
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 4px;
       padding: 6px 12px;
       margin-bottom: 6px;
       gap: 8px;
+      color: var(--c8y-text-color, inherit);
     }
     .override-type-text {
       flex: 2;
@@ -431,7 +431,7 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
   typeOverridesList: any[] = [];
   newOverrideType = '';
   newOverrideIcon = 'hdd-o';
-  newOverrideColor = '#1776bf';
+  newOverrideColor = '#00A1F2';
 
   private alert = inject(AlertService);
   private widgetConfigService = inject(WidgetConfigService);
@@ -441,6 +441,7 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
   private binaryService = inject(InventoryBinaryService);
   private inventoryService = inject(InventoryService);
   private currentPreviewBinaryId: string | null = null;
+  private i18n = inject(WidgetTranslationService);
 
   @ViewChild('widgetPreview')
   set preview(template: TemplateRef<any>) {
@@ -496,29 +497,29 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
 
     this.widgetConfigService.addOnBeforeSave((currentConfig: any) => {
       if (this.formGroup.invalid) {
-        this.alert.warning('Please complete the widget configuration.');
+        this.alert.warning(gettext('Please complete the widget configuration.'));
         return false;
       }
 
       const formVal = this.formGroup.getRawValue();
 
       if (!formVal.binaryId) {
-        this.alert.danger('Please upload a map image.');
+        this.alert.danger(gettext('Please upload a map image.'));
         return false;
       }
 
       if (formVal.coordMode === 'gps') {
         if (formVal.lat_tl === '' || formVal.lng_tl === '' || formVal.lat_br === '' || formVal.lng_br === '') {
-          this.alert.danger('All GPS coordinate boundaries (Top Left and Bottom Right) must be configured.');
+          this.alert.danger(gettext('All GPS coordinate boundaries (Top Left and Bottom Right) must be configured.'));
           return false;
         }
       } else {
         if (formVal.x_tl === '' || formVal.y_tl === '' || formVal.x_br === '' || formVal.y_br === '') {
-          this.alert.danger('All custom coordinate boundaries (Top Left and Bottom Right) must be configured.');
+          this.alert.danger(gettext('All custom coordinate boundaries (Top Left and Bottom Right) must be configured.'));
           return false;
         }
         if (!formVal.xPath || !formVal.yPath) {
-          this.alert.danger('Coordinate paths for X and Y must be provided.');
+          this.alert.danger(gettext('Coordinate paths for X and Y must be provided.'));
           return false;
         }
       }
@@ -592,10 +593,10 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
       }
 
       this.formGroup.patchValue({ binaryId });
-      this.alert.success('Map image uploaded successfully.');
+      this.alert.success(gettext('Map image uploaded successfully.'));
     } catch (err) {
       console.error('File upload failed:', err);
-      this.alert.danger('Failed to upload map image.');
+      this.alert.danger(gettext('Failed to upload map image.'));
     } finally {
       this.uploading = false;
     }
@@ -650,12 +651,12 @@ export class CustomMapWidgetConfigComponent implements DynamicComponent, OnInit 
 
   addTypeOverride() {
     if (!this.newOverrideType.trim()) {
-      this.alert.warning('Please enter a device type.');
+      this.alert.warning(gettext('Please enter a device type.'));
       return;
     }
     const exists = this.typeOverridesList.some(o => o.deviceType.toLowerCase() === this.newOverrideType.trim().toLowerCase());
     if (exists) {
-      this.alert.warning(`An override for device type "${this.newOverrideType}" already exists.`);
+      this.alert.warning(gettext('An override for this device type already exists.'));
       return;
     }
     this.typeOverridesList.push({

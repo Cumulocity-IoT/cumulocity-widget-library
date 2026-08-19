@@ -1,0 +1,1032 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cumulocity-widget-library\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language: de\n"
+"Language-Team: German\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Alarm Heatmap"
+msgstr "Alarm-Heatmap"
+
+msgid "Visualizes alarm frequency over time as a configurable grid heatmap"
+msgstr "Visualisiert die Alarmhäufigkeit im Zeitverlauf als konfigurierbare Raster-Heatmap"
+
+msgid "Visualizes alarm frequencies in a premium grid layout over a configured time range."
+msgstr "Visualisiert Alarmhäufigkeiten in einem Rasterlayout über einen konfigurierten Zeitbereich."
+
+msgid "Custom Map Tracker"
+msgstr "Benutzerdefinierter Karten-Tracker"
+
+msgid "Displays a custom map with dynamic tracking markers using GPS or custom coordinate systems."
+msgstr "Zeigt eine benutzerdefinierte Karte mit dynamischen Tracking-Markern unter Verwendung von GPS oder benutzerdefinierten Koordinatensystemen an."
+
+msgid "Time context"
+msgstr "Zeitkontext"
+
+msgid "Heatmap Parameters"
+msgstr "Heatmap-Parameter"
+
+msgid "Time Range"
+msgstr "Zeitbereich"
+
+msgid "Last Hour"
+msgstr "Letzte Stunde"
+
+msgid "Last Day"
+msgstr "Letzter Tag"
+
+msgid "Last Week"
+msgstr "Letzte Woche"
+
+msgid "Last Month"
+msgstr "Letzter Monat"
+
+msgid "Last Minute"
+msgstr "Letzte Minute"
+
+msgid "Last 2 Hours"
+msgstr "Letzte 2 Stunden"
+
+msgid "Last 4 Hours"
+msgstr "Letzte 4 Stunden"
+
+msgid "Last 8 Hours"
+msgstr "Letzte 8 Stunden"
+
+msgid "Time Aggregation Level"
+msgstr "Zeitaggregationsstufe"
+
+msgid "1 Minute (60 cols)"
+msgstr "1 Minute (60 Spalten)"
+
+msgid "5 Minutes (12 cols)"
+msgstr "5 Minuten (12 Spalten)"
+
+msgid "Hourly (24 cols)"
+msgstr "Stündlich (24 Spalten)"
+
+msgid "Daily (7 cols)"
+msgstr "Täglich (7 Spalten)"
+
+msgid "Daily (28-31 cols)"
+msgstr "Täglich (28-31 Spalten)"
+
+msgid "Analyse children alarms instead of the asset itself"
+msgstr "Alarme von untergeordneten Geräten anstelle des Assets selbst analysieren"
+
+msgid "Alarm Types Filter"
+msgstr "Alarmtyp-Filter"
+
+msgid "Comma-separated list of alarm types, e.g. c8y_ThresholdAlarm, c8y_UnavailabilityAlarm"
+msgstr "Kommagetrennte Liste von Alarmtypen, z. B. c8y_ThresholdAlarm, c8y_UnavailabilityAlarm"
+
+msgid "Leave empty to include all alarm types."
+msgstr "Leer lassen, um alle Alarmtypen einzubeziehen."
+
+msgid "Please fill out all required configuration options."
+msgstr "Bitte füllen Sie alle erforderlichen Konfigurationsoptionen aus."
+
+msgid "Refresh"
+msgstr "Aktualisieren"
+
+msgid "Total Alarms"
+msgstr "Alarme gesamt"
+
+msgid "Max in Bucket"
+msgstr "Max. im Intervall"
+
+msgid "Active Types"
+msgstr "Aktive Typen"
+
+msgid "Loading alarm heatmap..."
+msgstr "Alarm-Heatmap wird geladen..."
+
+msgid "No target asset/group or device configured."
+msgstr "Kein Ziel-Asset/-Gruppe oder Gerät konfiguriert."
+
+msgid "No alarms found matching the filter criteria in the selected range."
+msgstr "Keine Alarme gefunden, die den Filterkriterien im ausgewählten Bereich entsprechen."
+
+msgid "Alarm Type"
+msgstr "Alarmtyp"
+
+msgid "Alarms:"
+msgstr "Alarme:"
+
+msgid "Less"
+msgstr "Weniger"
+
+msgid "More"
+msgstr "Mehr"
+
+msgid "Custom Map"
+msgstr "Benutzerdefinierte Karte"
+
+msgid "Displays a custom map with dynamic tracking markers using GPS or custom coordinates"
+msgstr "Zeigt eine benutzerdefinierte Karte mit dynamischen Tracking-Markern unter Verwendung von GPS- oder benutzerdefinierten Koordinaten an"
+
+msgid "Map Image URL"
+msgstr "Kartenbild-URL"
+
+msgid "Drop map image here or browse"
+msgstr "Kartenbild hier ablegen oder durchsuchen"
+
+msgid "Supports PNG, JPG, SVG, WebP up to 5MB"
+msgstr "Unterstützt PNG, JPG, SVG, WebP bis zu 5 MB"
+
+msgid "Uploading image..."
+msgstr "Bild wird hochgeladen..."
+
+msgid "Coordinate System"
+msgstr "Koordinatensystem"
+
+msgid "Real GPS Coordinates (GeoJSON / Real-world GPS bounding box)"
+msgstr "Echte GPS-Koordinaten (GeoJSON / Reale GPS-Bounding-Box)"
+
+msgid "Custom (X/Y Coordinates in %)"
+msgstr "Benutzerdefiniert (X/Y-Koordinaten in %)"
+
+msgid "GPS Bounding Box Coordinates"
+msgstr "GPS-Bounding-Box-Koordinaten"
+
+msgid "GPS Coordinate Configuration"
+msgstr "GPS-Koordinatenkonfiguration"
+
+msgid "Custom Coordinate Configuration"
+msgstr "Benutzerdefinierte Koordinatenkonfiguration"
+
+msgid "Top Left Lat"
+msgstr "Oben links Breitengrad (Lat)"
+
+msgid "Top Left Lng"
+msgstr "Oben links Längengrad (Lng)"
+
+msgid "Bottom Right Lat"
+msgstr "Unten rechts Breitengrad (Lat)"
+
+msgid "Bottom Right Lng"
+msgstr "Unten rechts Längengrad (Lng)"
+
+msgid "Top Left X"
+msgstr "Oben links X"
+
+msgid "Top Left Y"
+msgstr "Oben links Y"
+
+msgid "Bottom Right X"
+msgstr "Unten rechts X"
+
+msgid "Bottom Right Y"
+msgstr "Unten rechts Y"
+
+msgid "Update Interval (Seconds)"
+msgstr "Aktualisierungsintervall (Sekunden)"
+
+msgid "Manage Tracked Devices"
+msgstr "Verfolgte Geräte verwalten"
+
+msgid "Add Device"
+msgstr "Gerät hinzufügen"
+
+msgid "Select Device"
+msgstr "Gerät auswählen"
+
+msgid "Change"
+msgstr "Ändern"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Select"
+msgstr "Auswählen"
+
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Loading map and tracked devices..."
+msgstr "Karte und verfolgte Geräte werden geladen..."
+
+msgid "No Map Image Configured"
+msgstr "Kein Kartenbild konfiguriert"
+
+msgid "Please upload or specify a map image URL in the widget configuration settings."
+msgstr "Bitte laden Sie ein Kartenbild hoch oder geben Sie eine URL in den Widget-Einstellungen an."
+
+msgid "Please upload a map image and select at least one tracked device."
+msgstr "Bitte laden Sie ein Kartenbild hoch und wählen Sie mindestens ein verfolgtes Gerät aus."
+
+msgid "Status:"
+msgstr "Status:"
+
+msgid "Last Update:"
+msgstr "Letzte Aktualisierung:"
+
+msgid "Open Device Details"
+msgstr "Gerätedetails öffnen"
+
+msgid "Devices Tracked"
+msgstr "Verfolgte Geräte"
+
+msgid "Active Alarms"
+msgstr "Aktive Alarme"
+
+msgid "Critical Alarms"
+msgstr "Kritische Alarme"
+
+msgid "Device Type Overrides"
+msgstr "Gerätetyp-Überschreibungen"
+
+msgid "Override marker icon and color for specific device types."
+msgstr "Symbol und Farbe von Markern für bestimmte Gerätetypen überschreiben."
+
+msgid "Type (exact match)"
+msgstr "Typ (genaue Übereinstimmung)"
+
+msgid "Icon"
+msgstr "Symbol"
+
+msgid "Color"
+msgstr "Farbe"
+
+msgid "Downtime Gantt Diagram"
+msgstr "Stillstands-Gantt-Diagramm"
+
+msgid "Visualizes machine states over time based on measurements or events with custom mappings."
+msgstr "Visualisiert Maschinenzustände im Zeitverlauf basierend auf Messungen oder Ereignissen mit benutzerdefinierten Zuordnungen."
+
+msgid "Input Data Source"
+msgstr "Eingangsdatenquelle"
+
+msgid "Measurement"
+msgstr "Messung"
+
+msgid "Event"
+msgstr "Ereignis"
+
+msgid "Measurement & Asset Selection"
+msgstr "Messungs- und Asset-Auswahl"
+
+msgid "Target Device / Asset"
+msgstr "Zielgerät / -Asset"
+
+msgid "No device selected. Please select a target device."
+msgstr "Kein Gerät ausgewählt. Bitte wählen Sie ein Zielgerät aus."
+
+msgid "Event Type"
+msgstr "Ereignistyp"
+
+msgid "State Property Path"
+msgstr "Status-Eigenschaftspfad"
+
+msgid "Dotted paths are supported (e.g. c8y_MachineStatus.state)."
+msgstr "Punktierte Pfade werden unterstützt (z. B. c8y_MachineStatus.state)."
+
+msgid "State Mappings"
+msgstr "Status-Zuordnungen"
+
+msgid "Map incoming state values to labels and colors. Identify which states represent machine downtime."
+msgstr "Ordnen Sie eingehende Statuswerte Bezeichnungen und Farben zu. Bestimmen Sie, welche Zustände Maschinenstillstand darstellen."
+
+msgid "Value"
+msgstr "Wert"
+
+msgid "Label"
+msgstr "Bezeichnung"
+
+msgid "Is Downtime"
+msgstr "Ist Stillstand"
+
+msgid "Downtime"
+msgstr "Stillstand"
+
+msgid "Display Settings"
+msgstr "Anzeigeeinstellungen"
+
+msgid "Show summary cards (Machine Status, Availability, Uptime/Downtime)"
+msgstr "Zusammenfassungskarten anzeigen (Maschinenstatus, Verfügbarkeit, Betriebszeit/Stillstand)"
+
+msgid "Show downtime logs table"
+msgstr "Stillstandsprotokoll-Tabelle anzeigen"
+
+msgid "Select Target Device"
+msgstr "Zielgerät auswählen"
+
+msgid "Please select a measurement data point."
+msgstr "Bitte wählen Sie einen Messdatenpunkt aus."
+
+msgid "Please select a target device."
+msgstr "Bitte wählen Sie ein Zielgerät aus."
+
+msgid "Please enter event type and property path."
+msgstr "Bitte geben Sie Ereignistyp und Eigenschaftspfad ein."
+
+msgid "Please configure at least one state mapping."
+msgstr "Bitte konfigurieren Sie mindestens eine Statuszuordnung."
+
+msgid "Mapping for this value already exists."
+msgstr "Eine Zuordnung für diesen Wert existiert bereits."
+
+msgid "Could not resolve selected asset ID."
+msgstr "Ausgewählte Asset-ID konnte nicht aufgelöst werden."
+
+msgid "Loading machine state timeline..."
+msgstr "Maschinenzustands-Zeitachse wird geladen..."
+
+msgid "No device or data point configured. Please edit widget settings."
+msgstr "Kein Gerät oder Datenpunkt konfiguriert. Bitte bearbeiten Sie die Widget-Einstellungen."
+
+msgid "No state records found for this period."
+msgstr "Keine Datensätze für diesen Zeitraum gefunden."
+
+msgid "Machine Status"
+msgstr "Maschinenstatus"
+
+msgid "Current State"
+msgstr "Aktueller Zustand"
+
+msgid "Availability"
+msgstr "Verfügbarkeit"
+
+msgid "Total Uptime"
+msgstr "Gesamte Betriebszeit"
+
+msgid "Total Downtime"
+msgstr "Gesamter Stillstand"
+
+msgid "Downtime Incidents"
+msgstr "Stillstandsvorfälle"
+
+msgid "Downtime Logs"
+msgstr "Stillstandsprotokolle"
+
+msgid "Downtime Log"
+msgstr "Stillstandsprotokoll"
+
+msgid "State"
+msgstr "Status"
+
+msgid "Start Time"
+msgstr "Startzeit"
+
+msgid "Started At"
+msgstr "Gestartet um"
+
+msgid "End Time"
+msgstr "Endzeit"
+
+msgid "Ended At"
+msgstr "Beendet um"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Ongoing"
+msgstr "Laufend"
+
+msgid "Go to Live"
+msgstr "Zu Live wechseln"
+
+msgid "Use mouse wheel to zoom, drag to pan the timeline."
+msgstr "Mausrad zum Zoomen, Ziehen zum Verschieben der Zeitachse."
+
+msgid "No downtime events recorded in this period."
+msgstr "Keine Stillstandsereignisse in diesem Zeitraum erfasst."
+
+msgid "Machine is operating at 100% availability."
+msgstr "Maschine arbeitet mit 100% Verfügbarkeit."
+
+msgid "Ideal State Deviation"
+msgstr "Idealzustandsabweichung"
+
+msgid "Scores an asset from 0 to 100 based on deviation from configured target ranges."
+msgstr "Bewertet ein Asset von 0 bis 100 basierend auf der Abweichung von konfigurierten Zielbereichen."
+
+msgid "Calculation Mode"
+msgstr "Berechnungsmodus"
+
+msgid "Linear Decay"
+msgstr "Linearer Abfall"
+
+msgid "Exponential Decay"
+msgstr "Exponentieller Abfall"
+
+msgid "Sigmoidal (S-Curve)"
+msgstr "Sigmoidal (S-Kurve)"
+
+msgid "Defines how the score drops from 100 to 0 as the value deviates from the ideal state."
+msgstr "Definiert, wie der Wert von 100 auf 0 fällt, wenn der Wert vom Idealzustand abweicht."
+
+msgid "Exponent (p):"
+msgstr "Exponent (p):"
+
+msgid "Strict (0.5)"
+msgstr "Streng (0.5)"
+
+msgid "Standard (2.0)"
+msgstr "Standard (2.0)"
+
+msgid "Lenient (5.0)"
+msgstr "Tolerant (5.0)"
+
+msgid "Grace Zone:"
+msgstr "Toleranzzone:"
+
+msgid "Size of the boundary around the ideal target (0% to 20%) that still receives a perfect 100% score."
+msgstr "Größe des Bereichs um das Idealziel (0% bis 20%), der weiterhin eine perfekte Bewertung von 100% erhält."
+
+msgid "Show individual measurement scores"
+msgstr "Einzelne Messwertbewertungen anzeigen"
+
+msgid "Data point selection"
+msgstr "Datenpunktauswahl"
+
+msgid "Loading metrics configuration..."
+msgstr "Metrikkonfiguration wird geladen..."
+
+msgid "No device selected. Please edit the widget settings."
+msgstr "Kein Gerät ausgewählt. Bitte bearbeiten Sie die Widget-Einstellungen."
+
+msgid "No data points selected. Please edit the widget settings."
+msgstr "Keine Datenpunkte ausgewählt. Bitte bearbeiten Sie die Widget-Einstellungen."
+
+msgid "SCORE"
+msgstr "BEWERTUNG"
+
+msgid "Individual Scores"
+msgstr "Einzelbewertungen"
+
+msgid "Current:"
+msgstr "Aktuell:"
+
+msgid "Ideal:"
+msgstr "Ideal:"
+
+msgid "Pareto Chart"
+msgstr "Pareto-Diagramm"
+
+msgid "Analyses alarms/events by type in a Pareto distribution."
+msgstr "Analysiert Alarme/Ereignisse nach Typ in einer Pareto-Verteilung."
+
+msgid "Analysis Mode"
+msgstr "Analysemodus"
+
+msgid "Alarms Breakdown"
+msgstr "Alarm-Aufschlüsselung"
+
+msgid "Events Breakdown"
+msgstr "Ereignis-Aufschlüsselung"
+
+msgid "Time Frame"
+msgstr "Zeitfenster"
+
+msgid "Analyse children alarms/events instead of the asset itself"
+msgstr "Alarme/Ereignisse von untergeordneten Elementen anstelle des Assets analysieren"
+
+msgid "Plot X-Axis By"
+msgstr "X-Achse darstellen nach"
+
+msgid "Alarm/Event Type"
+msgstr "Alarm-/Ereignistyp"
+
+msgid "Child Device/Asset"
+msgstr "Untergeordnetes Gerät/Asset"
+
+msgid "Type Filter Mode"
+msgstr "Typfilter-Modus"
+
+msgid "No Filter (All Types)"
+msgstr "Kein Filter (Alle Typen)"
+
+msgid "Whitelist (Only listed types)"
+msgstr "Whitelist (Nur aufgelistete Typen)"
+
+msgid "Blacklist (Ignore listed types)"
+msgstr "Blacklist (Aufgelistete Typen ignorieren)"
+
+msgid "Types List"
+msgstr "Typenliste"
+
+msgid "Enter a comma-separated list of alarm/event types."
+msgstr "Geben Sie eine kommagetrennte Liste von Alarm-/Ereignistypen ein."
+
+msgid "Fetching alarms/events..."
+msgstr "Alarme/Ereignisse werden abgerufen..."
+
+msgid "No alarms/events match the filter criteria in the selected range."
+msgstr "Keine Alarme/Ereignisse entsprechen den Filterkriterien im ausgewählten Bereich."
+
+msgid "An error occurred while fetching alarms/events data."
+msgstr "Beim Abrufen der Alarm-/Ereignisdaten ist ein Fehler aufgetreten."
+
+msgid "Failed to fetch data for Pareto chart."
+msgstr "Fehler beim Abrufen der Daten für das Pareto-Diagramm."
+
+msgid "Count"
+msgstr "Anzahl"
+
+msgid "Cumulative %"
+msgstr "Kumuliert %"
+
+msgid "Percentage"
+msgstr "Prozentsatz"
+
+msgid "Radar/Spider Chart"
+msgstr "Radar-/Netzdiagramm"
+
+msgid "Allows comparing up to 5 devices across up to 10 datapoints, rendering missing data points visually"
+msgstr "Ermöglicht den Vergleich von bis zu 5 Geräten über bis zu 10 Datenpunkte mit visueller Darstellung fehlender Werte"
+
+msgid "Compare Devices (Up to 5)"
+msgstr "Geräte vergleichen (Bis zu 5)"
+
+msgid "No devices selected. Click "Add Device" to select one."
+msgstr "Keine Geräte ausgewählt. Klicken Sie auf „Gerät hinzufügen“, um eines auszuwählen."
+
+msgid "Choose device color"
+msgstr "Gerätefarbe wählen"
+
+msgid "Remove device"
+msgstr "Gerät entfernen"
+
+msgid "Show data table under the chart"
+msgstr "Datentabelle unter dem Diagramm anzeigen"
+
+msgid "Select Device or Asset"
+msgstr "Gerät oder Asset auswählen"
+
+msgid "Please select at least one device."
+msgstr "Bitte wählen Sie mindestens ein Gerät aus."
+
+msgid "You can select a maximum of 5 devices."
+msgstr "Sie können maximal 5 Geräte auswählen."
+
+msgid "Device is already added."
+msgstr "Gerät ist bereits hinzugefügt."
+
+msgid "Loading telemetry data..."
+msgstr "Telemetriedaten werden geladen..."
+
+msgid "No devices selected. Please configure the widget."
+msgstr "Keine Geräte ausgewählt. Bitte konfigurieren Sie das Widget."
+
+msgid "Please select at least 3 datapoints to render the radar chart."
+msgstr "Bitte wählen Sie mindestens 3 Datenpunkte aus, um das Radardiagramm darzustellen."
+
+msgid "Device / Asset"
+msgstr "Gerät / Asset"
+
+msgid "N/A"
+msgstr "N/V"
+
+msgid "Sankey Diagram"
+msgstr "Sankey-Diagramm"
+
+msgid "Displays the breakdown flow of alarms/events down the asset/group hierarchy."
+msgstr "Zeigt den Aufschlüsselungsfluss von Alarmen/Ereignissen entlang der Asset-/Gruppenhierarchie an."
+
+msgid "Event or Alarm Type"
+msgstr "Ereignis- oder Alarmtyp"
+
+msgid "Enter the exact type string to filter by, or leave blank to count all types."
+msgstr "Geben Sie die genaue Typbezeichnung ein oder lassen Sie das Feld leer, um alle Typen zu zählen."
+
+msgid "Hierarchy Search Depth"
+msgstr "Hierarchie-Suchtiefe"
+
+msgid "Depth of children search (1: immediate children, 2: children + grandchildren, etc. Max 5)"
+msgstr "Tiefe der Unterelementsuche (1: direkte Kinder, 2: Kinder + Enkel usw. Max 5)"
+
+msgid "Configure Layer Colors"
+msgstr "Ebenenfarben konfigurieren"
+
+msgid "Root Asset Color (Level 0)"
+msgstr "Root-Asset-Farbe (Ebene 0)"
+
+msgid "Children Color (Level 1)"
+msgstr "Unterelemente-Farbe (Ebene 1)"
+
+msgid "Grandchildren Color (Level 2)"
+msgstr "Unter-Unterelemente-Farbe (Ebene 2)"
+
+msgid "Level 3 Color"
+msgstr "Ebene 3 Farbe"
+
+msgid "Level 4 Color"
+msgstr "Ebene 4 Farbe"
+
+msgid "Level 5 Color"
+msgstr "Ebene 5 Farbe"
+
+msgid "Direct Flows Color (Self)"
+msgstr "Direkte Flussfarbe (Eigen)"
+
+msgid "Loading hierarchy & counts..."
+msgstr "Hierarchie und Zähler werden geladen..."
+
+msgid "No target group/asset configured."
+msgstr "Keine Zielgruppe/Asset konfiguriert."
+
+msgid "No events/alarms found in the selected range & hierarchy."
+msgstr "Keine Ereignisse/Alarme im ausgewählten Bereich und der Hierarchie gefunden."
+
+msgid "An error occurred while fetching the hierarchy and counts."
+msgstr "Beim Abrufen der Hierarchie und Zähler ist ein Fehler aufgetreten."
+
+msgid "Scatter Plot"
+msgstr "Streudiagramm"
+
+msgid "Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay"
+msgstr "Stellt X- vs. Y-Telemetriemessungen mit anpassbarem zeitbasiertem Farbverlauf und Live-Wiedergabe dar"
+
+msgid "X-Axis Data Point"
+msgstr "X-Achsen-Datenpunkt"
+
+msgid "Y-Axis Data Point"
+msgstr "Y-Achsen-Datenpunkt"
+
+msgid "Default Time Window"
+msgstr "Standard-Zeitfenster"
+
+msgid "Aggregation Settings"
+msgstr "Aggregationseinstellungen"
+
+msgid "Enable Data Aggregation"
+msgstr "Datenaggregation aktivieren"
+
+msgid "Aggregation Value"
+msgstr "Aggregationswert"
+
+msgid "Average (avg)"
+msgstr "Durchschnitt (avg)"
+
+msgid "Minimum (min)"
+msgstr "Minimum (min)"
+
+msgid "Maximum (max)"
+msgstr "Maximum (max)"
+
+msgid "Time Bucket Interval"
+msgstr "Zeitintervall-Bucket"
+
+msgid "Minutely"
+msgstr "Minütlich"
+
+msgid "Hourly"
+msgstr "Stündlich"
+
+msgid "Daily"
+msgstr "Täglich"
+
+msgid "Time-Based Color Gradient"
+msgstr "Zeitbasierter Farbverlauf"
+
+msgid "Start Color (Older points)"
+msgstr "Startfarbe (Ältere Punkte)"
+
+msgid "End Color (Newer points)"
+msgstr "Endfarbe (Neuere Punkte)"
+
+msgid "Newer"
+msgstr "Neuer"
+
+msgid "Older"
+msgstr "Älter"
+
+msgid "Please select an X-Axis Data Point."
+msgstr "Bitte wählen Sie einen X-Achsen-Datenpunkt aus."
+
+msgid "Please select a Y-Axis Data Point."
+msgstr "Bitte wählen Sie einen Y-Achsen-Datenpunkt aus."
+
+msgid "Refresh Data"
+msgstr "Daten aktualisieren"
+
+msgid "Aligning measurement feeds..."
+msgstr "Messwert-Feeds werden abgeglichen..."
+
+msgid "No paired X/Y measurements found in this window."
+msgstr "In diesem Fenster wurden keine gepaarten X/Y-Messwerte gefunden."
+
+msgid "Verify that both measurements are being sent with matched timestamps, or enable Aggregation in settings."
+msgstr "Stellen Sie sicher, dass beide Messungen mit übereinstimmenden Zeitstempeln gesendet werden, oder aktivieren Sie die Aggregation in den Einstellungen."
+
+msgid "Start Replay"
+msgstr "Wiedergabe starten"
+
+msgid "Pause Replay"
+msgstr "Wiedergabe anhalten"
+
+msgid "Exit Replay and return to Live data"
+msgstr "Wiedergabe beenden und zu Livedaten zurückkehren"
+
+msgid "points"
+msgstr "Punkte"
+
+msgid "Speed:"
+msgstr "Geschwindigkeit:"
+
+msgid "Current Time:"
+msgstr "Aktuelle Zeit:"
+
+msgid "SPC Chart"
+msgstr "SPC-Diagramm"
+
+msgid "Statistical Process Control line chart with control limits and annotations"
+msgstr "Statistische Prozesslenkungs-Liniendiagramm mit Regelgrenzen und Annotationen"
+
+msgid "Static Lines"
+msgstr "Statische Linien"
+
+msgid "No static lines added."
+msgstr "Keine statischen Linien hinzugefügt."
+
+msgid "Add Line"
+msgstr "Linie hinzufügen"
+
+msgid "Control Areas / Limits"
+msgstr "Regelbereiche / Grenzen"
+
+msgid "No control areas added."
+msgstr "Keine Regelbereiche hinzugefügt."
+
+msgid "Upper Limit"
+msgstr "Obere Grenze"
+
+msgid "Lower Limit"
+msgstr "Untere Grenze"
+
+msgid "Range"
+msgstr "Bereich"
+
+msgid "Area Label"
+msgstr "Bereichsbezeichnung"
+
+msgid "Threshold Value"
+msgstr "Schwellenwert"
+
+msgid "Min Value"
+msgstr "Min-Wert"
+
+msgid "Max Value"
+msgstr "Max-Wert"
+
+msgid "Add Area"
+msgstr "Bereich hinzufügen"
+
+msgid "Stacked Bar Chart"
+msgstr "Gestapeltes Balkendiagramm"
+
+msgid "Displays a stacked bar chart with selected data points"
+msgstr "Zeigt ein gestapeltes Balkendiagramm mit ausgewählten Datenpunkten an"
+
+msgid "Data Limit"
+msgstr "Datenlimit"
+
+msgid " to select one."
+msgstr " um eines auszuwählen."
+
+msgid "10 seconds"
+msgstr "10 Sekunden"
+
+msgid "30 seconds (Default)"
+msgstr "30 Sekunden (Standard)"
+
+msgid "5 seconds"
+msgstr "5 Sekunden"
+
+msgid "A heat level has a minimum higher than its maximum threshold."
+msgstr "Eine Wärmestufe hat ein Minimum, das höher als ihr Maximalschwellenwert ist."
+
+msgid "Add override"
+msgstr "Überschreibung hinzufügen"
+
+msgid "Aggregating alarms..."
+msgstr "Alarme werden aggregiert..."
+
+msgid "Aggregation Level"
+msgstr "Aggregationsstufe"
+
+msgid "Alarms"
+msgstr "Alarme"
+
+msgid "All GPS coordinate boundaries (Top Left and Bottom Right) must be configured."
+msgstr "Alle GPS-Koordinatengrenzen (oben links und unten rechts) müssen konfiguriert sein."
+
+msgid "All custom coordinate boundaries (Top Left and Bottom Right) must be configured."
+msgstr "Alle benutzerdefinierten Koordinatengrenzen (oben links und unten rechts) müssen konfiguriert sein."
+
+msgid "An override for this device type already exists."
+msgstr "Eine Überschreibung für diesen Gerätetyp ist bereits vorhanden."
+
+msgid "Change device"
+msgstr "Gerät ändern"
+
+msgid "Choose an image or drag here"
+msgstr "Bild auswählen oder hierher ziehen"
+
+msgid "Configure Heat Levels (5 levels, open-ended)"
+msgstr "Wärmestufen konfigurieren (5 Stufen, nach oben offen)"
+
+msgid "Coordinate Mode"
+msgstr "Koordinatenmodus"
+
+msgid "Coordinate paths for X and Y must be provided."
+msgstr "Koordinatenpfade für X und Y müssen angegeben werden."
+
+msgid "Custom Coordinates (x, y)"
+msgstr "Benutzerdefinierte Koordinaten (x, y)"
+
+msgid "Custom Map Floor"
+msgstr "Benutzerdefinierter Gebäudeplan"
+
+msgid "Custom Range"
+msgstr "Benutzerdefinierter Bereich"
+
+msgid "Default Marker Color"
+msgstr "Standard-Markerfarbe"
+
+msgid "Default Marker Icon"
+msgstr "Standard-Markersymbol"
+
+msgid "Device Coordinate Mapping"
+msgstr "Geräte-Koordinatenzuordnung"
+
+msgid "Device Type"
+msgstr "Gerätetyp"
+
+msgid "Device Type Marker Overrides (Optional)"
+msgstr "Marker-Überschreibungen nach Gerätetyp (optional)"
+
+msgid "Devices showing"
+msgstr "Angezeigte Geräte"
+
+msgid "Display Label"
+msgstr "Anzeigebezeichnung"
+
+msgid "Every 2 Hours"
+msgstr "Alle 2 Stunden"
+
+msgid "Every 4 Hours"
+msgstr "Alle 4 Stunden"
+
+msgid "Every 6 Hours"
+msgstr "Alle 6 Stunden"
+
+msgid "Every Day"
+msgstr "Jeden Tag"
+
+msgid "Every Hour"
+msgstr "Jede Stunde"
+
+msgid "Failed to upload map image."
+msgstr "Fehler beim Hochladen des Kartenbildes."
+
+msgid "Fetching state data..."
+msgstr "Statusdaten werden abgerufen..."
+
+msgid "From"
+msgstr "Von"
+
+msgid "GPS Coordinates (lat, lng)"
+msgstr "GPS-Koordinaten (Breite, Länge)"
+
+msgid "Gaps or overlaps detected between heat levels. Consecutive level ranges must be contiguous."
+msgstr "Lücken oder Überschneidungen zwischen den Wärmestufen erkannt. Aufeinanderfolgende Stufenbereiche müssen lückenlos anschließen."
+
+msgid "Intermediate heat level cannot be open-ended."
+msgstr "Zwischenstufen können nicht nach oben offen sein."
+
+msgid "Last 24 Hours"
+msgstr "Letzte 24 Stunden"
+
+msgid "Legend (Alarms count):"
+msgstr "Legende (Alarmanzahl):"
+
+msgid "Level"
+msgstr "Stufe"
+
+msgid "Loading map image..."
+msgstr "Kartenbild wird geladen..."
+
+msgid "Loading preview..."
+msgstr "Vorschau wird geladen..."
+
+msgid "Map Image"
+msgstr "Kartenbild"
+
+msgid "Map image uploaded successfully."
+msgstr "Kartenbild erfolgreich hochgeladen."
+
+msgid "Map preview"
+msgstr "Kartenvorschau"
+
+msgid "Max"
+msgstr "Max."
+
+msgid "Max limit"
+msgstr "Höchstgrenze"
+
+msgid "Min"
+msgstr "Min."
+
+msgid "Mode"
+msgstr "Modus"
+
+msgid "No data found in the selected range."
+msgstr "Keine Daten im ausgewählten Bereich gefunden."
+
+msgid "No map image uploaded. Please configure the widget."
+msgstr "Kein Kartenbild hochgeladen. Bitte konfigurieren Sie das Widget."
+
+msgid "No target device selected. Please configure the widget or place it in a device dashboard."
+msgstr "Kein Zielgerät ausgewählt. Bitte konfigurieren Sie das Widget oder platzieren Sie es auf einem Geräte-Dashboard."
+
+msgid "Open-ended"
+msgstr "Nach oben offen"
+
+msgid "Please complete the widget configuration."
+msgstr "Bitte vervollständigen Sie die Widget-Konfiguration."
+
+msgid "Please configure state mappings in the widget settings."
+msgstr "Bitte konfigurieren Sie die Statuszuordnungen in den Widget-Einstellungen."
+
+msgid "Please enter a device type."
+msgstr "Bitte geben Sie einen Gerätetyp ein."
+
+msgid "Please enter valid widget configuration options."
+msgstr "Bitte geben Sie gültige Widget-Konfigurationsoptionen ein."
+
+msgid "Please upload a map image."
+msgstr "Bitte laden Sie ein Kartenbild hoch."
+
+msgid "Polling"
+msgstr "Abfrageintervall"
+
+msgid "Raw value"
+msgstr "Rohwert"
+
+msgid "Remove image"
+msgstr "Bild entfernen"
+
+msgid "Remove mapping"
+msgstr "Zuordnung entfernen"
+
+msgid "Scroll timeline to current live time"
+msgstr "Zeitleiste zur aktuellen Live-Zeit scrollen"
+
+msgid "Supports PNG, JPG, WebP"
+msgstr "Unterstützt PNG, JPG, WebP"
+
+msgid "The final heat level (Level 5) must be open-ended."
+msgstr "Die letzte Wärmestufe (Stufe 5) muss nach oben offen sein."
+
+msgid "Timeline & Transitions"
+msgstr "Zeitleiste & Zustandsübergänge"
+
+msgid "To"
+msgstr "Bis"
+
+msgid "Total Active Uptime"
+msgstr "Gesamte Betriebszeit"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Update Interval"
+msgstr "Aktualisierungsintervall"
+
+msgid "Updated"
+msgstr "Aktualisiert"
+
+msgid "X Coordinate Path"
+msgstr "X-Koordinatenpfad"
+
+msgid "Y Coordinate Path"
+msgstr "Y-Koordinatenpfad"
+
+msgid "e.g. 0 or stopped"
+msgstr "z. B. 0 oder stopped"
+
+msgid "e.g. Stopped"
+msgstr "z. B. Angehalten"
+
+msgid "e.g. c8y_MachineStateEvent"
+msgstr "z. B. c8y_MachineStateEvent"
+
+msgid "e.g. c8y_ThresholdAlarm (Leave empty for all)"
+msgstr "z. B. c8y_ThresholdAlarm (leer lassen für alle)"
+
+msgid "e.g. c8y_ThresholdAlarm, c8y_ConnectionAlarm"
+msgstr "z. B. c8y_ThresholdAlarm, c8y_ConnectionAlarm"
+
+msgid "e.g. status or state"
+msgstr "z. B. status oder state"
+

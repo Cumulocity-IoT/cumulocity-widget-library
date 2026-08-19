@@ -7,7 +7,7 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlarmService } from '@c8y/client';
-import { CoreModule } from '@c8y/ngx-components';
+import { CoreModule, gettext } from '@c8y/ngx-components';
 import { WidgetConfig, HeatLevel } from './widget-config.model';
 
 interface TimeBucket {
@@ -31,7 +31,7 @@ interface HeatmapRow {
       <div class="heatmap-actions">
         <button 
           class="btn btn-clean" 
-          title="Refresh" 
+          [title]="'Refresh' | translate" 
           (click)="fetchAndAggregateAlarms()"
           [disabled]="loading()"
         >
@@ -42,12 +42,12 @@ interface HeatmapRow {
       @if (loading()) {
         <div class="loading-state text-center p-24">
           <span class="spinner"></span>
-          <p class="m-t-8 text-muted text-small">Aggregating alarms...</p>
+          <p class="m-t-8 text-muted text-small">{{ 'Aggregating alarms...' | translate }}</p>
         </div>
       } @else if (rows().length === 0) {
         <div class="empty-state text-center p-24">
           <i c8yIcon="info" class="text-muted text-large"></i>
-          <p class="m-t-8 text-muted">No data found in the selected range.</p>
+          <p class="m-t-8 text-muted">{{ 'No data found in the selected range.' | translate }}</p>
         </div>
       } @else {
         <div class="heatmap-rows">
@@ -57,7 +57,7 @@ interface HeatmapRow {
             <div class="row-cells-container">
               <div class="row-cells" [ngClass]="'cols-' + (config()?.aggregationLevel || 'hourly')">
                 @for (header of columnHeaders(); track $index) {
-                  <div class="column-header text-center">{{ header }}</div>
+                  <div class="column-header text-center">{{ header | translate }}</div>
                 }
               </div>
             </div>
@@ -73,7 +73,7 @@ interface HeatmapRow {
                     <div 
                       class="heatmap-cell"
                       [style.background-color]="bucket.color"
-                      [title]="bucket.label + '\nAlarms: ' + bucket.count"
+                      [title]="bucket.label + '\n' + ('Alarms' | translate) + ': ' + bucket.count"
                     >
                     </div>
                   }
@@ -84,7 +84,7 @@ interface HeatmapRow {
         </div>
 
         <div class="heatmap-legend m-t-24 p-12">
-          <div class="legend-title m-b-8 text-small text-muted">Legend (Alarms count):</div>
+          <div class="legend-title m-b-8 text-small text-muted">{{ 'Legend (Alarms count):' | translate }}</div>
           <div class="legend-items">
             @for (level of configuredHeatLevels(); track $index) {
               <div class="legend-item">
@@ -105,12 +105,13 @@ interface HeatmapRow {
   `,
   styles: [`
     .heatmap-container {
-      font-family: 'Outfit', 'Inter', sans-serif;
+      font-family: var(--c8y-font-family-base, inherit);
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
       height: 100%;
       box-sizing: border-box;
+      color: var(--c8y-text-color, inherit);
     }
 
     .heatmap-actions {
@@ -180,7 +181,7 @@ interface HeatmapRow {
 
     .column-header {
       font-size: 9px;
-      color: #94a3b8;
+      color: var(--c8y-text-muted, #94a3b8);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -212,19 +213,19 @@ interface HeatmapRow {
       cursor: pointer;
       position: relative;
       transition: all 0.15s ease-in-out;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
 
     .heatmap-cell:hover {
-      box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 0 0 2px var(--c8y-brand-primary, rgba(0, 0, 0, 0.2));
       filter: brightness(0.9);
       transform: scale(1.08);
       z-index: 2;
     }
 
     .heatmap-legend {
-      background: rgba(0, 0, 0, 0.02);
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      background: var(--c8y-root-component-background-expanded, rgba(0, 0, 0, 0.02));
+      border-top: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.15));
       border-radius: 8px;
     }
 
@@ -244,14 +245,14 @@ interface HeatmapRow {
       width: 14px;
       height: 14px;
       border-radius: 3px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
     }
 
     .spinner {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(0,0,0,0.1);
+      border: 3px solid var(--c8y-root-component-border-color, rgba(128, 128, 128, 0.2));
       border-radius: 50%;
       border-top-color: var(--c8y-brand-primary, #1776BF);
       animation: spin 1s ease-in-out infinite;
@@ -274,11 +275,11 @@ export class AlarmHeatmapComponent implements OnInit {
   private alarmService = inject(AlarmService);
 
   defaultHeatLevels: HeatLevel[] = [
-    { min: 0, max: 0, color: '#FFFFFF' },
-    { min: 1, max: 2, color: '#FEE2E2' },
-    { min: 3, max: 5, color: '#FCA5A5' },
-    { min: 6, max: 10, color: '#EF4444' },
-    { min: 11, max: null, color: '#991B1B' }
+    { min: 0, max: 0, color: 'rgba(128, 128, 128, 0.08)' },
+    { min: 1, max: 2, color: '#FAD1D1' },
+    { min: 3, max: 5, color: '#F58C8C' },
+    { min: 6, max: 10, color: '#E51A1A' },
+    { min: 11, max: null, color: '#8A0B0B' }
   ];
 
   deviceInfo = computed(() => this.config()?.device?.name || '');

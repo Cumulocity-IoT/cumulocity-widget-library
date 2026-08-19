@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
 import { SpcChartWidgetComponent } from './spc-chart-widget.component';
 import { SpcChartWidgetConfigComponent } from './spc-chart-widget-config.component';
 import { SPC_CHART_PREVIEW } from './preview-image';
@@ -16,6 +16,8 @@ import { DateTimePickerModule } from '@c8y/ngx-components';
 import { hookWidgetConfig } from '@c8y/ngx-components/context-dashboard';
 import { PRESET_NAME, GlobalContextConnectorComponent, LocalControlsComponent } from '@c8y/ngx-components/global-context';
 import { ChartsComponent } from '@c8y/ngx-components/echart';
+
+import { WidgetTranslationService } from '../i18n.service';
 
 @NgModule({
   imports: [
@@ -37,8 +39,8 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
       multi: true,
       useValue: {
         id: 'spc-chart-widget',
-        label: 'SPC Chart',
-        description: 'Statistical Process Control line chart with control limits and annotations',
+        label: gettext('SPC Chart'),
+        description: gettext('Statistical Process Control line chart with control limits and annotations'),
         previewImage: SPC_CHART_PREVIEW,
         component: SpcChartWidgetComponent,
         configComponent: SpcChartWidgetConfigComponent,
@@ -58,7 +60,7 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
     hookWidgetConfig({
       widgetId: 'spc-chart-widget',
       priority: 10,
-      label: 'Time context',
+      label: gettext('Time context'),
       initialState: {
         controls: PRESET_NAME.DEFAULT
       },
@@ -68,7 +70,7 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
     hookWidgetConfig({
       widgetId: 'spc-chart-widget',
       priority: 20,
-      label: 'Data point selection',
+      label: gettext('Data point selection'),
       initialState: {
         minActiveCount: 1,
         maxActiveCount: 1,
@@ -82,4 +84,6 @@ import { ChartsComponent } from '@c8y/ngx-components/echart';
     })
   ]
 })
-export class SpcChartWidgetModule {}
+export class SpcChartWidgetModule {
+  constructor(_i18n: WidgetTranslationService) {}
+}

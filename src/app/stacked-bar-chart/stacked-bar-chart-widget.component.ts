@@ -259,19 +259,20 @@ export class StackedBarChartWidgetComponent implements OnInit, OnChanges, DoChec
                             ...xConfig,
                             axisLine: {
                                 show: true,
-                                lineStyle: { color: '#ccc' }
+                                lineStyle: { color: 'var(--c8y-root-component-border-color, #ccc)' }
                             },
                             axisTick: {
                                 show: true,
-                                lineStyle: { color: '#ccc' }
+                                lineStyle: { color: 'var(--c8y-root-component-border-color, #ccc)' }
                             },
                             axisLabel: {
                                 show: true,
-                                color: '#666'
+                                color: 'var(--c8y-text-muted, #666)',
+                                fontFamily: 'var(--c8y-font-family-base, inherit)'
                             },
                             splitLine: {
                                 show: true,
-                                lineStyle: { color: '#eee', type: 'solid' }
+                                lineStyle: { color: 'rgba(128, 128, 128, 0.15)', type: 'solid' }
                             }
                         };
                     });
@@ -296,19 +297,20 @@ export class StackedBarChartWidgetComponent implements OnInit, OnChanges, DoChec
                     // Remove series color from all Y-axis elements by enforcing neutral colors
                     yAxisConfig.axisLine = {
                         show: true,
-                        lineStyle: { color: '#ccc' }
+                        lineStyle: { color: 'var(--c8y-root-component-border-color, #ccc)' }
                     };
                     yAxisConfig.axisTick = {
                         show: true,
-                        lineStyle: { color: '#ccc' }
+                        lineStyle: { color: 'var(--c8y-root-component-border-color, #ccc)' }
                     };
                     yAxisConfig.axisLabel = {
                         show: true,
-                        color: '#666'
+                        color: 'var(--c8y-text-muted, #666)',
+                        fontFamily: 'var(--c8y-font-family-base, inherit)'
                     };
                     yAxisConfig.splitLine = {
                         show: true,
-                        lineStyle: { color: '#eee', type: 'dashed' }
+                        lineStyle: { color: 'rgba(128, 128, 128, 0.15)', type: 'dashed' }
                     };
 
                     option.yAxis = [yAxisConfig];
