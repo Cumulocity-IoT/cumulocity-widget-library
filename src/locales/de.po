@@ -1030,3 +1030,124 @@ msgstr "z. B. c8y_ThresholdAlarm, c8y_ConnectionAlarm"
 msgid "e.g. status or state"
 msgstr "z. B. status oder state"
 
+msgid "Trend Analysis & Forecasting"
+msgstr "Trendanalyse & Prognose"
+
+msgid "Enabled"
+msgstr "Aktiviert"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Forecasting Method"
+msgstr "Prognosemethode"
+
+msgid "Holt's Linear Exponential Smoothing (Adaptive)"
+msgstr "Lineare exponentielle Glättung nach Holt (adaptiv)"
+
+msgid "Linear Regression (OLS)"
+msgstr "Lineare Regression (OLS)"
+
+msgid "Polynomial Regression (Non-Linear)"
+msgstr "Polynomische Regression (nicht-linear)"
+
+msgid "Moving Average Velocity"
+msgstr "Gleitende Durchschnittsgeschwindigkeit"
+
+msgid "Target Data Point"
+msgstr "Ziel-Datenpunkt"
+
+msgid "Future Forecast Horizon"
+msgstr "Zukünftiger Prognosehorizont"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Hours"
+msgstr "Stunden"
+
+msgid "Days"
+msgstr "Tage"
+
+msgid "Weeks"
+msgstr "Wochen"
+
+msgid "Months"
+msgstr "Monate"
+
+msgid "Historical Training Scope"
+msgstr "Historischer Trainingsbereich"
+
+msgid "All visible historical data"
+msgstr "Alle sichtbaren historischen Daten"
+
+msgid "Last N data points"
+msgstr "Letzte N Datenpunkte"
+
+msgid "Last % of visible time range"
+msgstr "Letzte % des sichtbaren Zeitbereichs"
+
+msgid "Number of points (e.g. 50)"
+msgstr "Anzahl der Punkte (z. B. 50)"
+
+msgid "Percentage"
+msgstr "Prozentsatz"
+
+msgid "Holt Smoothing Parameters"
+msgstr "Holt-Glättungsparameter"
+
+msgid "Level Smoothing (&alpha;)"
+msgstr "Niveaubereinigende Glättung (&alpha;)"
+
+msgid "Higher &alpha; adapts faster to recent value levels."
+msgstr "Ein höheres &alpha; passt sich schneller an neuere Werte an."
+
+msgid "Trend Smoothing (&beta;)"
+msgstr "Trendglättung (&beta;)"
+
+msgid "Higher &beta; adapts faster to recent slope changes."
+msgstr "Ein höheres &beta; passt sich schneller an neuere Steigungsänderungen an."
+
+msgid "Damping Factor (&phi;)"
+msgstr "Dämpfungsfaktor (&phi;)"
+
+msgid "Dampens trend to prevent unrealistic long-term linear runaway."
+msgstr "Dämpft den Trend, um unrealistische langfristige lineare Ausreißer zu verhindern."
+
+msgid "Polynomial Degree"
+msgstr "Polynomgrad"
+
+msgid "Degree 2 (Quadratic curve)"
+msgstr "Grad 2 (Quadratische Kurve)"
+
+msgid "Degree 3 (Cubic curve)"
+msgstr "Grad 3 (Kubische Kurve)"
+
+msgid "Moving Average Window Size (Points)"
+msgstr "Fenstergröße des gleitenden Durchschnitts (Punkte)"
+
+msgid "Window Size (e.g. 10)"
+msgstr "Fenstergröße (z. B. 10)"
+
+msgid "Visual Presentation"
+msgstr "Visuelle Darstellung"
+
+msgid "Trend Color"
+msgstr "Trendfarbe"
+
+msgid "Dashed"
+msgstr "Gestrichelt"
+
+msgid "Dotted"
+msgstr "Gepunktet"
+
+msgid "Solid"
+msgstr "Durchgezogen"
+
+msgid "Show Confidence / Uncertainty Band"
+msgstr "Konfidenz- / Unsicherheitsband anzeigen"
+
+

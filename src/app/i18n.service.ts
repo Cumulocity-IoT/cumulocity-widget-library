@@ -78,13 +78,21 @@ const GERMAN_VARIANTS = ['de', 'de_DE', 'de-DE', 'de_de', 'de-de'];
 const JAPANESE_VARIANTS = ['ja', 'ja_JP', 'ja-JP', 'ja_jp', 'ja-jp', 'ja-JA', 'ja_JA'];
 
 export function loadWidgetTranslations(translate: TranslateService): void {
-  if (!translate) return;
+  if (!translate || !translate.currentLang) return;
 
   for (const lang of GERMAN_VARIANTS) {
-    translate.setTranslation(lang, DE_TRANSLATIONS, true);
+    try {
+      translate.setTranslation(lang, DE_TRANSLATIONS, true);
+    } catch {
+      // Ignore if language not ready
+    }
   }
   for (const lang of JAPANESE_VARIANTS) {
-    translate.setTranslation(lang, JA_TRANSLATIONS, true);
+    try {
+      translate.setTranslation(lang, JA_TRANSLATIONS, true);
+    } catch {
+      // Ignore if language not ready
+    }
   }
 }
 
@@ -94,8 +102,15 @@ export class WidgetTranslationService {
 
   constructor() {
     if (this.translate) {
-      loadWidgetTranslations(this.translate);
+      if (this.translate.currentLang) {
+        loadWidgetTranslations(this.translate);
+      }
       this.translate.onLangChange.subscribe((_event: LangChangeEvent) => {
+        if (this.translate) {
+          loadWidgetTranslations(this.translate);
+        }
+      });
+      this.translate.onDefaultLangChange?.subscribe(() => {
         if (this.translate) {
           loadWidgetTranslations(this.translate);
         }
@@ -104,7 +119,7 @@ export class WidgetTranslationService {
   }
 
   ensureLoaded() {
-    if (this.translate) {
+    if (this.translate && this.translate.currentLang) {
       loadWidgetTranslations(this.translate);
     }
   }

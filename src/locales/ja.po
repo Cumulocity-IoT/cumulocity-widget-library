@@ -1030,3 +1030,124 @@ msgstr "例: c8y_ThresholdAlarm, c8y_ConnectionAlarm"
 msgid "e.g. status or state"
 msgstr "例: status または state"
 
+msgid "Trend Analysis & Forecasting"
+msgstr "トレンド分析と予測"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "Forecasting Method"
+msgstr "予測手法"
+
+msgid "Holt's Linear Exponential Smoothing (Adaptive)"
+msgstr "ホルトの線形指数平滑法（適応型）"
+
+msgid "Linear Regression (OLS)"
+msgstr "線形回帰（最小二乗法）"
+
+msgid "Polynomial Regression (Non-Linear)"
+msgstr "多項式回帰（非線形）"
+
+msgid "Moving Average Velocity"
+msgstr "移動平均速度"
+
+msgid "Target Data Point"
+msgstr "対象データポイント"
+
+msgid "Future Forecast Horizon"
+msgstr "将来の予測期間"
+
+msgid "Duration"
+msgstr "期間"
+
+msgid "Minutes"
+msgstr "分"
+
+msgid "Hours"
+msgstr "時間"
+
+msgid "Days"
+msgstr "日"
+
+msgid "Weeks"
+msgstr "週間"
+
+msgid "Months"
+msgstr "か月"
+
+msgid "Historical Training Scope"
+msgstr "過去の学習範囲"
+
+msgid "All visible historical data"
+msgstr "表示中のすべての過去データ"
+
+msgid "Last N data points"
+msgstr "直近N個のデータポイント"
+
+msgid "Last % of visible time range"
+msgstr "表示時間範囲の直近%"
+
+msgid "Number of points (e.g. 50)"
+msgstr "ポイント数（例: 50）"
+
+msgid "Percentage"
+msgstr "パーセンテージ"
+
+msgid "Holt Smoothing Parameters"
+msgstr "ホルト平滑化パラメータ"
+
+msgid "Level Smoothing (&alpha;)"
+msgstr "水準平滑化（&alpha;）"
+
+msgid "Higher &alpha; adapts faster to recent value levels."
+msgstr "&alpha; の値が大きいほど、直近のデータ水準に素早く適応します。"
+
+msgid "Trend Smoothing (&beta;)"
+msgstr "トレンド平滑化（&beta;）"
+
+msgid "Higher &beta; adapts faster to recent slope changes."
+msgstr "&beta; の値が大きいほど、直近の傾きの変化に素早く適応します。"
+
+msgid "Damping Factor (&phi;)"
+msgstr "減衰係数（&phi;）"
+
+msgid "Dampens trend to prevent unrealistic long-term linear runaway."
+msgstr "長期的な過剰予測を防ぐためにトレンドを減衰させます。"
+
+msgid "Polynomial Degree"
+msgstr "多項式の次数"
+
+msgid "Degree 2 (Quadratic curve)"
+msgstr "2次（放物線）"
+
+msgid "Degree 3 (Cubic curve)"
+msgstr "3次（3次曲線）"
+
+msgid "Moving Average Window Size (Points)"
+msgstr "移動平均ウィンドウサイズ（ポイント数）"
+
+msgid "Window Size (e.g. 10)"
+msgstr "ウィンドウサイズ（例: 10）"
+
+msgid "Visual Presentation"
+msgstr "表示設定"
+
+msgid "Trend Color"
+msgstr "トレンドカラー"
+
+msgid "Dashed"
+msgstr "破線"
+
+msgid "Dotted"
+msgstr "点線"
+
+msgid "Solid"
+msgstr "実線"
+
+msgid "Show Confidence / Uncertainty Band"
+msgstr "信頼区間・不確実性バンドを表示"
+
+
