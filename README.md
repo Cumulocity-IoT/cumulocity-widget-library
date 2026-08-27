@@ -34,7 +34,7 @@ The library contains the following custom widgets:
   <tr>
     <td valign="top" width="50%">
       <h4>5. Sankey Diagram Widget</h4>
-      <p>Displays the breakdown flow of alarms/events down the asset/group hierarchy.</p>
+      <p>Displays the breakdown flow of alarms, events, or measurements down the asset/device hierarchy.</p>
       <img src="public/sankey-diagram-preview.png" width="350" alt="Sankey Diagram Preview"/>
     </td>
     <td valign="top" width="50%">

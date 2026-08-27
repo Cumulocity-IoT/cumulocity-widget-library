@@ -7,6 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule, HOOK_COMPONENTS, gettext } from '@c8y/ngx-components';
+import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector';
 import { SankeyDiagramComponent } from './sankey-diagram.component';
 import { SankeyDiagramConfigComponent } from './sankey-diagram-config.component';
 import { SANKEY_PREVIEW } from './preview-image';
@@ -17,6 +18,7 @@ import { WidgetTranslationService } from '../i18n.service';
   imports: [
     CommonModule,
     CoreModule,
+    DatapointSelectorModule,
     SankeyDiagramComponent,
     SankeyDiagramConfigComponent
   ],
@@ -28,7 +30,7 @@ import { WidgetTranslationService } from '../i18n.service';
       useValue: {
         id: 'c8y.widget.sankey.diagram',
         label: gettext('Sankey Diagram'),
-        description: gettext('Displays the breakdown flow of alarms/events down the asset/group hierarchy.'),
+        description: gettext('Displays the breakdown flow of alarms, events, or measurements down the asset/device hierarchy.'),
         previewImage: SANKEY_PREVIEW,
         component: SankeyDiagramComponent,
         configComponent: SankeyDiagramConfigComponent,
@@ -36,19 +38,19 @@ import { WidgetTranslationService } from '../i18n.service';
           settings: {
             noNewWidgets: false,
             groups: true,
-            devices: false,
+            devices: true,
             assets: true,
             ng1: {
               options: {
                 noDeviceTarget: false,
                 groupsSelectable: true,
-                devicesSelectable: false,
+                devicesSelectable: true,
                 deviceTargetNotRequired: false
               }
             }
           },
           groups: true,
-          devices: false,
+          devices: true,
           assets: true
         }
       }

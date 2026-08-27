@@ -55,7 +55,7 @@ export default {
         name: 'Sankey Diagram Widget',
         module: 'SankeyDiagramWidgetModule',
         path: './src/app/sankey-diagram/index.ts',
-        description: 'Displays the breakdown flow of alarms/events down the asset/group hierarchy'
+        description: 'Displays the breakdown flow of alarms, events, or measurements down the asset/device hierarchy'
       },
       {
         name: 'Pareto Chart Widget',
