@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <rect width="400" height="200" fill="#ffffff" rx="8"/>
+  
+  <!-- Header / Title -->
+  <text x="20" y="28" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#1e293b" letter-spacing="0.05em">FLEET DISTRIBUTION</text>
+  <line x1="20" y1="36" x2="380" y2="36" stroke="#f1f5f9" stroke-width="1"/>
+  
+  <!-- Total badge -->
+  <rect x="290" y="14" width="90" height="18" rx="9" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="335" y="26" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="700" fill="#15803d" text-anchor="middle">1,248 Devices</text>
+  
+  <!-- Donut Chart with brand shades -->
+  <g transform="translate(100, 118)">
+    <!-- Slice 1: brand-primary #119d11 (40%) -->
+    <path d="M 0,-55 A 55,55 0 0,1 54,12 L 32,7 A 33,33 0 0,0 0,-33 Z" fill="#119d11" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- Slice 2: brand-60 #a5daa5 (25%) -->
+    <path d="M 54,12 A 55,55 0 0,1 -17,52 L -10,31 A 33,33 0 0,0 32,7 Z" fill="#a5daa5" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- Slice 3: brand-20 #0a5c0a (20%) -->
+    <path d="M -17,52 A 55,55 0 0,1 -54,-12 L -32,-7 A 33,33 0 0,0 -10,31 Z" fill="#0a5c0a" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- Slice 4: Other #94a3b8 (15%) -->
+    <path d="M -54,-12 A 55,55 0 0,1 0,-55 L 0,-33 A 33,33 0 0,0 -32,-7 Z" fill="#94a3b8" stroke="#ffffff" stroke-width="2"/>
+    
+    <!-- Center text -->
+    <circle cx="0" cy="0" r="30" fill="#ffffff"/>
+    <text x="0" y="-3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Total</text>
+    <text x="0" y="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">100%</text>
+  </g>
+  
+  <!-- Legend list on right -->
+  <g transform="translate(195, 58)">
+    <!-- Item 1 -->
+    <rect x="0" y="0" width="10" height="10" rx="2" fill="#119d11"/>
+    <text x="16" y="9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#1e293b">v2.4.0</text>
+    <text x="180" y="9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#64748b" text-anchor="end">499 (40%)</text>
+    
+    <!-- Item 2 -->
+    <rect x="0" y="24" width="10" height="10" rx="2" fill="#a5daa5"/>
+    <text x="16" y="33" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#1e293b">v2.3.1</text>
+    <text x="180" y="33" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#64748b" text-anchor="end">312 (25%)</text>
+    
+    <!-- Item 3 -->
+    <rect x="0" y="48" width="10" height="10" rx="2" fill="#0a5c0a"/>
+    <text x="16" y="57" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#1e293b">v2.2.0</text>
+    <text x="180" y="57" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#64748b" text-anchor="end">250 (20%)</text>
+    
+    <!-- Item 4 -->
+    <rect x="0" y="72" width="10" height="10" rx="2" fill="#94a3b8"/>
+    <text x="16" y="81" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#1e293b">Other</text>
+    <text x="180" y="81" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#64748b" text-anchor="end">187 (15%)</text>
+  </g>
+</svg>

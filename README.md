@@ -67,6 +67,15 @@ The library contains the following custom widgets:
       <img src="public/scatter-plot-preview.png" width="350" alt="Scatter Plot Preview"/>
     </td>
   </tr>
+  <tr>
+    <td valign="top" width="50%">
+      <h4>11. Fleet Statistics Widget</h4>
+      <p>Queries inventory with OData queries and visualizes device or asset distributions as interactive pie or donut charts.</p>
+      <img src="public/fleet-statistics-preview.svg" width="350" alt="Fleet Statistics Preview"/>
+    </td>
+    <td valign="top" width="50%">
+    </td>
+  </tr>
 </table>
 
 
@@ -102,7 +111,8 @@ To install this widget library as a plugin in your Cumulocity application:
        RadarChartWidgetModule, 
        IdealStateDeviationWidgetModule,
        DowntimeGanttWidgetModule,
-       ScatterPlotWidgetModule
+       ScatterPlotWidgetModule,
+       FleetStatisticsWidgetModule
      } from 'cumulocity-widget-library';
 
      @NgModule({
@@ -117,7 +127,8 @@ To install this widget library as a plugin in your Cumulocity application:
          RadarChartWidgetModule,
          IdealStateDeviationWidgetModule,
          DowntimeGanttWidgetModule,
-         ScatterPlotWidgetModule
+         ScatterPlotWidgetModule,
+         FleetStatisticsWidgetModule
        ]
      })
     export class AppModule {}
