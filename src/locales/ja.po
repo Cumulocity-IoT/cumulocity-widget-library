@@ -1150,4 +1150,139 @@ msgstr "実線"
 msgid "Show Confidence / Uncertainty Band"
 msgstr "信頼区間・不確実性バンドを表示"
 
+msgid "Fleet Statistics"
+msgstr "フリート統計"
+
+msgid "Queries inventory with OData queries and visualizes device or asset distributions as interactive pie or donut charts."
+msgstr "ODataクエリでインベントリを検索し、デバイスやアセットの分布をインタラクティブな円グラフまたはドーナツグラフで可視化します。"
+
+msgid "Configuration Preset"
+msgstr "設定プリセット"
+
+msgid "Custom Configuration"
+msgstr "カスタム設定"
+
+msgid "Device Firmware Versions"
+msgstr "デバイスファームウェアバージョン"
+
+msgid "Device Hardware Models"
+msgstr "デバイスハードウェアモデル"
+
+msgid "Device Types"
+msgstr "デバイスタイプ"
+
+msgid "Device Availability Status"
+msgstr "デバイス稼働状況ステータス"
+
+msgid "Installed Software Version"
+msgstr "インストール済みソフトウェアバージョン"
+
+msgid "Asset Types"
+msgstr "アセットタイプ"
+
+msgid "Asset Deployment / Creation Year"
+msgstr "アセット展開・作成年"
+
+msgid "Target Scope"
+msgstr "対象スコープ"
+
+msgid "Devices (has c8y_IsDevice)"
+msgstr "デバイス (c8y_IsDevice を持つ)"
+
+msgid "Assets (has c8y_IsAsset)"
+msgstr "アセット (c8y_IsAsset を持つ)"
+
+msgid "All Inventory Managed Objects"
+msgstr "すべてのインベントリマネージドオブジェクト"
+
+msgid "OData Inventory Filter Query"
+msgstr "ODataインベントリフィルタクエリ"
+
+msgid "Test Query"
+msgstr "クエリをテスト"
+
+msgid "Group By Property Path"
+msgstr "グループ化プロパティパス"
+
+msgid "Date Extraction / Transformation"
+msgstr "日付抽出 / 変換"
+
+msgid "None (Use Raw Property Value)"
+msgstr "なし (生のプロパティ値を使用)"
+
+msgid "Year Only (YYYY) e.g. 2024"
+msgstr "年のみ (YYYY) 例: 2024"
+
+msgid "Year & Month (YYYY-MM) e.g. 2024-08"
+msgstr "年・月 (YYYY-MM) 例: 2024-08"
+
+msgid "Full Date (YYYY-MM-DD) e.g. 2024-08-28"
+msgstr "年月日 (YYYY-MM-DD) 例: 2024-08-28"
+
+msgid "Fallback Label for Missing Values"
+msgstr "値が存在しない場合の代替ラベル"
+
+msgid "Chart Display Settings"
+msgstr "グラフ表示設定"
+
+msgid "Chart Style"
+msgstr "グラフスタイル"
+
+msgid "Donut (Ring)"
+msgstr "ドーナツ (リング)"
+
+msgid "Classic Pie"
+msgstr "クラシック円グラフ"
+
+msgid "Max Slices to Display"
+msgstr "表示する最大スライス数"
+
+msgid "Group remaining slices into \"Other\""
+msgstr "残りのスライスを「その他」にまとめる"
+
+msgid "Label Format"
+msgstr "ラベルフォーマット"
+
+msgid "Count and Percentage"
+msgstr "件数と割合"
+
+msgid "Count Only"
+msgstr "件数のみ"
+
+msgid "Percentage Only"
+msgstr "割合のみ"
+
+msgid "Legend"
+msgstr "凡例"
+
+msgid "Right Side"
+msgstr "右側"
+
+msgid "Hidden"
+msgstr "非表示"
+
+msgid "Fleet Distribution"
+msgstr "フリート分布"
+
+msgid "Color Palette"
+msgstr "カラーパレット"
+
+msgid "Brand Colors (Automatic)"
+msgstr "ブランドカラー (自動)"
+
+msgid "Custom Colors"
+msgstr "カスタムカラー"
+
+msgid "Automatically uses tints and shades of the primary brand color."
+msgstr "プライマリブランドカラーの濃淡・明度を自動的に使用します。"
+
+msgid "Custom Slice Colors"
+msgstr "カスタムスライスカラー"
+
+msgid "Add Color"
+msgstr "色を追加"
+
+msgid "Remove color"
+msgstr "色を削除"
+
 

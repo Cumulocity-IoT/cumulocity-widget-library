@@ -1150,4 +1150,139 @@ msgstr "Durchgezogen"
 msgid "Show Confidence / Uncertainty Band"
 msgstr "Konfidenz- / Unsicherheitsband anzeigen"
 
+msgid "Fleet Statistics"
+msgstr "Flottenstatistik"
+
+msgid "Queries inventory with OData queries and visualizes device or asset distributions as interactive pie or donut charts."
+msgstr "Fragt das Inventar mit OData-Abfragen ab und visualisiert die Verteilung von Geräten oder Assets als interaktive Kreis- oder Donut-Diagramme."
+
+msgid "Configuration Preset"
+msgstr "Konfigurationsvorlage"
+
+msgid "Custom Configuration"
+msgstr "Benutzerdefinierte Konfiguration"
+
+msgid "Device Firmware Versions"
+msgstr "Geräte-Firmware-Versionen"
+
+msgid "Device Hardware Models"
+msgstr "Geräte-Hardwaremodelle"
+
+msgid "Device Types"
+msgstr "Gerätetypen"
+
+msgid "Device Availability Status"
+msgstr "Geräte-Verfügbarkeitsstatus"
+
+msgid "Installed Software Version"
+msgstr "Installierte Softwareversion"
+
+msgid "Asset Types"
+msgstr "Asset-Typen"
+
+msgid "Asset Deployment / Creation Year"
+msgstr "Asset-Bereitstellungs- / Erstellungsjahr"
+
+msgid "Target Scope"
+msgstr "Zielbereich"
+
+msgid "Devices (has c8y_IsDevice)"
+msgstr "Geräte (hat c8y_IsDevice)"
+
+msgid "Assets (has c8y_IsAsset)"
+msgstr "Assets (hat c8y_IsAsset)"
+
+msgid "All Inventory Managed Objects"
+msgstr "Alle verwalteten Inventarobjekte"
+
+msgid "OData Inventory Filter Query"
+msgstr "OData-Inventarfilterabfrage"
+
+msgid "Test Query"
+msgstr "Abfrage testen"
+
+msgid "Group By Property Path"
+msgstr "Gruppieren nach Eigenschaftspfad"
+
+msgid "Date Extraction / Transformation"
+msgstr "Datumsextraktion / Transformation"
+
+msgid "None (Use Raw Property Value)"
+msgstr "Keine (Ursprünglichen Eigenschaftswert verwenden)"
+
+msgid "Year Only (YYYY) e.g. 2024"
+msgstr "Nur Jahr (JJJJ) z. B. 2024"
+
+msgid "Year & Month (YYYY-MM) e.g. 2024-08"
+msgstr "Jahr & Monat (JJJJ-MM) z. B. 2024-08"
+
+msgid "Full Date (YYYY-MM-DD) e.g. 2024-08-28"
+msgstr "Vollständiges Datum (JJJJ-MM-TT) z. B. 2024-08-28"
+
+msgid "Fallback Label for Missing Values"
+msgstr "Standardbezeichnung für fehlende Werte"
+
+msgid "Chart Display Settings"
+msgstr "Diagramm-Anzeigeeinstellungen"
+
+msgid "Chart Style"
+msgstr "Diagrammstil"
+
+msgid "Donut (Ring)"
+msgstr "Donut (Ring)"
+
+msgid "Classic Pie"
+msgstr "Klassischer Kreis"
+
+msgid "Max Slices to Display"
+msgstr "Maximale Anzahl an Segmenten"
+
+msgid "Group remaining slices into \"Other\""
+msgstr "Verbleibende Segmente unter \"Andere\" zusammenfassen"
+
+msgid "Label Format"
+msgstr "Beschriftungsformat"
+
+msgid "Count and Percentage"
+msgstr "Anzahl und Prozentsatz"
+
+msgid "Count Only"
+msgstr "Nur Anzahl"
+
+msgid "Percentage Only"
+msgstr "Nur Prozentsatz"
+
+msgid "Legend"
+msgstr "Legende"
+
+msgid "Right Side"
+msgstr "Rechte Seite"
+
+msgid "Hidden"
+msgstr "Ausgeblendet"
+
+msgid "Fleet Distribution"
+msgstr "Flottenverteilung"
+
+msgid "Color Palette"
+msgstr "Farbpalette"
+
+msgid "Brand Colors (Automatic)"
+msgstr "Markenfarben (Automatisch)"
+
+msgid "Custom Colors"
+msgstr "Benutzerdefinierte Farben"
+
+msgid "Automatically uses tints and shades of the primary brand color."
+msgstr "Verwendet automatisch Nuancen und Abstufungen der primären Markenfarbe."
+
+msgid "Custom Slice Colors"
+msgstr "Benutzerdefinierte Segmentfarben"
+
+msgid "Add Color"
+msgstr "Farbe hinzufügen"
+
+msgid "Remove color"
+msgstr "Farbe entfernen"
+
 

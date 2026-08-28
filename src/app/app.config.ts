@@ -18,6 +18,7 @@ import { IdealStateDeviationWidgetModule } from './ideal-state-deviation/index';
 import { DowntimeGanttWidgetModule } from './downtime-gantt/index';
 import { ScatterPlotWidgetModule } from './scatter-plot/index';
 import { RadarChartWidgetModule } from './radar-chart/index';
+import { FleetStatisticsWidgetModule } from './fleet-statistics/index';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,7 +35,8 @@ export const appConfig: ApplicationConfig = {
       IdealStateDeviationWidgetModule,
       DowntimeGanttWidgetModule,
       ScatterPlotWidgetModule,
-      RadarChartWidgetModule
+      RadarChartWidgetModule,
+      FleetStatisticsWidgetModule
     )
   ]
 };

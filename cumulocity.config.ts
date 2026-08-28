@@ -20,7 +20,8 @@ export default {
         'RadarChartWidgetModule',
         'IdealStateDeviationWidgetModule',
         'DowntimeGanttWidgetModule',
-        'ScatterPlotWidgetModule'
+        'ScatterPlotWidgetModule',
+        'FleetStatisticsWidgetModule'
       ]
     },
     package: 'plugin',
@@ -86,6 +87,12 @@ export default {
         module: 'ScatterPlotWidgetModule',
         path: './src/app/scatter-plot/index.ts',
         description: 'Plots X vs Y telemetry measurements with a customizable time-based color gradient and live replay'
+      },
+      {
+        name: 'Fleet Statistics Widget',
+        module: 'FleetStatisticsWidgetModule',
+        path: './src/app/fleet-statistics/index.ts',
+        description: 'Queries inventory with OData queries and visualizes device/asset distribution as a pie or donut chart'
       }
     ]
   },
